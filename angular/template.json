@@ -1,0 +1,10 @@
+{
+  "id": "angular",
+  "name": "Angular",
+  "description": "Angular standalone app with routing — scaffolded for the Cloudgate editor and dev preview.",
+  "folder": "angular",
+  "framework": "Angular",
+  "devCommand": "npm install && npm run start",
+  "devPort": 4200,
+  "tags": ["angular", "typescript"]
+}
