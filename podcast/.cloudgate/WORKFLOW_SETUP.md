@@ -2,23 +2,23 @@
 
 Create the `GET /api/podcasts` workflow so the podcast app can load catalog JSON at runtime.
 
-## Option A — Import template (recommended)
+## Option A — Quick Start (recommended)
 
-1. In Cloudgate, open **Imports**.
-2. Upload [../.template/workflow-template.json](../.template/workflow-template.json).
-3. Import into project path **`api`**.
+1. In Web Coder, open **Quick Start** and use the **Cloudgate Podcast** template.
+2. Keep **Podcast Catalog** selected in the workflow import list (default).
+3. Click **Create & open editor** — the app and workflow import run together.
 4. Publish **Podcast Catalog** to sandbox.
 5. Test: `GET http://apps.localhost:44301/sbx/api/podcasts`
 
-Regenerate the import file after editing the catalog:
+See [../.template/README.md](../.template/README.md).
 
-```bash
-node .template/gen-workflow-template.mjs
-```
+## Option B — Manual import
 
-See [../.template/README.md](../.template/README.md) for details.
+1. In Cloudgate, open **Imports**.
+2. Upload [../.template/workflow-template.json](../.template/workflow-template.json).
+3. Import into project path **`api`**, publish sandbox, and test as above.
 
-## Option B — Cloudgate MCP
+## Option C — Cloudgate MCP
 
 ### Prerequisites
 
@@ -96,10 +96,6 @@ Regenerate from `podcast-catalog.json` — do not use base64 or `json.loads` in 
 ## Updating catalog data
 
 1. Edit `podcast-catalog.json`
-2. Regenerate import + MCP payloads:
-   ```bash
-   node .template/gen-workflow-template.mjs
-   node .cloudgate/gen-podcast-workflow.mjs
-   ```
+2. Update the Function node in `../.template/workflow-template.json` (or regenerate MCP payload: `node .cloudgate/gen-podcast-workflow.mjs`)
 3. Re-import or `update_endpoint` via MCP, then `publish_endpoint`
 4. Re-test `GET /sbx/api/podcasts`

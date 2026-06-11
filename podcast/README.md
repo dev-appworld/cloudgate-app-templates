@@ -58,11 +58,11 @@ Example: `http://apps.localhost:44301/sbx/api/podcasts`
 
 ### Create the workflow
 
-**Import (recommended):** upload `.template/workflow-template.json` in Cloudgate Imports → project `api` → publish sandbox.
+**Quick Start (recommended):** use the Podcast template from Web Coder — workflows import automatically when you create the project. Then publish **Podcast Catalog** to sandbox.
 
-**MCP:** catalog source `.cloudgate/podcast-catalog.json`, payload `.cloudgate/podcast-catalog-workflow.json` — see `.cloudgate/WORKFLOW_SETUP.md`.
+**Manual:** upload `.template/workflow-template.json` in Cloudgate Imports → project `api` → publish sandbox.
 
-Regenerate import JSON: `node .template/gen-workflow-template.mjs`
+**MCP / dev:** see `.cloudgate/WORKFLOW_SETUP.md` for catalog source and MCP payload.
 
 Quick test after creation:
 

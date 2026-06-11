@@ -22,7 +22,7 @@ The **podcast** template also ships `.template/workflow-template.json` — impor
 1. Create a new top-level folder with the starter source.
 2. Add a `template.json` inside the folder.
 3. Add an entry to `templates.json` at the repo root.
-4. Push to `main` — the API caches the manifest for ~10 minutes.
+4. Push to `main` — the API caches the manifest (`WebApps:TemplatesCacheMinutes`: `1` in local dev, `720` / 12 hours in production). **Restart the Cloudgate API** or wait for the cache to expire, then click refresh on `/web-coder`.
 
 ## Cloudgate configuration
 

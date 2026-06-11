@@ -1,23 +1,14 @@
-# Podcast workflow import template
+# Podcast workflow bundle
 
-This folder ships the Cloudgate **project import** JSON for the podcast catalog API.
+[workflow-template.json](./workflow-template.json) is the Cloudgate import payload for the podcast catalog API.
 
-## Import in Cloudgate
+When you create this template from **Quick Start**, Cloudgate copies the app into your workspace and imports the bundled workflow(s) automatically (you can deselect them in the dialog).
 
-1. Open **Imports** in the Cloudgate dashboard.
-2. Upload or paste [workflow-template.json](./workflow-template.json).
-3. Import into project path **`api`** (creates `GET /podcasts`, anonymous).
-4. **Publish** the endpoint to sandbox.
-5. Confirm: `GET {apps-gateway}/sbx/api/podcasts` returns catalog JSON.
+After create:
+
+1. **Publish** the **Podcast Catalog** endpoint to sandbox.
+2. Confirm: `GET {apps-gateway}/sbx/api/podcasts` returns catalog JSON.
 
 The Angular app reads that URL via `workflowGatewayUrl`, `workflowEnvironment`, and `podcastCatalogRoute` in `src/assets/appconfig.json`.
 
-## Regenerate after catalog changes
-
-```bash
-node .template/gen-workflow-template.mjs
-```
-
-Source data: [../.cloudgate/podcast-catalog.json](../.cloudgate/podcast-catalog.json).
-
-MCP alternative: see [../.cloudgate/WORKFLOW_SETUP.md](../.cloudgate/WORKFLOW_SETUP.md).
+To change catalog data, edit the Function node script in `workflow-template.json` (or update it from `.cloudgate/podcast-catalog.json` and re-export via Cloudgate Imports if you prefer).
