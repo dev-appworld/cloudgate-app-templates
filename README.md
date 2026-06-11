@@ -1,41 +1,57 @@
 # Cloudgate App Templates
 
-Pre-built starter apps for the Cloudgate Web Coder **Quick Start** gallery.
+Official starter apps for the [Cloudgate](https://cloudgate.dev) **Web Coder** Quick Start gallery.
 
-## Structure
+Browse templates in the hub at **Web Coder → Quick Start** (`/web-coder`). Each card shows a preview image, framework, description, and a link to the template source on GitHub. Choose **Use this template** to copy the project into your Cloudgate workspace and open it in the editor.
+
+## Templates
+
+| Template | Folder | Notes |
+| --- | --- | --- |
+| Cloudgate Podcast | [`podcast/`](./podcast/) | Angular podcast app with bundled workflow import for `GET /podcasts` |
+
+Additional starters (`react/`, `angular/`, `html/`, `vue/`) live in this repo and can be enabled in [`templates.json`](./templates.json) when listed in the manifest.
+
+### Podcast
+
+The podcast template includes a workflow catalog the app calls at runtime. When you create the project from Quick Start, selected workflows import automatically. See [podcast/README.md](./podcast/README.md) for screenshots, demo link, and full setup.
+
+## Repository layout
 
 ```
-templates.json          # Manifest consumed by the Cloudgate API
-react/                  # React + Vite starter (port 3000)
-angular/                # Angular standalone app with IdP login flow (port 3000)
-html/                   # Plain static HTML site with IdP login flow (port 3000)
-vue/                    # Vue 3 + Vite starter (port 5173)
-podcast/                # Angular podcast app (port 3000) + workflow import template
+templates.json          # Manifest published to the Quick Start gallery
+react/
+angular/
+html/
+vue/
+podcast/                # Featured template — Angular + workflow import
 ```
 
-Each template folder contains a `template.json` (same metadata as the root manifest entry) plus a minimal runnable project.
+Each template folder contains a runnable project and a `template.json` with the same metadata as its manifest entry.
 
-The **podcast** template also ships `.template/workflow-template.json` — import it in Cloudgate to create the `GET /podcasts` API the app uses at runtime. See [podcast/README.md](./podcast/README.md) for screenshots and setup details.
+## Manifest fields
+
+Entries in `templates.json` drive the Quick Start cards:
+
+| Field | Purpose |
+| --- | --- |
+| `id` | Unique template identifier |
+| `name` | Card title |
+| `description` | Short summary on the card |
+| `folder` | Repo subfolder copied into the user's workspace |
+| `framework` | Badge label (e.g. Angular, React) |
+| `devCommand` | Suggested start command shown in the use-template dialog |
+| `devPort` | Dev server port (informational) |
+| `thumbnail` | Preview image URL on the card |
+| `tags` | Search/filter tags in Quick Start |
 
 ## Adding a template
 
-1. Create a new top-level folder with the starter source.
-2. Add a `template.json` inside the folder.
-3. Add an entry to `templates.json` at the repo root (optional `thumbnail` URL for the Quick Start card image).
-4. Push to `main` — the API caches the manifest (`WebApps:TemplatesCacheMinutes`: `1` in local dev, `720` / 12 hours in production). **Restart the Cloudgate API** or wait for the cache to expire, then click refresh on `/web-coder`.
+1. Add a new top-level folder with the starter source.
+2. Add `template.json` inside the folder.
+3. Register the template in `templates.json` (include a `thumbnail` URL for the card image).
+4. Push to `main` — new and updated templates appear in Quick Start after the gallery refreshes.
 
-## Cloudgate configuration
+## License
 
-Point the API at this repo in `appsettings.json`:
-
-```json
-"WebApps": {
-  "TemplatesRepo": "YOUR_GITHUB_USER/cloudgate-app-templates",
-  "TemplatesBranch": "main",
-  "TemplatesManifest": "templates.json"
-}
-```
-
-## Dev preview
-
-Starters are configured to listen on `0.0.0.0` and allow `.dev.cloudgate.dev` so they work in the Cloudgate editor preview URLs.
+Template projects include their own licenses where applicable. See each folder for details.

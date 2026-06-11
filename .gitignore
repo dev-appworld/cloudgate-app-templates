@@ -2,3 +2,7 @@ node_modules/
 dist/
 .angular/
 *.log
+
+# Per-workspace Cloudgate editor artifacts (see each folder's .cloudgate/.gitignore)
+**/.cloudgate/*
+!**/.cloudgate/.gitignore

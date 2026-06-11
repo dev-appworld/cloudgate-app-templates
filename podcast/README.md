@@ -8,18 +8,43 @@ Use it as a starting point when you want more than a blank shell — browse cate
 
 ## Screenshots
 
-Light and dark mode on mobile. Images live in [`docs/screenshots/`](./docs/screenshots/).
+Mobile UI in light and dark mode. Full-size files live in [`docs/screenshots/`](./docs/screenshots/).
 
-| Screen | Light | Dark |
-| --- | --- | --- |
-| Sign in | ![Sign in (light)](./docs/screenshots/light-01.png) | ![Sign in (dark)](./docs/screenshots/dark-01.png) |
-| Sign up | ![Sign up (light)](./docs/screenshots/light-02.png) | ![Sign up (dark)](./docs/screenshots/dark-02.png) |
-| Home | ![Home (light)](./docs/screenshots/light-03.png) | ![Home (dark)](./docs/screenshots/dark-03.png) |
-| Categories | ![Categories (light)](./docs/screenshots/light-04.png) | ![Categories (dark)](./docs/screenshots/dark-04.png) |
-| Playlists | ![Playlists (light)](./docs/screenshots/light-05.png) | ![Playlists (dark)](./docs/screenshots/dark-05.png) |
-| Profile | ![Profile (light)](./docs/screenshots/light-06.png) | ![Profile (dark)](./docs/screenshots/dark-06.png) |
-| Now playing | ![Now playing (light)](./docs/screenshots/light-07.png) | ![Now playing (dark)](./docs/screenshots/dark-07.png) |
-| Side menu | ![Side menu (light)](./docs/screenshots/light-08.png) | ![Side menu (dark)](./docs/screenshots/dark-08.png) |
+### Light mode
+
+<p align="center">
+  <img src="./docs/screenshots/light-01.png" width="190" alt="Sign in" />
+  <img src="./docs/screenshots/light-02.png" width="190" alt="Sign up" />
+  <img src="./docs/screenshots/light-03.png" width="190" alt="Home" />
+  <img src="./docs/screenshots/light-04.png" width="190" alt="Categories" />
+</p>
+<p align="center"><sub>Sign in · Sign up · Home · Categories</sub></p>
+
+<p align="center">
+  <img src="./docs/screenshots/light-05.png" width="190" alt="Playlists" />
+  <img src="./docs/screenshots/light-06.png" width="190" alt="Profile" />
+  <img src="./docs/screenshots/light-07.png" width="190" alt="Now playing" />
+  <img src="./docs/screenshots/light-08.png" width="190" alt="Side menu" />
+</p>
+<p align="center"><sub>Playlists · Profile · Now playing · Side menu</sub></p>
+
+### Dark mode
+
+<p align="center">
+  <img src="./docs/screenshots/dark-01.png" width="190" alt="Sign in" />
+  <img src="./docs/screenshots/dark-02.png" width="190" alt="Sign up" />
+  <img src="./docs/screenshots/dark-03.png" width="190" alt="Home" />
+  <img src="./docs/screenshots/dark-04.png" width="190" alt="Categories" />
+</p>
+<p align="center"><sub>Sign in · Sign up · Home · Categories</sub></p>
+
+<p align="center">
+  <img src="./docs/screenshots/dark-05.png" width="190" alt="Playlists" />
+  <img src="./docs/screenshots/dark-06.png" width="190" alt="Profile" />
+  <img src="./docs/screenshots/dark-07.png" width="190" alt="Now playing" />
+  <img src="./docs/screenshots/dark-08.png" width="190" alt="Side menu" />
+</p>
+<p align="center"><sub>Playlists · Profile · Now playing · Side menu</sub></p>
 
 ## Stack
 
@@ -78,8 +103,6 @@ Example: `http://apps.localhost:44301/sbx/api/podcasts`
 **Quick Start (recommended):** use the Podcast template from Web Coder — workflows import automatically when you create the project. Then publish **Podcast Catalog** to sandbox.
 
 **Manual:** upload `.template/workflow-template.json` in Cloudgate Imports → project `api` → publish sandbox.
-
-**MCP / dev:** see `.cloudgate/WORKFLOW_SETUP.md` for catalog source and MCP payload.
 
 Quick test after creation:
 

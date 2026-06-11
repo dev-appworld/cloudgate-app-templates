@@ -11,4 +11,4 @@ After create:
 
 The Angular app reads that URL via `workflowGatewayUrl`, `workflowEnvironment`, and `podcastCatalogRoute` in `src/assets/appconfig.json`.
 
-To change catalog data, edit the Function node script in `workflow-template.json` (or update it from `.cloudgate/podcast-catalog.json` and re-export via Cloudgate Imports if you prefer).
+To change catalog data, edit the Function node script in `workflow-template.json`, then re-import via Cloudgate Imports if needed.
