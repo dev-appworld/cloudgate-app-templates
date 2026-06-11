@@ -1,10 +1,10 @@
 {
   "id": "html",
-  "name": "HTML + Vite",
-  "description": "Lightweight static site with vanilla HTML, CSS and JavaScript served by Vite.",
+  "name": "HTML",
+  "description": "Plain static HTML/CSS/JS site with IdP login flow — open index.html directly or preview on port 3000.",
   "folder": "html",
   "framework": "HTML",
-  "devCommand": "npm install && npm run dev",
+  "devCommand": "npm install && npm start",
   "devPort": 3000,
-  "tags": ["html", "vanilla", "vite"]
+  "tags": ["html", "vanilla"]
 }
