@@ -32,7 +32,7 @@ export const idpAuthConfig = {
   },
   get apiUrl() {
     const configured = (AppConsts.idpApiUrl ?? '').trim();
-    const fallback = (AppConsts.remoteServiceBaseUrl ?? '').trim();
+    const fallback = (AppConsts.workflowGatewayUrl ?? '').trim();
     return (configured || fallback).replace(/\/$/, '');
   },
   get tenancyName() {
@@ -57,6 +57,17 @@ export const idpAuthConfig = {
   },
   buildLoginUrl(returnUrl?: string) {
     const base = this.loginUrl;
+    const target = (returnUrl ?? this.returnUrl).trim();
+    if (!target) return base;
+    const sep = base.includes('?') ? '&' : '?';
+    return `${base}${sep}returnUrl=${encodeURIComponent(target)}`;
+  },
+  get signUpUrl() {
+    const base = this.baseUrl.replace(/\/$/, '');
+    return `${base}/idp/${encodeURIComponent(this.tenancyName)}/register`;
+  },
+  buildSignUpUrl(returnUrl?: string) {
+    const base = this.signUpUrl;
     const target = (returnUrl ?? this.returnUrl).trim();
     if (!target) return base;
     const sep = base.includes('?') ? '&' : '?';

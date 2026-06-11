@@ -7,17 +7,6 @@ import { AppComponentBase } from 'src/app/shared/common/app-component-base';
 import { CommonModule } from '@angular/common';
 import { AlertModalComponent } from 'src/app/shared/components/alert/alert.component';
 import { GetInTouchModalComponent } from 'src/app/shared/components/getInTouch/get-in-touch.component';
-import { IFormattedUserNotification, UserNotificationHelper } from 'src/shared/helpers/UserNotificationHelper';
-import {
-  DeviceDto,
-  NotificationServiceProxy,
-  PushNotificationServiceProxy,
-  UserNotification,
-} from 'src/shared/service-proxies/service-proxies';
-import { UrlHelper } from 'src/app/shared/helpers/UrlHelper';
-import { Capacitor } from '@capacitor/core';
-import { ActionPerformed, PushNotificationSchema, PushNotifications, Token } from '@capacitor/push-notifications';
-import { Device } from '@capacitor/device';
 
 @Component({
   selector: 'app-layout',
@@ -40,13 +29,7 @@ export class LayoutComponent extends AppComponentBase implements OnInit {
   private mainContent: HTMLElement | null = null;
   hideBottomNavbar = false;
 
-  constructor(
-    injector: Injector,
-    public _zone: NgZone,
-    private _notificationService: NotificationServiceProxy,
-    private _userNotificationHelper: UserNotificationHelper,
-    private _pushNotificationService: PushNotificationServiceProxy,
-  ) {
+  constructor(injector: Injector, public _zone: NgZone) {
     super(injector);
     document.body.classList.add('overflow-y-clip');
     this.router.events.subscribe((event: Event) => {
@@ -61,7 +44,6 @@ export class LayoutComponent extends AppComponentBase implements OnInit {
 
   ngOnInit(): void {
     this.registerToEvents();
-    this.pushNotifications();
     this.syncBottomNavbarVisibility();
     this.subscribeToEvent('app.show.nav', () => this.syncBottomNavbarVisibility());
   }
@@ -80,9 +62,6 @@ export class LayoutComponent extends AppComponentBase implements OnInit {
     });
   }
 
-  notifications: IFormattedUserNotification[] = [];
-  unreadNotificationCount = 0;
-
   registerToEvents() {
     let self = this;
 
@@ -99,58 +78,8 @@ export class LayoutComponent extends AppComponentBase implements OnInit {
       self._zone.run(() => {});
     });
 
-    this.subscribeToEvent('app.notifications.read', (userNotificationId, success) => {
+    this.subscribeToEvent('app.notifications.read', () => {
       self._zone.run(() => {});
     });
-  }
-
-  async pushNotifications() {
-    if (Capacitor.isNativePlatform()) {
-      PushNotifications.requestPermissions().then((result) => {
-        if (result.receive === 'granted') {
-          // Register with Apple / Google to receive push via APNS/FCM
-          PushNotifications.register();
-        } else {
-          // Show some error
-        }
-      });
-
-      // On success, we should be able to receive notifications
-      await PushNotifications.addListener('registration', (token) => {
-        console.info('Registration token: ', token.value);
-
-        Device.getId().then((deviceId) => {
-          return Device.getInfo().then((deviceInfo) => {
-            const device = new DeviceDto({
-              deviceId: deviceId.identifier,
-              model: deviceInfo.model,
-              token: token.value,
-            });
-
-            this._pushNotificationService
-              .deviceSave(device)
-              .toPromise()
-              .then(() => {
-                console.log(`Device registered`);
-              });
-          });
-        });
-      });
-
-      // Some issue with our setup and push will not work
-      PushNotifications.addListener('registrationError', (error: any) => {
-        // alert('Error on registration: ' + JSON.stringify(error));
-      });
-
-      // Show us the notification payload if the app is open on our device
-      PushNotifications.addListener('pushNotificationReceived', (notification: PushNotificationSchema) => {
-        // alert('Push received: ' + JSON.stringify(notification));
-      });
-
-      // Method called when tapping on a notification
-      PushNotifications.addListener('pushNotificationActionPerformed', (notification: ActionPerformed) => {
-        // alert('Push action performed: ' + JSON.stringify(notification));
-      });
-    }
   }
 }

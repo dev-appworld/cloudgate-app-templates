@@ -1,14 +1,8 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { environment } from './environments/environment';
-import { AppComponent } from './app/app.component';
-import { AppRoutingModule } from './app/app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { RootModule } from './root.module';
-import { provideToastr } from 'ngx-toastr';
 
 declare global {
   interface Window {
@@ -31,16 +25,7 @@ if (environment.production) {
   }
 }
 
-const bootstrap = () => platformBrowserDynamic().bootstrapModule(RootModule);
-bootstrap(); //Regular bootstrap
-
-bootstrapApplication(AppComponent, {
-  providers: [
-    importProvidersFrom(BrowserModule, HttpClientModule, AppRoutingModule),
-    provideAnimations(),
-    provideToastr(),
-  ],
-}).catch((err) => console.error(err));
+platformBrowserDynamic().bootstrapModule(RootModule);
 
 function selfXSSWarning() {
   setTimeout(() => {

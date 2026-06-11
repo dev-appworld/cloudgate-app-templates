@@ -1,8 +1,7 @@
 {
-  "remoteServiceBaseUrl": "http://localhost:44301",
   "appBaseUrl": "http://{TENANCY_NAME}.localhost:3000",
   "idpBaseUrl": "http://localhost:5173",
-  "idpApiUrl": "http://localhost:44301",
+  "idpApiUrl": "http://apps.localhost:44301",
   "idpTenancyName": "apps",
   "idpReturnUrl": "",
   "workflowGatewayUrl": "http://apps.localhost:44301",

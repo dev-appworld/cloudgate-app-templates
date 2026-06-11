@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
-import { AppConsts } from 'src/app/shared/AppConsts';
-import { FileDto } from '../service-proxies/service-proxies';
+
+export interface FileDto {
+  fileName?: string;
+  fileType?: string;
+  fileToken?: string;
+}
 
 @Injectable()
 export class FileDownloadService {
-  downloadTempFile(file: FileDto) {
-    const url =
-      AppConsts.remoteServiceBaseUrl +
-      '/File/DownloadTempFile?fileType=' +
-      file.fileType +
-      '&fileToken=' +
-      file.fileToken +
-      '&fileName=' +
-      file.fileName;
-    location.href = url; //TODO: This causes reloading of same page in Firefox
+  /** Legacy ABP temp-file download — not available without remoteServiceBaseUrl. */
+  downloadTempFile(_file: FileDto) {
+    abp.notify.warn('File download is not available in this template.');
   }
 }

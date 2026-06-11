@@ -34,14 +34,12 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "node_modules/apexcharts/dist/apexcharts.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.js",
               "src/assets/abp-web-resources/abp.js",
               "src/assets/abp-web-resources/abp.sweet-alert.js",
               "src/assets/abp-web-resources/abp.notify.js",
               "node_modules/flowbite/dist/flowbite.min.js"
-            ],
-            "allowedCommonJsDependencies": ["apexcharts"]
+            ]
           },
           "configurations": {
             "production": {
@@ -112,7 +110,6 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "node_modules/apexcharts/dist/apexcharts.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.js",
               "src/assets/abp-web-resources/abp.js",
               "src/assets/abp-web-resources/abp.sweet-alert.js",

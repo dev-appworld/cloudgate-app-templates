@@ -1,17 +1,32 @@
 import {
   Component,
-  ElementRef,
   EventEmitter,
   Injector,
   Input,
   OnInit,
   Output,
-  ViewChild,
   forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, UntypedFormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SettingScopes, NameValueDto, TimingServiceProxy } from 'src/shared/service-proxies/service-proxies';
 import { AppComponentBase } from '../app-component-base';
+
+interface NameValueDto {
+  name?: string;
+  value?: string;
+}
+
+function loadTimeZones(): NameValueDto[] {
+  const intlWithSupportedValues = Intl as typeof Intl & {
+    supportedValuesOf?: (key: string) => string[];
+  };
+  if (typeof intlWithSupportedValues.supportedValuesOf === 'function') {
+    return intlWithSupportedValues.supportedValuesOf('timeZone').map((zone) => ({
+      name: zone,
+      value: zone,
+    }));
+  }
+  return [];
+}
 
 @Component({
   selector: 'timezone-combo',
@@ -34,17 +49,14 @@ export class TimeZoneComboComponent extends AppComponentBase implements OnInit, 
   timeZones: NameValueDto[] = [];
   selectedTimeZone = new UntypedFormControl('');
 
-  constructor(private _timingService: TimingServiceProxy, injector: Injector) {
+  constructor(injector: Injector) {
     super(injector);
   }
 
   onTouched: any = () => {};
 
   ngOnInit(): void {
-    let self = this;
-    self._timingService.getTimezones(self.defaultTimezoneScope).subscribe((result) => {
-      self.timeZones = result.items as NameValueDto[];
-    });
+    this.timeZones = loadTimeZones();
   }
 
   writeValue(obj: any): void {

@@ -3,19 +3,10 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { Capacitor } from '@capacitor/core';
 import { DateTime, Settings } from 'luxon';
 import { AppConsts } from './app/shared/AppConsts';
-import { LocalStorageService } from './app/shared/utils/local-storage.service';
-import { LocalService } from './app/shared/session/local-storage.service';
 import { UrlHelper } from './app/shared/helpers/UrlHelper';
 import { XmlHttpRequestHelper } from './app/shared/helpers/XmlHttpRequestHelper';
 import { LocaleMappingService } from './app/shared/locale-mapping.service';
 import { environment } from './environments/environment';
-import { merge as _merge } from 'lodash-es';
-import {
-  AccountServiceProxy,
-  IsTenantAvailableInput,
-  IsTenantAvailableOutput,
-  TenantAvailabilityState,
-} from './shared/service-proxies/service-proxies';
 import { CookieTenantResolver } from './shared/multi-tenancy/tenant-resolvers/cookie-tenant-resolver';
 import { QueryStringTenantResolver } from './shared/multi-tenancy/tenant-resolvers/query-string-tenant-resolver';
 import { SubdomainTenantResolver } from './shared/multi-tenancy/tenant-resolvers/subdomain-tenant-resolver';
@@ -25,33 +16,26 @@ import { bootstrapIdpSessionFromUrl } from './app/shared/idp-auth/idp-auth.boots
 export class AppPreBootstrap {
   static run(appRootUrl: string, injector: Injector, callback: () => void, resolve: any, reject: any): void {
     AppPreBootstrap.getApplicationConfig(appRootUrl, injector, () => {
-      const queryStringObj = UrlHelper.getQueryParameters();
-      AppPreBootstrap.getUserConfiguration(callback, injector.get(LocalService));
+      AppPreBootstrap.configureMinimalAbp(callback);
     });
   }
 
-  private static getUserConfiguration(callback: () => void, localStore: LocalService): any {
-    const token = abp.auth.getToken();
-
-    let requestHeaders = AppPreBootstrap.getRequetHeadersWithDefaultValues();
-
-    if (token) {
-      requestHeaders['Authorization'] = 'Bearer ' + token;
-    }
-
-    XmlHttpRequestHelper.ajax(
-      'GET',
-      AppConsts.remoteServiceBaseUrl + '/AbpUserConfiguration/GetAll',
-      requestHeaders,
-      null,
-      (response: { result: any }) => {
-        let result = response.result;
-        _merge(abp, result);
-        abp.clock.provider = this.getCurrentClockProvider(result.clock.provider);
-        AppPreBootstrap.configureLuxon();
-        callback();
-      },
-    );
+  private static configureMinimalAbp(callback: () => void): void {
+    abp.localization = abp.localization || {};
+    abp.localization.currentLanguage = {
+      name: 'en-US',
+      displayName: 'English',
+      icon: 'famfamfam-flags us',
+      isDefault: true,
+      isDisabled: false,
+      isRightToLeft: false,
+    };
+    abp.auth = abp.auth || {};
+    abp.auth.grantedPermissions = abp.auth.grantedPermissions || {};
+    abp.clock = abp.clock || {};
+    abp.clock.provider = abp.timing.localClockProvider;
+    AppPreBootstrap.configureLuxon();
+    callback();
   }
 
   static bootstrap<TM>(
@@ -83,7 +67,6 @@ export class AppPreBootstrap {
       (result: {
         localeMappings: any;
         appBaseUrl: string;
-        remoteServiceBaseUrl: string;
         idpBaseUrl?: string;
         idpApiUrl?: string;
         idpTenancyName?: string;
@@ -110,7 +93,6 @@ export class AppPreBootstrap {
           }
 
           AppConsts.appBaseUrlFormat = result.appBaseUrl;
-          AppConsts.remoteServiceBaseUrl = result.remoteServiceBaseUrl;
           AppConsts.idpTenancyName = (result.idpTenancyName ?? '').trim();
           if (AppConsts.idpBaseUrl) {
             bootstrapIdpSessionFromUrl();
@@ -120,10 +102,9 @@ export class AppPreBootstrap {
         }
 
         AppConsts.appBaseUrlFormat = result.appBaseUrl;
-        AppConsts.remoteServiceBaseUrlFormat = result.remoteServiceBaseUrl;
 
         var tenancyName = AppPreBootstrap.resolveTenancyName(result.appBaseUrl);
-        AppPreBootstrap.configureAppUrls(tenancyName, result.appBaseUrl, result.remoteServiceBaseUrl);
+        AppPreBootstrap.configureAppUrls(tenancyName, result.appBaseUrl);
         AppConsts.idpTenancyName = (result.idpTenancyName ?? '').trim() || tenancyName || '';
 
         if (AppConsts.idpBaseUrl) {
@@ -132,13 +113,13 @@ export class AppPreBootstrap {
 
         if (AppConsts.PreventNotExistingTenantSubdomains) {
           var subdomainTenancyNameFinder = new SubdomainTenancyNameFinder();
-          if (subdomainTenancyNameFinder.urlHasTenancyNamePlaceholder(result.remoteServiceBaseUrl)) {
+          if (subdomainTenancyNameFinder.urlHasTenancyNamePlaceholder(result.appBaseUrl)) {
             const message = abp.localization.localize(
               'ThereIsNoTenantDefinedWithName{0}',
               AppConsts.localization.defaultLocalizationSourceName,
             );
             abp.message.warn(abp.utils.formatString(message, tenancyName));
-            document.location.href = result.remoteServiceBaseUrl.replace(
+            document.location.href = result.appBaseUrl.replace(
               AppConsts.tenancyNamePlaceHolderInUrl + '.',
               '',
             );
@@ -149,7 +130,7 @@ export class AppPreBootstrap {
         if (tenancyName == null) {
           callback();
         } else {
-          AppPreBootstrap.ConfigureTenantIdCookie(injector, tenancyName, callback);
+          AppPreBootstrap.configureTenantIdCookie(tenancyName, callback);
         }
       },
     );
@@ -175,18 +156,9 @@ export class AppPreBootstrap {
     return tenancyName;
   }
 
-  private static ConfigureTenantIdCookie(injector: any, tenancyName: string, callback: () => void) {
-    let accountServiceProxy: AccountServiceProxy = injector.get(AccountServiceProxy);
-    let input = new IsTenantAvailableInput();
-    input.tenancyName = tenancyName;
-
-    accountServiceProxy.isTenantAvailable(input).subscribe((result: IsTenantAvailableOutput) => {
-      if (result.state === TenantAvailabilityState.Available) {
-        abp.multiTenancy.setTenantIdCookie(result.tenantId);
-      }
-
-      callback();
-    });
+  private static configureTenantIdCookie(tenancyName: string, callback: () => void) {
+    abp.utils.setCookieValue('abp_tenancy_name', tenancyName);
+    callback();
   }
 
   private static applyWorkflowConfig(result: {
@@ -201,112 +173,12 @@ export class AppPreBootstrap {
     AppConsts.podcastCatalogRoute = (result.podcastCatalogRoute ?? 'podcasts').trim() || 'podcasts';
   }
 
-  private static configureAppUrls(tenancyName: string, appBaseUrl: string, remoteServiceBaseUrl: string): void {
+  private static configureAppUrls(tenancyName: string, appBaseUrl: string): void {
     if (tenancyName == null) {
       AppConsts.appBaseUrl = appBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl + '.', '');
-      AppConsts.remoteServiceBaseUrl = remoteServiceBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl + '.', '');
     } else {
       AppConsts.appBaseUrl = appBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl, tenancyName);
-      AppConsts.remoteServiceBaseUrl = remoteServiceBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl, tenancyName);
     }
-  }
-
-  private static getCurrentClockProvider(currentProviderName: string): abp.timing.IClockProvider {
-    if (currentProviderName === 'unspecifiedClockProvider') {
-      return abp.timing.unspecifiedClockProvider;
-    }
-
-    if (currentProviderName === 'utcClockProvider') {
-      return abp.timing.utcClockProvider;
-    }
-
-    return abp.timing.localClockProvider;
-  }
-
-  private static getRequetHeadersWithDefaultValues(): any {
-    const cookieLangValue = abp.utils.getCookieValue('Abp.Localization.CultureName');
-
-    if (cookieLangValue) {
-      let requestHeaders = {
-        '.AspNetCore.Culture': 'c=' + cookieLangValue + '|uic=' + cookieLangValue,
-      };
-      return requestHeaders;
-    }
-
-    return [];
-  }
-
-  private static impersonatedAuthenticate(impersonationToken: string, tenantId: number, callback: () => void): void {
-    abp.multiTenancy.setTenantIdCookie(tenantId);
-    let requestHeaders = AppPreBootstrap.getRequetHeadersWithDefaultValues();
-
-    XmlHttpRequestHelper.ajax(
-      'POST',
-      AppConsts.remoteServiceBaseUrl +
-        '/api/TokenAuth/ImpersonatedAuthenticate?impersonationToken=' +
-        impersonationToken,
-      requestHeaders,
-      null,
-      (response: any) => {
-        let result = response.result;
-        abp.auth.setToken(result.accessToken);
-        AppPreBootstrap.setEncryptedTokenCookie(result.encryptedAccessToken, () => {
-          callback();
-          location.search = '';
-        });
-      },
-    );
-  }
-
-  private static delegatedImpersonatedAuthenticate(
-    userDelegationId: number,
-    impersonationToken: string,
-    tenantId: number,
-    callback: () => void,
-  ): void {
-    abp.multiTenancy.setTenantIdCookie(tenantId);
-    let requestHeaders = AppPreBootstrap.getRequetHeadersWithDefaultValues();
-
-    XmlHttpRequestHelper.ajax(
-      'POST',
-      AppConsts.remoteServiceBaseUrl +
-        '/api/TokenAuth/DelegatedImpersonatedAuthenticate?userDelegationId=' +
-        userDelegationId +
-        '&impersonationToken=' +
-        impersonationToken,
-      requestHeaders,
-      null,
-      (response: any) => {
-        let result = response.result;
-        abp.auth.setToken(result.accessToken);
-        AppPreBootstrap.setEncryptedTokenCookie(result.encryptedAccessToken, () => {
-          callback();
-          location.search = '';
-        });
-      },
-    );
-  }
-
-  private static linkedAccountAuthenticate(switchAccountToken: string, tenantId: number, callback: () => void): void {
-    abp.multiTenancy.setTenantIdCookie(tenantId);
-    let requestHeaders = AppPreBootstrap.getRequetHeadersWithDefaultValues();
-
-    XmlHttpRequestHelper.ajax(
-      'POST',
-      AppConsts.remoteServiceBaseUrl +
-        '/api/TokenAuth/LinkedAccountAuthenticate?switchAccountToken=' +
-        switchAccountToken,
-      requestHeaders,
-      null,
-      (response: any) => {
-        let result = response.result;
-        abp.auth.setToken(result.accessToken);
-        AppPreBootstrap.setEncryptedTokenCookie(result.encryptedAccessToken, () => {
-          callback();
-          location.search = '';
-        });
-      },
-    );
   }
 
   private static configureLuxon() {
@@ -329,16 +201,5 @@ export class AppPreBootstrap {
       let date = this.setLocale('en').setZone(abp.timing.timeZoneInfo.iana.timeZoneId) as DateTime;
       return date.toISO();
     };
-  }
-
-  private static setEncryptedTokenCookie(encryptedToken: string, callback: () => void) {
-    new LocalStorageService().setItem(
-      AppConsts.authorization.encrptedAuthTokenName,
-      {
-        token: encryptedToken,
-        expireDate: new Date(new Date().getTime() + 365 * 86400000), //1 year
-      },
-      callback,
-    );
   }
 }

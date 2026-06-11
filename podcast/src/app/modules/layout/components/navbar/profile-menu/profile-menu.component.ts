@@ -5,7 +5,6 @@ import { ClickOutsideDirective } from '../../../../../shared/directives/click-ou
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { AppComponentBase } from 'src/app/shared/common/app-component-base';
-import { ProfileServiceProxy } from 'src/shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-profile-menu',
@@ -84,7 +83,7 @@ export class ProfileMenuComponent extends AppComponentBase implements OnInit {
 
   public themeMode = ['light', 'dark'];
 
-  constructor(injector: Injector, private _profileService: ProfileServiceProxy) {
+  constructor(injector: Injector) {
     super(injector);
   }
 

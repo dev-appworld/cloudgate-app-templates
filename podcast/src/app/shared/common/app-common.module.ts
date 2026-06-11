@@ -13,7 +13,6 @@ import {
 } from 'ngx-bootstrap/datepicker';
 import { PaginatorModule } from 'primeng/paginator';
 import { TableModule } from 'primeng/table';
-import { AppAuthService } from './auth/app-auth.service';
 import { AppRouteGuard } from './auth/auth-route-guard';
 
 import { DateRangePickerInitialValueSetterDirective } from './timing/date-range-picker-initial-value.directive';
@@ -55,7 +54,7 @@ export class AppCommonModule {
   static forRoot(): ModuleWithProviders<AppCommonModule> {
     return {
       ngModule: AppCommonModule,
-      providers: [AppAuthService, AppRouteGuard],
+      providers: [AppRouteGuard],
     };
   }
 }

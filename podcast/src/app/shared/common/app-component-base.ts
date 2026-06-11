@@ -15,7 +15,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { NgxSpinnerTextService } from '../ngx-spinner-text.service';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
-import { AppAuthService } from './auth/app-auth.service';
+import { CloudgateAuthService } from '../auth/cloudgate-auth.service';
 import { AppLauncher } from '@capacitor/app-launcher';
 import { LocalService } from '../session/local-storage.service';
 import { ToastrService } from 'ngx-toastr';
@@ -45,7 +45,7 @@ export abstract class AppComponentBase implements OnDestroy {
   spinnerService: NgxSpinnerService;
   eventSubscriptions: AbpEventSubscription[] = [];
   router: Router;
-  authService: AppAuthService;
+  authService: CloudgateAuthService;
   localStore: LocalService;
   toastr: ToastrService;
   themeService: ThemeService;
@@ -68,7 +68,7 @@ export abstract class AppComponentBase implements OnDestroy {
     this.spinnerService = injector.get(NgxSpinnerService);
     this.ngxSpinnerTextService = injector.get(NgxSpinnerTextService);
     this.router = injector.get(Router);
-    this.authService = injector.get(AppAuthService);
+    this.authService = injector.get(CloudgateAuthService);
     this.localStore = injector.get(LocalService);
     this.toastr = injector.get(ToastrService);
     this.themeService = injector.get(ThemeService);
@@ -180,26 +180,20 @@ export abstract class AppComponentBase implements OnDestroy {
     });
   }
 
-  privacy() {
-    abp.event.trigger('showModal', {
-      title: 'Privacy Policy',
-      frameUrl: window.config.Website + '/privacy',
-      buttonText: 'OK',
-      buttonTextSecondary: undefined,
-      onPositive: () => {},
-      onNegative: () => {},
-    });
+  get privacyUrl(): string {
+    return `${window.config.Website}/privacy`;
   }
 
-  terms() {
-    abp.event.trigger('showModal', {
-      title: 'Terms of Service',
-      frameUrl: window.config.Website + '/terms-plain',
-      buttonText: 'OK',
-      buttonTextSecondary: undefined,
-      onPositive: () => {},
-      onNegative: () => {},
-    });
+  get termsUrl(): string {
+    return `${window.config.Website}/terms-plain`;
+  }
+
+  privacy(): void {
+    window.open(this.privacyUrl, '_blank', 'noopener,noreferrer');
+  }
+
+  terms(): void {
+    window.open(this.termsUrl, '_blank', 'noopener,noreferrer');
   }
 
   skeleton(width: string, height: string, radius: string, margin: string) {

@@ -3,23 +3,17 @@ import { Capacitor } from '@capacitor/core';
 import {
   UserLoginInfoDto,
   ApplicationInfoDto,
-  SessionServiceProxy,
-  GetCurrentLoginInformationsOutput,
-  ProfileServiceProxy,
   TenantLoginInfoDto,
-  DataFileServiceProxy,
   AppInformationDto,
-  SaaSAppType,
-} from 'src/shared/service-proxies/service-proxies';
+} from './session.models';
 import { AppConsts } from '../AppConsts';
 import { AppBranding } from '../branding/app-branding';
 import { buildTenantBrandingLogoUrl, getDefaultLoginLogo } from '../branding/tenant-branding';
-import { Router } from '@angular/router';
 import { idpAuthConfig } from '../idp-auth/idp-auth.config';
 import { IdpProfileService } from '../idp-auth/idp-profile.service';
 import { getProfilePictureSrc, IdpProfile } from '../idp-auth/idp-profile.models';
-import { getStoredAccessToken } from '../idp-auth/auth-storage';
-import { isTokenValid } from '../idp-auth/jwt.utils';
+import { getStoredAccessToken, getStoredRefreshToken, storeIdpTokens } from '../idp-auth/auth-storage';
+import { isTokenValid, userFromIdpToken } from '../idp-auth/jwt.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -34,19 +28,9 @@ export class AppSessionService {
   private _isIOS: boolean | undefined;
   private _profilePicture = AppConsts.appBaseUrl + '/assets/avatars/placeholder-profile.jpg';
   private _app: AppInformationDto | undefined;
-  private _icon: string | undefined = AppBranding.appIcon;
   private _tenantLogoUrl: string | undefined;
-  private _qrImage: string | undefined = './assets/icons/image-holder.jpg';
 
-  constructor(
-    private _sessionService: SessionServiceProxy,
-    private _profileService: ProfileServiceProxy,
-    private _dataFileService: DataFileServiceProxy,
-    private readonly _router: Router,
-    private readonly _idpProfileService: IdpProfileService,
-  ) {
-    this.init();
-  }
+  constructor(private readonly _idpProfileService: IdpProfileService) {}
 
   get application(): ApplicationInfoDto | undefined {
     return this._application;
@@ -69,7 +53,7 @@ export class AppSessionService {
   }
 
   get tenantId(): number | null {
-    return this.tenant ? this.tenant.id : null;
+    return this.tenant?.id ?? null;
   }
 
   get impersonatorUser(): UserLoginInfoDto | undefined {
@@ -108,48 +92,16 @@ export class AppSessionService {
     return this._app?.appUrl;
   }
 
-  get saasType(): SaaSAppType | undefined {
+  get saasType(): number | undefined {
     return this._app?.saaSType;
   }
 
   get appIcon(): string | undefined {
-    return this._tenantLogoUrl ?? this._icon;
+    return this._tenantLogoUrl ?? AppBranding.appIcon;
   }
 
   get loginLogo(): string {
     return this._tenantLogoUrl ?? getDefaultLoginLogo();
-  }
-
-  get qrImage(): string | undefined {
-    return this._qrImage;
-  }
-
-  getProfilePicture(): void {
-    this._profileService.getProfilePicture().subscribe((result) => {
-      if (result && result.profilePicture) {
-        this._profilePicture = 'data:image/jpeg;base64,' + result.profilePicture;
-      }
-    });
-  }
-
-  setQRImage(): void {
-    this._dataFileService.getrawbinary(this.tenant?.communityCodeImageId).subscribe((result) => {
-      if (result) {
-        this._qrImage = 'data:image/jpeg;base64,' + result;
-      }
-    });
-  }
-
-  setIcon(imageId: string | undefined): void {
-    if (!imageId || this._tenantLogoUrl) {
-      return;
-    }
-
-    this._dataFileService.getraw(imageId).subscribe((result) => {
-      if (result && !this._tenantLogoUrl) {
-        this._icon = 'data:image/jpeg;base64,' + result;
-      }
-    });
   }
 
   /** Use the public branding URL directly — img tags load cross-origin without CORS (fetch does not). */
@@ -201,76 +153,34 @@ export class AppSessionService {
     this._platform = Capacitor.getPlatform();
     this._isIOS = this._platform == 'ios';
     this.applyTenantBrandingUrl();
-    return new Promise<boolean>((resolve, reject) => {
-      this._sessionService
-        .getCurrentLoginInformations()
-        .toPromise()
-        .then(
-          (result: GetCurrentLoginInformationsOutput | undefined) => {
-            if (!result?.tenant && this.isMobile) {
-              if (!window.config.BuildTenantId) {
-                this.applyTenantBrandingUrl();
-                this._router.navigate(['/auth/onboarding']);
-                return;
-              }
-            }
-            this._application = result?.application;
-            this._user = result?.user;
-            this._tenant = result?.tenant;
-            if (this._tenant) {
-              this.setQRImage();
-            }
-            this._impersonatorTenant = result?.impersonatorTenant;
-            this._impersonatorUser = result?.impersonatorUser;
-            this._app = result?.app;
-            this.setIcon(result?.app?.iconId);
 
-            const finishInit = () => {
-              this.applyTenantBrandingUrl();
-              resolve(true);
-            };
-
-            if (this._user) {
-              abp.event.trigger('abp.session.user');
-              this.getProfilePicture();
-              void finishInit();
-              return;
-            }
-
-            if (idpAuthConfig.enabled) {
-              void this.hydrateUserFromIdpProfile().then(() => {
-                if (this._user) {
-                  abp.event.trigger('abp.session.user');
-                }
-                void finishInit();
-              });
-              return;
-            }
-
-            void finishInit();
-          },
-          (err) => {
-            reject(err);
-            abp.event.trigger('showModal', {
-              title: 'Server Error',
-              content: `
-              <p class="text-center">
-                Server is temporarily unavailable. Please try again after a few minutes.
-              </p>
-              `,
-              buttonText: 'Retry',
-              buttonTextSecondary: undefined,
-              onPositive: () => {
-                window.location.href = '/';
-              },
-              onNegative: () => {
-                window.location.href = '/';
-              },
-            });
-            resolve(false);
-          },
-        );
+    return this.ensureUserHydrated().then(() => {
+      if (this._user) {
+        abp.event.trigger('abp.session.user');
+      }
+      this.applyTenantBrandingUrl();
+      return true;
     });
+  }
+
+  async ensureUserHydrated(): Promise<void> {
+    let accessToken = getStoredAccessToken() || abp.auth.getToken() || '';
+
+    if (!isTokenValid(accessToken)) {
+      const refreshed = await this.tryRefreshAccessToken();
+      if (refreshed) {
+        accessToken = refreshed;
+      }
+    }
+
+    if (!isTokenValid(accessToken)) {
+      return;
+    }
+
+    await this.hydrateUserFromIdpProfile();
+    if (!this._user) {
+      this.applyUserFromJwt(accessToken);
+    }
   }
 
   getShownLoginName(): string | undefined {
@@ -284,6 +194,10 @@ export class AppSessionService {
     const profile = await this._idpProfileService.getProfile(token!, idpAuthConfig.tenancyName);
     if (!profile) return;
 
+    this.applyProfileToSession(profile);
+  }
+
+  private applyProfileToSession(profile: IdpProfile): void {
     const numericId =
       typeof profile.id === 'number' ? profile.id : parseInt(String(profile.id), 10) || 0;
     const user = new UserLoginInfoDto();
@@ -299,10 +213,52 @@ export class AppSessionService {
       this._profilePicture = photo;
     }
 
+    this.ensureTenantFromConfig();
+  }
+
+  private applyUserFromJwt(accessToken: string): void {
+    const claims = userFromIdpToken(accessToken);
+    if (!claims) return;
+
+    const parts = String(claims.displayName || '')
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+    const user = new UserLoginInfoDto();
+    user.id = parseInt(String(claims.id), 10) || 0;
+    user.name = parts[0] ?? claims.displayName ?? 'User';
+    user.surname = parts.length > 1 ? parts.slice(1).join(' ') : '';
+    user.emailAddress = claims.email ?? '';
+    user.userName = claims.email ?? claims.displayName ?? '';
+    this._user = user;
+
+    if (claims.photoURL) {
+      this._profilePicture = claims.photoURL;
+    }
+
+    this.ensureTenantFromConfig();
+  }
+
+  private ensureTenantFromConfig(): void {
     if (!this._tenant && idpAuthConfig.tenancyName) {
       const tenant = new TenantLoginInfoDto();
       tenant.tenancyName = idpAuthConfig.tenancyName;
       this._tenant = tenant;
     }
+  }
+
+  private async tryRefreshAccessToken(): Promise<string | null> {
+    if (!idpAuthConfig.enabled) return null;
+
+    const refreshToken = getStoredRefreshToken();
+    if (!refreshToken) return null;
+
+    const result = await this._idpProfileService.refreshToken(refreshToken);
+    if (!result || !isTokenValid(result.accessToken)) return null;
+
+    storeIdpTokens(result.accessToken, result.refreshToken, result.expiresIn);
+    abp.auth.setToken(result.accessToken);
+    abp.auth.setRefreshToken(result.refreshToken);
+    return result.accessToken;
   }
 }

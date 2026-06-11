@@ -7,9 +7,9 @@ import { SharedModule } from 'src/app/shared.module';
 import { AppCommonModule } from 'src/app/shared/common/app-common.module';
 import { ZeroCommonModule } from '../common.module';
 import { UtilsModule } from 'src/shared/utils/utils.module';
-import { UserNotificationHelper } from 'src/shared/helpers/UserNotificationHelper';
+
 @NgModule({
-  providers: [UserNotificationHelper],
+  providers: [],
   imports: [
     LayoutRoutingModule,
     HttpClientModule,

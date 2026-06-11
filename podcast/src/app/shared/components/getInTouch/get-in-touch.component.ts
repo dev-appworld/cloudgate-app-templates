@@ -2,8 +2,6 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Modal } from 'flowbite';
-import { finalize } from 'rxjs';
-import { CommsServiceProxy, ContactUsDto, RegisterOutput } from 'src/shared/service-proxies/service-proxies';
 import { UtilsModule } from 'src/shared/utils/utils.module';
 
 @Component({
@@ -42,7 +40,7 @@ export class GetInTouchModalComponent implements OnInit {
     { name: 'Other', value: 5 },
   ];
 
-  constructor(private readonly _formBuilder: FormBuilder, private _commsService: CommsServiceProxy) {}
+  constructor(private readonly _formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -82,9 +80,7 @@ export class GetInTouchModalComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    const { name, email, subject, message, duration } = this.form.value;
 
-    // stop here if form is invalid
     if (this.form.invalid) {
       return;
     }
@@ -93,28 +89,13 @@ export class GetInTouchModalComponent implements OnInit {
   }
 
   sendMessage() {
-    var model = new ContactUsDto();
-    model.name = this.form.value['name'];
-    model.email = this.form.value['email'];
-    model.subject = this.form.value['subject'];
-    model.message = this.form.value['message'];
-
     this.saving = true;
-    this._commsService
-      .contact(model)
-      .pipe(
-        finalize(() => {
-          this.saving = false;
-          this.form.controls['name'].setValue('');
-          this.form.controls['email'].setValue('');
-          this.form.controls['subject'].setValue('');
-          this.form.controls['message'].setValue('');
-          this.close();
-          abp.notify.success('Sent successfully');
-        }),
-      )
-      .subscribe((result) => {
-        this.hide();
-      });
+    this.form.controls['name'].setValue('');
+    this.form.controls['email'].setValue('');
+    this.form.controls['subject'].setValue('');
+    this.form.controls['message'].setValue('');
+    this.saving = false;
+    this.close();
+    abp.notify.info('Contact form is not connected to a backend in this template.');
   }
 }

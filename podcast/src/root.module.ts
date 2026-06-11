@@ -9,10 +9,10 @@ import { RootComponent } from './root.component';
 import { ZeroCommonModule } from './app/modules/common.module';
 import { AppConsts } from './app/shared/AppConsts';
 import { AppSessionService } from './app/shared/session/app-session.service';
-import { UiCustomizationSettingsDto, ApplicationInfoDto, API_BASE_URL } from './shared/service-proxies/service-proxies';
+import { ApplicationInfoDto } from './app/shared/session/session.models';
 import { ServiceProxyModule } from './shared/service-proxies/service-proxy.module';
 import { AppPreBootstrap } from './AppPreBootstrap';
-import { AppAuthService } from './app/shared/common/auth/app-auth.service';
+import { CloudgateAuthService } from './app/shared/auth/cloudgate-auth.service';
 import { UrlHelper } from './app/shared/helpers/UrlHelper';
 import { LocaleMappingService } from './app/shared/locale-mapping.service';
 import { provideLottieOptions } from 'ngx-lottie';
@@ -21,6 +21,7 @@ import { NgxBootstrapDatePickerConfigService } from './assets/ngx-bootstrap/ngx-
 import { DateTimeService } from './app/shared/common/timing/date-time.service';
 import { environment } from './environments/environment';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { ToastrModule } from 'ngx-toastr';
 import { AppCommonModule } from './app/shared/common/app-common.module';
 
 export function appInitializerFactory(injector: Injector, platformLocation: PlatformLocation) {
@@ -38,11 +39,12 @@ export function appInitializerFactory(injector: Injector, platformLocation: Plat
         appBaseUrl,
         injector,
         () => {
-          handleLogoutRequest(injector.get(AppAuthService));
+          handleLogoutRequest(injector.get(CloudgateAuthService));
           let appSessionService: AppSessionService = injector.get(AppSessionService);
           appSessionService.init().then(
-            (result) => {
-              // registerLocales(resolve, reject, spinnerService);
+            () => {
+              spinnerService.hide();
+              resolve(true);
             },
             (err) => {
               spinnerService.hide();
@@ -121,17 +123,17 @@ export function convertAbpLocaleToAngularLocale(locale: string): string {
   return new LocaleMappingService().map('angular', locale);
 }
 
-export function getRemoteServiceBaseUrl(): string {
-  return AppConsts.remoteServiceBaseUrl;
-}
-
 export function getCurrentLanguage(): string {
-  return convertAbpLocaleToAngularLocale(abp.localization.currentLanguage.name);
+  const locale = abp.localization?.currentLanguage?.name;
+  if (!locale) {
+    return 'en';
+  }
+  return convertAbpLocaleToAngularLocale(locale);
 }
 
 export function getCurrencyCode(injector: Injector): string | undefined {
   let appSessionService: AppSessionService = injector.get(AppSessionService);
-  return appSessionService?.application?.currency;
+  return appSessionService?.application?.currency ?? 'USD';
 }
 
 export function getBaseHref(platformLocation: PlatformLocation): string {
@@ -143,7 +145,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   return '/';
 }
 
-function handleLogoutRequest(authService: AppAuthService) {
+function handleLogoutRequest(authService: CloudgateAuthService) {
   let currentUrl = UrlHelper.initialUrl;
   let returnUrl = UrlHelper.getReturnUrl();
   if (currentUrl.indexOf('account/logout') >= 0 && returnUrl) {
@@ -159,6 +161,7 @@ function handleLogoutRequest(authService: AppAuthService) {
     HttpClientModule,
     RootRoutingModule,
     NgxSpinnerModule,
+    ToastrModule.forRoot(),
     AppCommonModule.forRoot(),
   ],
   declarations: [RootComponent],
@@ -166,7 +169,6 @@ function handleLogoutRequest(authService: AppAuthService) {
     provideLottieOptions({
       player: () => player,
     }),
-    { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,

@@ -44,10 +44,6 @@ const routes: Routes = [
         path: 'profile/edit',
         loadChildren: () => import('../home/profile/profile-edit/profile-edit.module').then((m) => m.ProfileEditModule),
       },
-      {
-        path: 'dashboard',
-        loadChildren: () => import('../dashboard/dashboard.module').then((m) => m.DashboardModule),
-      },
       { path: '**', redirectTo: 'error/404' },
     ],
   },

@@ -7,8 +7,6 @@ import { NgClass, NgIf } from '@angular/common';
 import { UtilsModule } from 'src/shared/utils/utils.module';
 import { AppComponentBase } from 'src/app/shared/common/app-component-base';
 import { NgOtpInputModule } from 'ng-otp-input';
-import { SaasType, SessionServiceProxy } from 'src/shared/service-proxies/service-proxies';
-import { finalize } from 'rxjs';
 import { ScanQRCodeComponent } from 'src/app/shared/components/scan-qrcode/scan-qrcode.component';
 import { SlideContentComponent } from './slide-content/slide-content.component';
 import { LocalService } from 'src/app/shared/session/local-storage.service';
@@ -54,7 +52,6 @@ export class OnboardingComponent extends AppComponentBase implements OnInit {
     injector: Injector,
     private _localStore: LocalService,
     private readonly _router: Router,
-    private _sessionService: SessionServiceProxy,
   ) {
     super(injector);
   }
@@ -96,16 +93,8 @@ export class OnboardingComponent extends AppComponentBase implements OnInit {
 
   submit() {
     this.saving = true;
-    this._sessionService
-      .getTenantIdByCommunityCode(this.otp, SaasType.LMS)
-      .pipe(finalize(() => (this.saving = false)))
-      .subscribe((result) => {
-        if (result > 0) {
-          this._router.navigate([`/auth/app/${result}`]);
-        } else {
-          this.toastr.error('Invalid Code');
-        }
-      });
+    this.toastr.warning('Community code lookup requires a Cloudgate workflow. This feature is not available.');
+    this.saving = false;
   }
 
   scanQR() {

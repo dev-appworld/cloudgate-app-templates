@@ -7,7 +7,6 @@ import { AppComponentBase } from 'src/app/shared/common/app-component-base';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { Share } from '@capacitor/share';
-import { AppLauncher } from '@capacitor/app-launcher';
 import { AppBranding } from 'src/app/shared/branding/app-branding';
 
 @Component({
@@ -64,9 +63,7 @@ export class NavbarComponent extends AppComponentBase implements OnInit, OnDestr
   async share() {
     await Share.share({
       title: window.config.FriendlyName,
-      text: this.appSession.isIOS
-        ? `iOS: ${window.config.iOS}`
-        : `Android: ${window.config.Android} \niOS: ${window.config.iOS}`,
+      url: window.config.Website,
       dialogTitle: 'Share with Friends',
     });
   }

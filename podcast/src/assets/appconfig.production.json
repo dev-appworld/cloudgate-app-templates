@@ -1,8 +1,7 @@
 {
-  "remoteServiceBaseUrl": "https://host.appworldsa.com",
   "appBaseUrl": "https://{TENANCY_NAME}.podcast.appworldsa.com",
   "idpBaseUrl": "",
-  "idpApiUrl": "",
+  "idpApiUrl": "https://apps.appworldsa.com",
   "idpTenancyName": "",
   "idpReturnUrl": "",
   "workflowGatewayUrl": "https://apps.appworldsa.com",
