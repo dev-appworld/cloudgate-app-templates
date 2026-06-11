@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-podcast-deployment
+  labels:
+    app: app-podcast
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-podcast
+  template:
+    metadata:
+      labels:
+        app: app-podcast
+    spec:
+      containers:
+        - name: app-podcast
+          image: deviapp.azurecr.io/app-podcast
+          ports:
+            - containerPort: 4200
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-podcast-clusterip-service
+  labels:
+    app: app-podcast
+spec:
+  type: ClusterIP
+  selector:
+    app: app-podcast
+  ports:
+    - port: 80
+      targetPort: 4200
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-podcast-ingress-service
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-wild
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: '*.podcast.appworldsa.com'
+      http:
+        paths:
+          - pathType: Prefix
+            path: '/'
+            backend:
+              service:
+                name: app-podcast-clusterip-service
+                port:
+                  number: 80
+    - host: 'podcast.appworldsa.com'
+      http:
+        paths:
+          - pathType: Prefix
+            path: '/'
+            backend:
+              service:
+                name: app-podcast-clusterip-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - '*.podcast.appworldsa.com'
+        - 'podcast.appworldsa.com'
+      secretName: podcast-demo-appworldsa-com-secret

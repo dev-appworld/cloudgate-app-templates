@@ -1,0 +1,133 @@
+<img src="./assets/images/image-07.jpg" class="mb-5 w-full rounded-3xl shadow-2xl" alt="..." />
+<div class="mb-8 text-center">
+  <p class="mb-1 text-lg font-bold text-gray-900 dark:text-white">Chocolate Dreams</p>
+  <p class="text-xs text-gray-500 dark:text-gray-400">Factory stories from the past</p>
+</div>
+<div class="relative mb-5">
+  <!-- Progress Bar -->
+  <div class="mt-6 h-2 rounded-full bg-gray-200">
+    <div class="h-2 w-1/2 rounded-full bg-primary"></div>
+  </div>
+  <div class="mt-3 flex justify-between text-sm text-gray-400">
+    <span>1:57</span>
+    <span>3:53</span>
+  </div>
+</div>
+<div class="mx-5 mb-5 flex justify-around">
+  <button
+    (click)="navigate('/home/play')"
+    class="rounded-full p-2.5 text-sm font-medium text-gray-400 dark:bg-gray-700">
+    <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M16.5 8.5H13.8604C13.6452 8.5 13.4541 8.63772 13.386 8.84189L12.7194 10.8419C12.6114 11.1657 12.8524 11.5 13.1937 11.5H14.5C15.6046 11.5 16.5 12.3954 16.5 13.5C16.5 14.6046 15.6046 15.5 14.5 15.5H12.5"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"></path>
+        <path
+          d="M7.5 10.5L10 8.5V15.5"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path
+          d="M14 4.5L12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C8.7288 22 5.82446 20.4293 4 18.001M8 2.83209C6.87754 3.32251 5.86251 4.01303 5 4.85857C3.14864 6.67349 2 9.20261 2 12C2 12.6849 2.06886 13.3538 2.20004 14"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </g>
+    </svg>
+    <span class="sr-only">Icon description</span>
+  </button>
+  <button
+    (click)="navigate('/home/play')"
+    class="rounded-full bg-primary p-4 text-sm font-medium text-white dark:bg-gray-700">
+    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z"
+          fill="currentColor"></path>
+      </g>
+    </svg>
+    <span class="sr-only">Icon description</span>
+  </button>
+  <button
+    (click)="navigate('/home/play')"
+    class="rounded-full p-2.5 text-sm font-medium text-gray-400 dark:bg-gray-700">
+    <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M16.5 8.5H13.8604C13.6452 8.5 13.4541 8.63772 13.386 8.84189L12.7194 10.8419C12.6114 11.1657 12.8524 11.5 13.1937 11.5H14.5C15.6046 11.5 16.5 12.3954 16.5 13.5C16.5 14.6046 15.6046 15.5 14.5 15.5H12.5"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"></path>
+        <path
+          d="M7.5 10.5L10 8.5V15.5"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path
+          d="M10 4.5L12 2C6.47715 2 2 6.47715 2 12C2 12.6849 2.06886 13.3538 2.20004 14M16 2.83209C19.5318 4.3752 22 7.89936 22 12C22 17.5228 17.5228 22 12 22C8.72852 22 5.82443 20.4287 4 18"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </g>
+    </svg>
+    <span class="sr-only">Icon description</span>
+  </button>
+</div>
+
+<!-- drawer init and toggle -->
+<div class="text-center">
+  <button
+    class="mb-2 inline-flex items-center text-sm font-medium text-primary"
+    type="button"
+    data-drawer-target="drawer-swipe"
+    data-drawer-show="drawer-swipe"
+    data-drawer-placement="bottom"
+    data-drawer-edge="true"
+    data-drawer-edge-offset="bottom-[60px]"
+    aria-controls="drawer-swipe">
+    Show Captions
+    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M17 18L12 13L7 18M17 11L12 6L7 11"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </g>
+    </svg>
+  </button>
+</div>
+
+<!-- drawer component -->
+<div
+  id="drawer-swipe"
+  class="fixed left-0 right-0 bottom-[60px] z-40 w-full translate-y-full overflow-y-auto rounded-t-box border-t border-gray-200 bg-white transition-transform dark:border-black dark:bg-gray-900"
+  tabindex="-1"
+  aria-labelledby="drawer-swipe-label">
+  <div class="cursor-pointer p-4 hover:bg-white dark:hover:bg-gray-900" data-drawer-toggle="drawer-swipe">
+    <span class="absolute top-3 left-1/2 h-1 w-8 -translate-x-1/2 rounded-lg bg-gray-200 dark:bg-black"></span>
+  </div>
+  <div class="mx-5 mb-10 rounded-box bg-gray-100 px-5 py-2 text-center dark:bg-gray-600">
+    <p class="text-gray-300">Man I just wanna go flex</p>
+    <p class="font-semibold text-gray-700 dark:text-black">Gold on my teeth and on my neck</p>
+    <p class="text-gray-300">And I'm stone cold with the flex</p>
+    <p class="text-gray-300">With my squad and I'm smokin' up a check</p>
+    <p class="text-gray-300">Man I just wanna go flex</p>
+    <p class="text-gray-300">Gold on my teeth and on my neck</p>
+  </div>
+</div>

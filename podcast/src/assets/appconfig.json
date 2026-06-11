@@ -1,0 +1,56 @@
+{
+  "remoteServiceBaseUrl": "http://localhost:44301",
+  "appBaseUrl": "http://{TENANCY_NAME}.localhost:3000",
+  "idpBaseUrl": "http://localhost:5173",
+  "idpApiUrl": "http://localhost:44301",
+  "idpTenancyName": "apps",
+  "idpReturnUrl": "",
+  "localeMappings": {
+    "angular": [
+      {
+        "from": "pt-BR",
+        "to": "pt"
+      },
+      {
+        "from": "zh-CN",
+        "to": "zh"
+      },
+      {
+        "from": "he-IL",
+        "to": "he"
+      },
+      {
+        "from": "es-MX",
+        "to": "es"
+      },
+      {
+        "from": "vi",
+        "to": "en"
+      }
+    ],
+    "luxon": [
+      {
+        "from": "es-MX",
+        "to": "es"
+      },
+      {
+        "from": "zh-Hans",
+        "to": "zh-cn"
+      },
+      {
+        "from": "vi",
+        "to": "en-gb"
+      }
+    ],
+    "recaptcha": [
+      {
+        "from": "zh-Hans",
+        "to": "zh-cn"
+      },
+      {
+        "from": "es-MX",
+        "to": "es"
+      }
+    ]
+  }
+}
