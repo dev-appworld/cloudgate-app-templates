@@ -15,17 +15,13 @@ podcast/                # Angular podcast app (port 3000) + workflow import temp
 
 Each template folder contains a `template.json` (same metadata as the root manifest entry) plus a minimal runnable project.
 
-The **podcast** template also ships `.template/workflow-template.json` — import it in Cloudgate to create the `GET /podcasts` API the app uses at runtime.
-
-![Cloudgate Podcast](./podcast/banner.png)
-
-See [podcast/README.md](./podcast/README.md) for light/dark screenshots and setup details.
+The **podcast** template also ships `.template/workflow-template.json` — import it in Cloudgate to create the `GET /podcasts` API the app uses at runtime. See [podcast/README.md](./podcast/README.md) for screenshots and setup details.
 
 ## Adding a template
 
 1. Create a new top-level folder with the starter source.
 2. Add a `template.json` inside the folder.
-3. Add an entry to `templates.json` at the repo root.
+3. Add an entry to `templates.json` at the repo root (optional `thumbnail` URL for the Quick Start card image).
 4. Push to `main` — the API caches the manifest (`WebApps:TemplatesCacheMinutes`: `1` in local dev, `720` / 12 hours in production). **Restart the Cloudgate API** or wait for the cache to expire, then click refresh on `/web-coder`.
 
 ## Cloudgate configuration
