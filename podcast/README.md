@@ -1,6 +1,6 @@
-# Cloudgate Podcast
+# Cloudgate Podcast Demo
 
-An Angular podcast app template for the [Cloudgate](https://cloudgate.dev) **Web Coder** Quick Start gallery. It ships with a full mobile-style listening experience, Cloudgate branding, and the hosted **IdP user login flow** used across Cloudgate app templates.
+An Angular podcast demo app for the [Cloudgate](https://cloudgate.dev) **Web Coder** Quick Start gallery. It ships with a full mobile-style listening experience, Cloudgate branding, and the hosted **IdP user login flow** used across Cloudgate app templates.
 
 Use it as a starting point when you want more than a blank shell — browse categories, manage playlists, view history, play episodes, and edit a user profile — while still fitting into the Cloudgate editor preview workflow.
 
@@ -100,7 +100,7 @@ Example: `http://apps.localhost:44301/sbx/api/podcasts`
 
 ### Create the workflow
 
-**Quick Start (recommended):** use the Podcast template from Web Coder — workflows import automatically when you create the project. Then publish **Podcast Catalog** to sandbox.
+**Quick Start (recommended):** use the **Cloudgate Podcast Demo** template from Web Coder — workflows import automatically when you create the project. Then publish **Podcast Catalog** to sandbox.
 
 **Manual:** upload `.template/workflow-template.json` in Cloudgate Imports → project `api` → publish sandbox.
 

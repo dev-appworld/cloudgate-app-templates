@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.appworldsa.audio',
-  appName: 'Podcast AppWorld',
+  appName: 'Cloudgate Podcast Demo',
   webDir: 'dist',
   server: {
     androidScheme: 'https',

@@ -8,13 +8,13 @@ Browse templates in the hub at **Web Coder → Quick Start** (`/web-coder`). Eac
 
 | Template | Folder | Notes |
 | --- | --- | --- |
-| Cloudgate Podcast | [`podcast/`](./podcast/) | Angular podcast app with bundled workflow import for `GET /podcasts` |
+| Cloudgate Podcast Demo | [`podcast/`](./podcast/) | Angular podcast demo app with bundled workflow import for `GET /podcasts` |
 
 Additional starters (`react/`, `angular/`, `html/`, `vue/`) live in this repo and can be enabled in [`templates.json`](./templates.json) when listed in the manifest.
 
-### Podcast
+### Cloudgate Podcast Demo
 
-The podcast template includes a workflow catalog the app calls at runtime. When you create the project from Quick Start, selected workflows import automatically. See [podcast/README.md](./podcast/README.md) for screenshots, demo link, and full setup.
+The Cloudgate Podcast Demo template includes a workflow catalog the app calls at runtime. When you create the project from Quick Start, selected workflows import automatically. See [podcast/README.md](./podcast/README.md) for screenshots, demo link, and full setup.
 
 ## Repository layout
 

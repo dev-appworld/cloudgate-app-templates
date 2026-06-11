@@ -1,7 +1,7 @@
 {
   "id": "podcast",
-  "name": "Cloudgate Podcast",
-  "description": "Angular podcast app with featured carousel, playlists, and workflow-backed catalog — ready for Cloudgate dev preview.",
+  "name": "Cloudgate Podcast Demo",
+  "description": "Angular podcast demo app with featured carousel, playlists, and workflow-backed catalog — ready for Cloudgate dev preview.",
   "folder": "podcast",
   "framework": "Angular",
   "devCommand": "npm install && npm run start",

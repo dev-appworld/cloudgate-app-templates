@@ -1,8 +1,8 @@
 {
   "name": "angular-tailwind",
-  "displayName": "Cloudgate Podcast",
+  "displayName": "Cloudgate Podcast Demo",
   "version": "1.0.0",
-  "description": "Cloudgate podcast app template",
+  "description": "Cloudgate Podcast Demo — Angular app template for Web Coder Quick Start",
   "homepage": "https://cloudgate.dev",
   "license": "MIT",
   "scripts": {
