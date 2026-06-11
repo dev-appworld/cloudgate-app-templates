@@ -7,8 +7,8 @@ Pre-built starter apps for the Cloudgate Web Coder **Quick Start** gallery.
 ```
 templates.json          # Manifest consumed by the Cloudgate API
 react/                  # React + Vite starter (port 3000)
-angular/                # Angular standalone starter (port 4200)
-html/                   # Vanilla HTML + Vite starter (port 3000)
+angular/                # Angular standalone app with IdP login flow (port 3000)
+html/                   # Plain static HTML site with IdP login flow (port 3000)
 ```
 
 Each template folder contains a `template.json` (same metadata as the root manifest entry) plus a minimal runnable project.

@@ -17,11 +17,11 @@
                       {
                           "id":  "angular",
                           "name":  "Angular",
-                          "description":  "Angular standalone app with routing â€” scaffolded for the Cloudgate editor and dev preview.",
+                          "description":  "Angular standalone app with IdP login flow — ready for Cloudgate dev preview.",
                           "folder":  "angular",
                           "framework":  "Angular",
                           "devCommand":  "npm install \u0026\u0026 npm run start",
-                          "devPort":  4200,
+                          "devPort":  3000,
                           "tags":  [
                                        "angular",
                                        "typescript"
