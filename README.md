@@ -17,6 +17,10 @@ Each template folder contains a `template.json` (same metadata as the root manif
 
 The **podcast** template also ships `.template/workflow-template.json` — import it in Cloudgate to create the `GET /podcasts` API the app uses at runtime.
 
+![Cloudgate Podcast](./podcast/banner.png)
+
+See [podcast/README.md](./podcast/README.md) for light/dark screenshots and setup details.
+
 ## Adding a template
 
 1. Create a new top-level folder with the starter source.

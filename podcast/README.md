@@ -4,6 +4,23 @@ An Angular podcast app template for the [Cloudgate](https://cloudgate.dev) **Web
 
 Use it as a starting point when you want more than a blank shell — browse categories, manage playlists, view history, play episodes, and edit a user profile — while still fitting into the Cloudgate editor preview workflow.
 
+**Public demo:** [https://placeholder.cloudgate.dev](https://placeholder.cloudgate.dev)
+
+## Screenshots
+
+Light and dark mode on mobile. Images live in [`docs/screenshots/`](./docs/screenshots/).
+
+| Screen | Light | Dark |
+| --- | --- | --- |
+| Sign in | ![Sign in (light)](./docs/screenshots/light-01.png) | ![Sign in (dark)](./docs/screenshots/dark-01.png) |
+| Sign up | ![Sign up (light)](./docs/screenshots/light-02.png) | ![Sign up (dark)](./docs/screenshots/dark-02.png) |
+| Home | ![Home (light)](./docs/screenshots/light-03.png) | ![Home (dark)](./docs/screenshots/dark-03.png) |
+| Categories | ![Categories (light)](./docs/screenshots/light-04.png) | ![Categories (dark)](./docs/screenshots/dark-04.png) |
+| Playlists | ![Playlists (light)](./docs/screenshots/light-05.png) | ![Playlists (dark)](./docs/screenshots/dark-05.png) |
+| Profile | ![Profile (light)](./docs/screenshots/light-06.png) | ![Profile (dark)](./docs/screenshots/dark-06.png) |
+| Now playing | ![Now playing (light)](./docs/screenshots/light-07.png) | ![Now playing (dark)](./docs/screenshots/dark-07.png) |
+| Side menu | ![Side menu (light)](./docs/screenshots/light-08.png) | ![Side menu (dark)](./docs/screenshots/dark-08.png) |
+
 ## Stack
 
 - **Angular 17** (standalone components)
