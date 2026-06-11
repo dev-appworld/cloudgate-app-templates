@@ -43,6 +43,44 @@ Edit `src/assets/appconfig.json` for local development:
 | `idpApiUrl` | Optional separate API base for profile/refresh. Falls back to `remoteServiceBaseUrl`. |
 | `idpTenancyName` | Default tenancy name. Override at runtime with `?idp_tenant=` or a tenant subdomain. |
 | `idpReturnUrl` | Optional post-login redirect. Defaults to the current app URL. |
+| `workflowGatewayUrl` | Cloudgate apps gateway (e.g. `http://apps.localhost:44301`). |
+| `workflowEnvironment` | `sbx` or `prod` — which published workflow slot to call. |
+| `workflowProjectPath` | Project path segment (default `api`). |
+| `podcastCatalogRoute` | Workflow route for catalog JSON (default `podcasts`). |
+
+## Workflow data
+
+Home, Categories, Playlists, and Now Playing load podcast content from a Cloudgate workflow instead of hard-coded template HTML.
+
+**Runtime URL:** `{workflowGatewayUrl}/{workflowEnvironment}/{workflowProjectPath}/{podcastCatalogRoute}`
+
+Example: `http://apps.localhost:44301/sbx/api/podcasts`
+
+### Create the workflow
+
+**Import (recommended):** upload `.template/workflow-template.json` in Cloudgate Imports → project `api` → publish sandbox.
+
+**MCP:** catalog source `.cloudgate/podcast-catalog.json`, payload `.cloudgate/podcast-catalog-workflow.json` — see `.cloudgate/WORKFLOW_SETUP.md`.
+
+Regenerate import JSON: `node .template/gen-workflow-template.mjs`
+
+Quick test after creation:
+
+```powershell
+Invoke-WebRequest -Uri "http://apps.localhost:44301/sbx/api/podcasts" -UseBasicParsing
+```
+
+### CORS / local dev
+
+The app runs on `{tenant}.localhost:3000` while the gateway is `apps.localhost:44301`. Ensure the gateway allows your app origin, or add a dev proxy in `proxy.conf.json` if needed.
+
+### Angular services
+
+| File | Role |
+| --- | --- |
+| `src/app/shared/workflow/workflow.config.ts` | Builds workflow URLs from `AppConsts` |
+| `src/app/shared/workflow/workflow-http.service.ts` | Generic HTTP client for workflow endpoints |
+| `src/app/shared/workflow/podcast-workflow.service.ts` | Loads and caches `PodcastCatalog` |
 
 Runtime links (website, store URLs, sample tenant) live in `src/assets/style.js`:
 

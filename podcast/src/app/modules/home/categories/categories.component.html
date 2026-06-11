@@ -1,44 +1,28 @@
-<div class="mb-4 mr-2 flex">
-  <h1 class="flex-1 text-xl font-bold text-gray-900 dark:text-white">Recent Podcast</h1>
-  <button type="button" class="mr-2 text-center text-sm font-medium text-gray-700">
-    <p class="text-xs text-gray-500 dark:text-gray-400">All</p>
-  </button>
+<div *ngIf="loading" class="px-5 py-8 text-center text-sm text-gray-500 dark:text-gray-400">Loading podcasts...</div>
+<div *ngIf="loadError && !loading" class="px-5 py-8 text-center text-sm text-red-400">
+  Could not load podcast catalog from the workflow.
 </div>
 
-<div class="mb-6 overflow-x-auto" style="scrollbar-width: none">
-  <div class="carousel">
-    <div class="carousel-item mr-3">
-      <app-podcast-grid-item
-        image="./assets/images/image-08.jpg"
-        title="Hot or Spicy"
-        subtitle="Would you like some tea"></app-podcast-grid-item>
-    </div>
-    <div class="carousel-item mr-3">
-      <app-podcast-grid-item
-        image="./assets/images/image-01.jpg"
-        title="Cool Bananas"
-        subtitle="A lazy day is healty"></app-podcast-grid-item>
-    </div>
-    <div class="carousel-item mr-3">
-      <app-podcast-grid-item
-        image="./assets/images/image-14.jpg"
-        title="Fearless Future"
-        subtitle="A story about life"></app-podcast-grid-item>
-    </div>
-    <div class="carousel-item mr-3">
-      <app-podcast-grid-item
-        image="./assets/images/image-11.jpg"
-        title="Kitty Cat"
-        subtitle="Prrrr away your troubles"></app-podcast-grid-item>
-    </div>
-    <div class="carousel-item mr-3">
-      <app-podcast-grid-item
-        image="./assets/images/image-12.jpg"
-        title="Panda Bee"
-        subtitle="Not everyone loves flowers"></app-podcast-grid-item>
+<ng-container *ngIf="catalog && !loading">
+  <div class="mb-4 mr-2 flex">
+    <h1 class="flex-1 text-xl font-bold text-gray-900 dark:text-white">Recent Podcast</h1>
+    <button type="button" class="mr-2 text-center text-sm font-medium text-gray-700">
+      <p class="text-xs text-gray-500 dark:text-gray-400">All</p>
+    </button>
+  </div>
+
+  <div class="mb-6 overflow-x-auto" style="scrollbar-width: none">
+    <div class="carousel">
+      <div *ngFor="let item of catalog.categories; trackBy: trackById" class="carousel-item mr-3">
+        <app-podcast-grid-item
+          [id]="item.id"
+          [image]="item.imageUrl"
+          [title]="item.title"
+          [subtitle]="item.subtitle"></app-podcast-grid-item>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>
 
 <div class="mb-4 mr-2 flex">
   <h1 class="flex-1 text-xl font-bold text-gray-900 dark:text-white">Categories</h1>

@@ -47,4 +47,10 @@ export class AppConsts {
   static idpApiUrl = '';
   static idpTenancyName = '';
   static idpReturnUrl = '';
+
+  /** Cloudgate workflow gateway. Loaded from appconfig.json. */
+  static workflowGatewayUrl = '';
+  static workflowEnvironment = 'sbx';
+  static workflowProjectPath = 'api';
+  static podcastCatalogRoute = 'podcasts';
 }

@@ -52,6 +52,21 @@
                                        "vue",
                                        "vite"
                                    ]
+                      },
+                      {
+                          "id":  "podcast",
+                          "name":  "Cloudgate Podcast",
+                          "description":  "Angular podcast app with workflow-backed catalog — import .template/workflow-template.json for GET /podcasts.",
+                          "folder":  "podcast",
+                          "framework":  "Angular",
+                          "devCommand":  "npm install \u0026\u0026 npm run start",
+                          "devPort":  3000,
+                          "tags":  [
+                                       "angular",
+                                       "podcast",
+                                       "tailwind",
+                                       "capacitor"
+                                   ]
                       }
                   ]
 }

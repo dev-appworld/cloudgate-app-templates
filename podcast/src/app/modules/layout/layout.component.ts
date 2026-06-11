@@ -68,6 +68,7 @@ export class LayoutComponent extends AppComponentBase implements OnInit {
 
   private shouldShowBottomNavbar(): boolean {
     const path = this.router.url.split('?')[0].split('#')[0].replace(/\/$/, '') || '/';
+    if (path.startsWith('/home/play')) return false;
     return LayoutComponent.BOTTOM_NAV_ROUTES.includes(path);
   }
 

@@ -88,11 +88,16 @@ export class AppPreBootstrap {
         idpApiUrl?: string;
         idpTenancyName?: string;
         idpReturnUrl?: string;
+        workflowGatewayUrl?: string;
+        workflowEnvironment?: string;
+        workflowProjectPath?: string;
+        podcastCatalogRoute?: string;
       }) => {
         AppConsts.localeMappings = result.localeMappings;
         AppConsts.idpBaseUrl = result.idpBaseUrl ?? '';
         AppConsts.idpApiUrl = result.idpApiUrl ?? '';
         AppConsts.idpReturnUrl = result.idpReturnUrl ?? '';
+        AppPreBootstrap.applyWorkflowConfig(result);
         let platform = Capacitor.getPlatform();
         if (platform === 'ios' || platform === 'android') {
           switch (platform) {
@@ -182,6 +187,18 @@ export class AppPreBootstrap {
 
       callback();
     });
+  }
+
+  private static applyWorkflowConfig(result: {
+    workflowGatewayUrl?: string;
+    workflowEnvironment?: string;
+    workflowProjectPath?: string;
+    podcastCatalogRoute?: string;
+  }): void {
+    AppConsts.workflowGatewayUrl = result.workflowGatewayUrl ?? '';
+    AppConsts.workflowEnvironment = (result.workflowEnvironment ?? 'sbx').trim() || 'sbx';
+    AppConsts.workflowProjectPath = (result.workflowProjectPath ?? 'api').trim() || 'api';
+    AppConsts.podcastCatalogRoute = (result.podcastCatalogRoute ?? 'podcasts').trim() || 'podcasts';
   }
 
   private static configureAppUrls(tenancyName: string, appBaseUrl: string, remoteServiceBaseUrl: string): void {

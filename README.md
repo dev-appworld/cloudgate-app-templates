@@ -9,9 +9,13 @@ templates.json          # Manifest consumed by the Cloudgate API
 react/                  # React + Vite starter (port 3000)
 angular/                # Angular standalone app with IdP login flow (port 3000)
 html/                   # Plain static HTML site with IdP login flow (port 3000)
+vue/                    # Vue 3 + Vite starter (port 5173)
+podcast/                # Angular podcast app (port 3000) + workflow import template
 ```
 
 Each template folder contains a `template.json` (same metadata as the root manifest entry) plus a minimal runnable project.
+
+The **podcast** template also ships `.template/workflow-template.json` — import it in Cloudgate to create the `GET /podcasts` API the app uses at runtime.
 
 ## Adding a template
 

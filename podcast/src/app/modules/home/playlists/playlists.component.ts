@@ -4,10 +4,9 @@ import { AppConsts } from 'src/app/shared/AppConsts';
 import { AppComponentBase } from 'src/app/shared/common/app-component-base';
 import { PodcastListItemComponent } from '../components/podcast-list-item/podcast-list-item.component';
 import { initFlowbite } from 'flowbite';
-import { DemoPodcastItemListDto, DemoPodcastServiceProxy } from 'src/shared/service-proxies/service-proxies';
-import { finalize } from 'rxjs';
 import { NgFor, NgIf } from '@angular/common';
-import { LocalStorageService } from 'src/shared/utils/local-storage.service';
+import { PodcastWorkflowService } from 'src/app/shared/workflow/podcast-workflow.service';
+import { PodcastCatalog, PodcastItem } from 'src/app/shared/workflow/podcast.models';
 
 @Component({
   selector: 'app-playlists',
@@ -16,13 +15,13 @@ import { LocalStorageService } from 'src/shared/utils/local-storage.service';
   imports: [RouterOutlet, PodcastListItemComponent, NgIf, NgFor],
 })
 export class PlaylistsComponent extends AppComponentBase implements OnInit {
-  loaded: boolean = false;
-  items: any[] | undefined = [];
+  catalog: PodcastCatalog | null = null;
+  loading = true;
+  loadError = false;
 
   constructor(
     injector: Injector,
-    private _demoPodcastService: DemoPodcastServiceProxy,
-    private _localStorageService: LocalStorageService,
+    private readonly podcastWorkflow: PodcastWorkflowService,
   ) {
     super(injector);
   }
@@ -31,39 +30,14 @@ export class PlaylistsComponent extends AppComponentBase implements OnInit {
     AppConsts.pageName = 'Playlists';
     AppConsts.pageAction = 'Menu';
     initFlowbite();
-    // this.getItems();
+    this.podcastWorkflow.loadCatalog().then((catalog) => {
+      this.catalog = catalog;
+      this.loading = false;
+      this.loadError = this.podcastWorkflow.getState() === 'error';
+    });
   }
 
-  getItems() {
-    this._demoPodcastService
-      .all('', '', 100, 0)
-      .pipe(finalize(() => (this.loaded = true)))
-      .subscribe((result) => {
-        this.items = result.items;
-        this.setImageUrl(this.items);
-      });
-  }
-
-  setImageUrl(items: DemoPodcastItemListDto[] | undefined): void {
-    for (let i = 0; i < items!.length; i++) {
-      let item = items![i];
-      this._localStorageService.getItem(
-        AppConsts.authorization.encrptedAuthTokenName,
-        function (err: any, value: { token: string | number | boolean }) {
-          if (!item.imageId) {
-            item.imageId = '';
-          }
-          let imageUrl =
-            AppConsts.remoteServiceBaseUrl +
-            '/File/GetFileById?id=' +
-            item.imageId +
-            '&' +
-            AppConsts.authorization.encrptedAuthTokenName +
-            '=' +
-            encodeURIComponent(value.token);
-          (item as any).imageUrl = imageUrl;
-        },
-      );
-    }
+  trackById(_index: number, item: PodcastItem): string {
+    return item.id;
   }
 }

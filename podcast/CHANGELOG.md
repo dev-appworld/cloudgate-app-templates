@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Cloudgate workflow HTTP layer (`WorkflowHttpService`, `PodcastWorkflowService`) for loading podcast catalog JSON
+- Workflow configuration in `appconfig.json` (`workflowGatewayUrl`, `workflowEnvironment`, etc.)
+- `.cloudgate/podcast-catalog.json` as single source of truth for template podcast data
+- `.cloudgate/podcast-catalog-workflow.json` and `WORKFLOW_SETUP.md` for MCP workflow creation
+- Dynamic Home, Categories, Playlists, and Now Playing views bound to workflow catalog
+- Episode navigation via `/home/play/:id`
+
 ## [0.5.0] - 2024-04-30
 
 ### Added

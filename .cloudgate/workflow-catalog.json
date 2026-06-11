@@ -39,6 +39,39 @@
             "fetchSbx": "const response = await fetch('http://apps.localhost:44301/sbx/api/hello', {\r\n  method: 'ANY',\r\n  headers: { 'Content-Type': 'application/json' },\r\n});\r\nconst data = await response.json();"
           },
           "workflowEditUrl": "http://localhost:5174/flows/workflows/c20e89f2-0ee4-45b6-9765-e66e7ea88a89"
+        },
+        {
+          "id": "create-via-mcp",
+          "name": "Podcast Catalog",
+          "route": "podcasts",
+          "requestType": "Get",
+          "projectPath": "api",
+          "prodUrl": "http://apps.localhost:44301/prod/api/podcasts",
+          "sbxUrl": "http://apps.localhost:44301/sbx/api/podcasts",
+          "allowAnonymous": true,
+          "useBasicAuthentication": false,
+          "requiresBearerAuth": false,
+          "setupNote": "Create with Cloudgate MCP using podcast/.cloudgate/podcast-catalog-workflow.json — see podcast/.cloudgate/WORKFLOW_SETUP.md",
+          "inputs": {
+            "httpMethod": "GET",
+            "routeParams": [],
+            "headers": [],
+            "query": [],
+            "forms": []
+          },
+          "outputs": {
+            "sessionKeys": [
+              {
+                "name": "PodcastCatalogFunction",
+                "nodeType": "Function"
+              }
+            ],
+            "responseNote": "Returns PodcastCatalog JSON: featured, trending, categories, playlists arrays."
+          },
+          "snippets": {
+            "curlSbx": "curl -X GET 'http://apps.localhost:44301/sbx/api/podcasts'",
+            "fetchSbx": "const response = await fetch('http://apps.localhost:44301/sbx/api/podcasts');\nconst data = await response.json();"
+          }
         }
       ]
     }

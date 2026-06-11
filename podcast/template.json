@@ -1,0 +1,20 @@
+{
+  "id": "podcast",
+  "name": "Cloudgate Podcast",
+  "description": "Angular podcast app with featured carousel, playlists, and workflow-backed catalog — ready for Cloudgate dev preview.",
+  "folder": "podcast",
+  "framework": "Angular",
+  "devCommand": "npm install && npm run start",
+  "devPort": 3000,
+  "tags": ["angular", "podcast", "tailwind", "capacitor"],
+  "workflowTemplate": ".template/workflow-template.json",
+  "workflowImport": {
+    "description": "Import this file in Cloudgate (Imports) to create the GET /podcasts API the app calls at runtime.",
+    "file": ".template/workflow-template.json",
+    "projectPath": "api",
+    "route": "podcasts",
+    "publishHint": "Publish the Podcast Catalog endpoint to sandbox, then test GET /sbx/api/podcasts on your apps gateway.",
+    "catalogSource": ".cloudgate/podcast-catalog.json",
+    "regenerate": "node .template/gen-workflow-template.mjs"
+  }
+}

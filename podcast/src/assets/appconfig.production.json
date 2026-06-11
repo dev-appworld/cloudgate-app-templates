@@ -5,6 +5,10 @@
   "idpApiUrl": "",
   "idpTenancyName": "",
   "idpReturnUrl": "",
+  "workflowGatewayUrl": "https://apps.appworldsa.com",
+  "workflowEnvironment": "prod",
+  "workflowProjectPath": "api",
+  "podcastCatalogRoute": "podcasts",
   "localeMappings": {
     "angular": [
       {

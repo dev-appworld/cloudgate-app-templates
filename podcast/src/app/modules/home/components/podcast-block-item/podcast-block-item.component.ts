@@ -8,6 +8,7 @@ import { AppComponentBase } from 'src/app/shared/common/app-component-base';
   standalone: true,
 })
 export class PodcastBlockItemComponent extends AppComponentBase implements OnInit {
+  @Input() id: string | undefined;
   @Input() image: string | undefined;
   @Input() title: string | undefined;
   @Input() subtitle: string | undefined;
@@ -17,4 +18,12 @@ export class PodcastBlockItemComponent extends AppComponentBase implements OnIni
   }
 
   ngOnInit(): void {}
+
+  play(): void {
+    if (this.id) {
+      this.router.navigate(['/home/play', this.id]);
+      return;
+    }
+    this.navigate('/home/play');
+  }
 }

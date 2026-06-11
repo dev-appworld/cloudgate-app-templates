@@ -5,6 +5,10 @@
   "idpApiUrl": "http://localhost:44301",
   "idpTenancyName": "apps",
   "idpReturnUrl": "",
+  "workflowGatewayUrl": "http://apps.localhost:44301",
+  "workflowEnvironment": "sbx",
+  "workflowProjectPath": "api",
+  "podcastCatalogRoute": "podcasts",
   "localeMappings": {
     "angular": [
       {

@@ -17,6 +17,10 @@ const routes: Routes = [
         canLoad: [AppRouteGuard],
       },
       {
+        path: 'home/play/:id',
+        loadChildren: () => import('../home/pages/now-play/now-play.module').then((m) => m.NowPlayModule),
+      },
+      {
         path: 'home/play',
         loadChildren: () => import('../home/pages/now-play/now-play.module').then((m) => m.NowPlayModule),
       },
