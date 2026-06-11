@@ -1,0 +1,473 @@
+{
+  "fetchedAt": "2026-06-10T08:26:22.578Z",
+  "hubUrl": "https://hub.cloudgate.dev",
+  "projects": [
+    {
+      "projectId": "bc67d54a-714d-4317-60da-08ddeb651446",
+      "projectName": "Cloudgate",
+      "projectPath": "chatbot",
+      "endpoints": [
+        {
+          "id": "2b2db689-60d2-4f04-990f-5cb5d245d521",
+          "name": "Cloudgate Agent",
+          "route": "message",
+          "requestType": "Any",
+          "projectPath": "chatbot",
+          "prodUrl": "https://appworld.api.cloudgate.dev/prod/chatbot/message",
+          "sbxUrl": "https://appworld.api.cloudgate.dev/sbx/chatbot/message",
+          "allowAnonymous": false,
+          "useBasicAuthentication": true,
+          "requiresBearerAuth": false,
+          "inputs": {
+            "httpMethod": "POST",
+            "routeParams": [],
+            "body": "{                  \n    \"thread_id\":\"\",\n    \"message\":\"What is a node\"\n}",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "query": [],
+            "forms": []
+          },
+          "outputs": {
+            "sessionKeys": [
+              {
+                "name": "AgentResponse",
+                "nodeType": "Function"
+              },
+              {
+                "name": "Func3",
+                "nodeType": "Function"
+              }
+            ],
+            "responseNote": "Each executing node stores its result under session key ${NodeName}. Reference later nodes with ${NodeName} in scripts, URLs, and templates."
+          },
+          "snippets": {
+            "curlSbx": "curl -X POST 'https://appworld.api.cloudgate.dev/sbx/chatbot/message' \\\n  -H 'Content-Type: application/json' \\\n  -H 'Authorization: Basic <base64_credentials>' \\\n  -d '{                  \n    \"thread_id\":\"\",\n    \"message\":\"What is a node\"\n}'",
+            "fetchSbx": "const response = await fetch('https://appworld.api.cloudgate.dev/sbx/chatbot/message', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json', 'Authorization': 'Basic <base64_credentials>' },\n  body: '{                  \\n    \"thread_id\":\"\",\\n    \"message\":\"What is a node\"\\n}',\n});\nconst data = await response.json();"
+          },
+          "workflowEditUrl": "https://hub.cloudgate.dev/flows/workflows/2b2db689-60d2-4f04-990f-5cb5d245d521"
+        }
+      ]
+    },
+    {
+      "projectId": "4311a3df-e47a-4f83-e06f-08ddb2f63962",
+      "projectName": "Default",
+      "projectPath": "api",
+      "endpoints": [
+        {
+          "id": "d41775c6-7a5f-4f0c-b365-8e64672c19ba",
+          "name": "Create Account",
+          "route": "create",
+          "requestType": "Any",
+          "projectPath": "api",
+          "prodUrl": "https://appworld.api.cloudgate.dev/prod/api/create",
+          "sbxUrl": "https://appworld.api.cloudgate.dev/sbx/api/create",
+          "allowAnonymous": false,
+          "useBasicAuthentication": false,
+          "requiresBearerAuth": false,
+          "inputs": {
+            "httpMethod": "POST",
+            "routeParams": [],
+            "body": "{\n  \"Name\":\"John\",\n  \"Surname\": \"Doe\"\n}",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "query": [],
+            "forms": []
+          },
+          "outputs": {
+            "sessionKeys": [
+              {
+                "name": "Func2",
+                "nodeType": "Function"
+              }
+            ],
+            "responseNote": "Each executing node stores its result under session key ${NodeName}. Reference later nodes with ${NodeName} in scripts, URLs, and templates."
+          },
+          "snippets": {
+            "curlSbx": "curl -X POST 'https://appworld.api.cloudgate.dev/sbx/api/create' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"Name\":\"John\",\n  \"Surname\": \"Doe\"\n}'",
+            "fetchSbx": "const response = await fetch('https://appworld.api.cloudgate.dev/sbx/api/create', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: '{\\n  \"Name\":\"John\",\\n  \"Surname\": \"Doe\"\\n}',\n});\nconst data = await response.json();"
+          },
+          "workflowEditUrl": "https://hub.cloudgate.dev/flows/workflows/d41775c6-7a5f-4f0c-b365-8e64672c19ba"
+        },
+        {
+          "id": "b153ab1f-c224-4f5c-950b-a5dd41d2680a",
+          "name": "Test",
+          "route": "test",
+          "requestType": "Any",
+          "projectPath": "api",
+          "prodUrl": "https://appworld.api.cloudgate.dev/prod/api/test",
+          "sbxUrl": "https://appworld.api.cloudgate.dev/sbx/api/test",
+          "allowAnonymous": false,
+          "useBasicAuthentication": false,
+          "requiresBearerAuth": false,
+          "inputs": {
+            "httpMethod": "POST",
+            "routeParams": [],
+            "body": "{\r\n  \"name\":\"My NFT\",\r\n  \"symbol\": \"NFT\"\r\n}",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "query": [],
+            "forms": []
+          },
+          "outputs": {
+            "sessionKeys": [
+              {
+                "name": "Func2",
+                "nodeType": "Function"
+              }
+            ],
+            "responseNote": "Each executing node stores its result under session key ${NodeName}. Reference later nodes with ${NodeName} in scripts, URLs, and templates."
+          },
+          "snippets": {
+            "curlSbx": "curl -X POST 'https://appworld.api.cloudgate.dev/sbx/api/test' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\r\n  \"name\":\"My NFT\",\r\n  \"symbol\": \"NFT\"\r\n}'",
+            "fetchSbx": "const response = await fetch('https://appworld.api.cloudgate.dev/sbx/api/test', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: '{\\n  \"name\":\"My NFT\",\\n  \"symbol\": \"NFT\"\\n}',\n});\nconst data = await response.json();"
+          },
+          "workflowEditUrl": "https://hub.cloudgate.dev/flows/workflows/b153ab1f-c224-4f5c-950b-a5dd41d2680a"
+        },
+        {
+          "id": "323e6bb4-3237-4568-8fd7-da4fc5bec4a8",
+          "name": "Test2",
+          "route": "test2",
+          "requestType": "Any",
+          "projectPath": "api",
+          "prodUrl": "https://appworld.api.cloudgate.dev/prod/api/test2",
+          "sbxUrl": "https://appworld.api.cloudgate.dev/sbx/api/test2",
+          "allowAnonymous": false,
+          "useBasicAuthentication": false,
+          "requiresBearerAuth": false,
+          "inputs": {
+            "httpMethod": "ANY",
+            "routeParams": [],
+            "headers": [],
+            "query": [],
+            "forms": []
+          },
+          "outputs": {
+            "sessionKeys": [],
+            "responseNote": "Each executing node stores its result under session key ${NodeName}. Reference later nodes with ${NodeName} in scripts, URLs, and templates."
+          },
+          "snippets": {
+            "curlSbx": "curl -X ANY 'https://appworld.api.cloudgate.dev/sbx/api/test2' \\\n  -H 'Content-Type: application/json'",
+            "fetchSbx": "const response = await fetch('https://appworld.api.cloudgate.dev/sbx/api/test2', {\n  method: 'ANY',\n  headers: { 'Content-Type': 'application/json' },\n});\nconst data = await response.json();"
+          },
+          "workflowEditUrl": "https://hub.cloudgate.dev/flows/workflows/323e6bb4-3237-4568-8fd7-da4fc5bec4a8"
+        },
+        {
+          "id": "31d16032-622b-4b58-b6bd-541fbcf43108",
+          "name": "Webhook",
+          "route": "webhook",
+          "requestType": "Any",
+          "projectPath": "api",
+          "prodUrl": "https://appworld.api.cloudgate.dev/prod/api/webhook",
+          "sbxUrl": "https://appworld.api.cloudgate.dev/sbx/api/webhook",
+          "allowAnonymous": false,
+          "useBasicAuthentication": false,
+          "requiresBearerAuth": false,
+          "inputs": {
+            "httpMethod": "POST",
+            "routeParams": [],
+            "body": "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <title>Test Document</title>\r\n</head>\r\n<body>\r\n    <h1>Hello World!</h1>\r\n    <p>This is a test document.</p>\r\n    <table>\r\n        <tr><th>Name</th><th>Value</th></tr>\r\n        <tr><td>Test</td><td>100</td></tr>\r\n    </table>\r\n</body>\r\n</html>",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              }
+            ],
+            "query": [],
+            "forms": []
+          },
+          "outputs": {
+            "sessionKeys": [
+              {
+                "name": "Func2",
+                "nodeType": "Function"
+              }
+            ],
+            "responseNote": "Each executing node stores its result under session key ${NodeName}. Reference later nodes with ${NodeName} in scripts, URLs, and templates."
+          },
+          "snippets": {
+            "curlSbx": "curl -X POST 'https://appworld.api.cloudgate.dev/sbx/api/webhook' \\\n  -H 'Content-Type: application/json' \\\n  -d '<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <title>Test Document</title>\r\n</head>\r\n<body>\r\n    <h1>Hello World!</h1>\r\n    <p>This is a test document.</p>\r\n    <table>\r\n        <tr><th>Name</th><th>Value</th></tr>\r\n        <tr><td>Test</td><td>100</td></tr>\r\n    </table>\r\n</body>\r\n</html>'",
+            "fetchSbx": "const response = await fetch('https://appworld.api.cloudgate.dev/sbx/api/webhook', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: '<!DOCTYPE html>\\n<html>\\n<head>\\n    <title>Test Document</title>\\n</head>\\n<body>\\n    <h1>Hello World!</h1>\\n    <p>This is a test document.</p>\\n    <table>\\n        <tr><th>Name</th><th>Value</th></tr>\\n        <tr><td>Test</td><td>100</td></tr>\\n    </table>\\n</body>\\n</html>',\n});\nconst data = await response.json();"
+          },
+          "workflowEditUrl": "https://hub.cloudgate.dev/flows/workflows/31d16032-622b-4b58-b6bd-541fbcf43108"
+        },
+        {
+          "id": "82d638da-e209-4cc6-947d-8dfff09d7b2b",
+          "name": "WebSocket",
+          "route": "socket",
+          "requestType": "Any",
+          "projectPath": "api",
+          "prodUrl": "https://appworld.api.cloudgate.dev/prod/api/socket",
+          "sbxUrl": "https://appworld.api.cloudgate.dev/sbx/api/socket",
+          "allowAnonymous": false,
+          "useBasicAuthentication": false,
+          "requiresBearerAuth": false,
+          "inputs": {
+            "httpMethod": "ANY",
+            "routeParams": [],
+            "headers": [],
+            "query": [],
+            "forms": []
+          },
+          "outputs": {
+            "sessionKeys": [],
+            "responseNote": "Each executing node stores its result under session key ${NodeName}. Reference later nodes with ${NodeName} in scripts, URLs, and templates."
+          },
+          "snippets": {
+            "curlSbx": "curl -X ANY 'https://appworld.api.cloudgate.dev/sbx/api/socket' \\\n  -H 'Content-Type: application/json'",
+            "fetchSbx": "const response = await fetch('https://appworld.api.cloudgate.dev/sbx/api/socket', {\n  method: 'ANY',\n  headers: { 'Content-Type': 'application/json' },\n});\nconst data = await response.json();"
+          },
+          "workflowEditUrl": "https://hub.cloudgate.dev/flows/workflows/82d638da-e209-4cc6-947d-8dfff09d7b2b"
+        }
+      ]
+    },
+    {
+      "projectId": "ffaf486f-3e20-4c5c-3474-08de308831ae",
+      "projectName": "Develop AI Agent",
+      "projectPath": "agent",
+      "endpoints": [
+        {
+          "id": "ee1b0b00-10f0-4588-8c74-91234f4191bf",
+          "name": "Worker",
+          "route": "do-work",
+          "requestType": "Any",
+          "projectPath": "agent",
+          "prodUrl": "https://appworld.api.cloudgate.dev/prod/agent/do-work",
+          "sbxUrl": "https://appworld.api.cloudgate.dev/sbx/agent/do-work",
+          "allowAnonymous": false,
+          "useBasicAuthentication": false,
+          "requiresBearerAuth": false,
+          "inputs": {
+            "httpMethod": "ANY",
+            "routeParams": [],
+            "headers": [],
+            "query": [],
+            "forms": []
+          },
+          "outputs": {
+            "sessionKeys": [],
+            "responseNote": "Each executing node stores its result under session key ${NodeName}. Reference later nodes with ${NodeName} in scripts, URLs, and templates."
+          },
+          "snippets": {
+            "curlSbx": "curl -X ANY 'https://appworld.api.cloudgate.dev/sbx/agent/do-work' \\\n  -H 'Content-Type: application/json'",
+            "fetchSbx": "const response = await fetch('https://appworld.api.cloudgate.dev/sbx/agent/do-work', {\n  method: 'ANY',\n  headers: { 'Content-Type': 'application/json' },\n});\nconst data = await response.json();"
+          },
+          "workflowEditUrl": "https://hub.cloudgate.dev/flows/workflows/ee1b0b00-10f0-4588-8c74-91234f4191bf"
+        }
+      ]
+    },
+    {
+      "projectId": "c17679a3-491c-41c5-5576-08de30a9ecd7",
+      "projectName": "Develop AI Agent",
+      "projectPath": "agent2",
+      "endpoints": [
+        {
+          "id": "09ebbc1f-f884-4d6c-adb6-671b909e9861",
+          "name": "Worker",
+          "route": "do-work",
+          "requestType": "Any",
+          "projectPath": "agent2",
+          "prodUrl": "https://appworld.api.cloudgate.dev/prod/agent2/do-work",
+          "sbxUrl": "https://appworld.api.cloudgate.dev/sbx/agent2/do-work",
+          "allowAnonymous": false,
+          "useBasicAuthentication": false,
+          "requiresBearerAuth": false,
+          "inputs": {
+            "httpMethod": "ANY",
+            "routeParams": [],
+            "headers": [],
+            "query": [],
+            "forms": []
+          },
+          "outputs": {
+            "sessionKeys": [
+              {
+                "name": "AgentWorker",
+                "nodeType": "Function"
+              }
+            ],
+            "responseNote": "Each executing node stores its result under session key ${NodeName}. Reference later nodes with ${NodeName} in scripts, URLs, and templates."
+          },
+          "snippets": {
+            "curlSbx": "curl -X ANY 'https://appworld.api.cloudgate.dev/sbx/agent2/do-work' \\\n  -H 'Content-Type: application/json'",
+            "fetchSbx": "const response = await fetch('https://appworld.api.cloudgate.dev/sbx/agent2/do-work', {\n  method: 'ANY',\n  headers: { 'Content-Type': 'application/json' },\n});\nconst data = await response.json();"
+          },
+          "workflowEditUrl": "https://hub.cloudgate.dev/flows/workflows/09ebbc1f-f884-4d6c-adb6-671b909e9861"
+        }
+      ]
+    },
+    {
+      "projectId": "e9b56695-9bf1-4021-8055-08ddc68183b6",
+      "projectName": "K53",
+      "projectPath": "learners",
+      "endpoints": [
+        {
+          "id": "dd57d6a5-a497-41d5-850e-96dd16b51b4c",
+          "name": "Learners Agent",
+          "route": "message",
+          "requestType": "Any",
+          "projectPath": "learners",
+          "prodUrl": "https://appworld.api.cloudgate.dev/prod/learners/message",
+          "sbxUrl": "https://appworld.api.cloudgate.dev/sbx/learners/message",
+          "allowAnonymous": false,
+          "useBasicAuthentication": true,
+          "requiresBearerAuth": false,
+          "inputs": {
+            "httpMethod": "POST",
+            "routeParams": [],
+            "body": "{                  \n    \"thread_id\":\"\",\n    \"message\":\"Do you have the book so that I can stud\"\n}",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "query": [],
+            "forms": []
+          },
+          "outputs": {
+            "sessionKeys": [
+              {
+                "name": "AgentResponse",
+                "nodeType": "Function"
+              },
+              {
+                "name": "Func3",
+                "nodeType": "Function"
+              }
+            ],
+            "responseNote": "Each executing node stores its result under session key ${NodeName}. Reference later nodes with ${NodeName} in scripts, URLs, and templates."
+          },
+          "snippets": {
+            "curlSbx": "curl -X POST 'https://appworld.api.cloudgate.dev/sbx/learners/message' \\\n  -H 'Content-Type: application/json' \\\n  -H 'Authorization: Basic <base64_credentials>' \\\n  -d '{                  \n    \"thread_id\":\"\",\n    \"message\":\"Do you have the book so that I can stud\"\n}'",
+            "fetchSbx": "const response = await fetch('https://appworld.api.cloudgate.dev/sbx/learners/message', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json', 'Authorization': 'Basic <base64_credentials>' },\n  body: '{                  \\n    \"thread_id\":\"\",\\n    \"message\":\"Do you have the book so that I can stud\"\\n}',\n});\nconst data = await response.json();"
+          },
+          "workflowEditUrl": "https://hub.cloudgate.dev/flows/workflows/dd57d6a5-a497-41d5-850e-96dd16b51b4c"
+        }
+      ]
+    },
+    {
+      "projectId": "c7f4bc99-8ab7-4644-b035-08ddeeb52e41",
+      "projectName": "Playground",
+      "projectPath": "play",
+      "endpoints": [
+        {
+          "id": "3ea32cd2-9019-4382-8147-30ad34b99ebf",
+          "name": "schedule",
+          "route": "schedule",
+          "requestType": "Any",
+          "projectPath": "play",
+          "prodUrl": "https://appworld.api.cloudgate.dev/prod/play/schedule",
+          "sbxUrl": "https://appworld.api.cloudgate.dev/sbx/play/schedule",
+          "allowAnonymous": false,
+          "useBasicAuthentication": false,
+          "requiresBearerAuth": false,
+          "inputs": {
+            "httpMethod": "ANY",
+            "routeParams": [],
+            "headers": [],
+            "query": [],
+            "forms": []
+          },
+          "outputs": {
+            "sessionKeys": [
+              {
+                "name": "Func2",
+                "nodeType": "Function"
+              }
+            ],
+            "responseNote": "Each executing node stores its result under session key ${NodeName}. Reference later nodes with ${NodeName} in scripts, URLs, and templates."
+          },
+          "snippets": {
+            "curlSbx": "curl -X ANY 'https://appworld.api.cloudgate.dev/sbx/play/schedule' \\\n  -H 'Content-Type: application/json'",
+            "fetchSbx": "const response = await fetch('https://appworld.api.cloudgate.dev/sbx/play/schedule', {\n  method: 'ANY',\n  headers: { 'Content-Type': 'application/json' },\n});\nconst data = await response.json();"
+          },
+          "workflowEditUrl": "https://hub.cloudgate.dev/flows/workflows/3ea32cd2-9019-4382-8147-30ad34b99ebf"
+        }
+      ]
+    },
+    {
+      "projectId": "1d2d5ced-43b2-4d26-a277-08ddb93a0c48",
+      "projectName": "Slip Tracker",
+      "projectPath": "slip",
+      "endpoints": [
+        {
+          "id": "3d9cf1b8-9fe7-4a31-84ed-6b93333209f1",
+          "name": "Message",
+          "route": "messages",
+          "requestType": "Any",
+          "projectPath": "slip",
+          "prodUrl": "https://appworld.api.cloudgate.dev/prod/slip/messages",
+          "sbxUrl": "https://appworld.api.cloudgate.dev/sbx/slip/messages",
+          "allowAnonymous": false,
+          "useBasicAuthentication": false,
+          "requiresBearerAuth": false,
+          "inputs": {
+            "httpMethod": "ANY",
+            "routeParams": [],
+            "headers": [],
+            "query": [],
+            "forms": []
+          },
+          "outputs": {
+            "sessionKeys": [
+              {
+                "name": "Deci5",
+                "nodeType": "Decision"
+              },
+              {
+                "name": "DbAddScript",
+                "nodeType": "Function"
+              },
+              {
+                "name": "AmountCheck",
+                "nodeType": "Condition"
+              },
+              {
+                "name": "ChatBot",
+                "nodeType": "Function"
+              },
+              {
+                "name": "SendResponse",
+                "nodeType": "Function"
+              },
+              {
+                "name": "MessageParse",
+                "nodeType": "Function"
+              },
+              {
+                "name": "ImageB64",
+                "nodeType": "Function"
+              },
+              {
+                "name": "ChatBot",
+                "nodeType": "Function"
+              },
+              {
+                "name": "DbInsert",
+                "nodeType": "Database"
+              }
+            ],
+            "responseNote": "Each executing node stores its result under session key ${NodeName}. Reference later nodes with ${NodeName} in scripts, URLs, and templates."
+          },
+          "snippets": {
+            "curlSbx": "curl -X ANY 'https://appworld.api.cloudgate.dev/sbx/slip/messages' \\\n  -H 'Content-Type: application/json'",
+            "fetchSbx": "const response = await fetch('https://appworld.api.cloudgate.dev/sbx/slip/messages', {\n  method: 'ANY',\n  headers: { 'Content-Type': 'application/json' },\n});\nconst data = await response.json();"
+          },
+          "workflowEditUrl": "https://hub.cloudgate.dev/flows/workflows/3d9cf1b8-9fe7-4a31-84ed-6b93333209f1"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+﻿{
+  "name": "Vue.js + Vite",
+  "description": "Vue 3 starter app with Vite and Hot Module Replacement",
+  "port": 5173,
+  "commands": ["npm run dev"],
+  "previewFilter": ".dev.cloudgate.dev"
+}
