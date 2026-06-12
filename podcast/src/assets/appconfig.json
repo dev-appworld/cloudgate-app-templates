@@ -3,7 +3,7 @@
   "idpBaseUrl": "http://localhost:5173",
   "idpApiUrl": "http://apps.localhost:44301",
   "idpTenancyName": "apps",
-  "idpReturnUrl": "",
+  "idpReturnUrl": "http://localhost:3000",
   "workflowGatewayUrl": "http://apps.localhost:44301",
   "environment": "sbx",
   "localeMappings": {
