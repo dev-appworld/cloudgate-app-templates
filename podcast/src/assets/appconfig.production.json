@@ -1,10 +1,10 @@
 {
-  "appBaseUrl": "https://{TENANCY_NAME}.podcast.appworldsa.com",
+  "appBaseUrl": "",
   "idpBaseUrl": "",
-  "idpApiUrl": "https://apps.appworldsa.com",
+  "idpApiUrl": "",
   "idpTenancyName": "",
   "idpReturnUrl": "",
-  "workflowGatewayUrl": "https://apps.appworldsa.com",
+  "workflowGatewayUrl": "",
   "environment": "prod",
   "localeMappings": {
     "angular": [
