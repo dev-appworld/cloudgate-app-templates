@@ -18,7 +18,6 @@
   },
   "configSetup": {
     "kind": "angular-appconfig",
-    "source": ".template/appsettings.json",
     "targets": [
       "src/assets/appconfig.json",
       "src/assets/appconfig.production.json"

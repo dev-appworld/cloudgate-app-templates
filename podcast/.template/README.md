@@ -2,7 +2,9 @@
 
 [workflow-template.json](./workflow-template.json) is the Cloudgate import payload for the podcast catalog API.
 
-When you create this template from **Quick Start**, Cloudgate copies the app into your workspace, applies [appsettings.json](./appsettings.json) into `src/assets/appconfig.json` and `appconfig.production.json` (including your dev preview URL for IdP return), and imports the bundled workflow(s) automatically (you can deselect them in the dialog).
+When you create this template from **Quick Start**, Cloudgate copies the app into your workspace, patches `src/assets/appconfig.json` and `appconfig.production.json` with your tenant and dev-preview URLs, and imports the bundled workflow(s) automatically (you can deselect them in the dialog).
+
+[appsettings.json](./appsettings.json) is a reference copy of the runtime keys Cloudgate sets (with `{{placeholders}}`); the app does not read it.
 
 After create:
 
