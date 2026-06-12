@@ -26,7 +26,10 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "src/styles.scss",
               "node_modules/flowbite/dist/flowbite.min.css",
@@ -84,7 +87,10 @@
           "options": {
             "host": "0.0.0.0",
             "port": 3000,
-            "allowedHosts": [".dev.cloudgate.dev"]
+            "allowedHosts": [
+              ".dev.cloudgate.dev",
+              ".code.cloudgate.dev"
+            ]
           },
           "configurations": {
             "production": {
@@ -110,7 +116,10 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "src/styles.scss",
               "node_modules/sweetalert2/dist/sweetalert2.css",

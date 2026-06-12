@@ -15,5 +15,13 @@
     "projectPath": "api",
     "route": "podcasts",
     "publishHint": "Publish the Podcast Catalog endpoint to sandbox, then test GET /sbx/api/podcasts on your apps gateway."
+  },
+  "configSetup": {
+    "kind": "angular-appconfig",
+    "source": ".template/appsettings.json",
+    "targets": [
+      "src/assets/appconfig.json",
+      "src/assets/appconfig.production.json"
+    ]
   }
 }

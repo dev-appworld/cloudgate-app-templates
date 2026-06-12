@@ -72,9 +72,8 @@ export class AppPreBootstrap {
         idpTenancyName?: string;
         idpReturnUrl?: string;
         workflowGatewayUrl?: string;
+        environment?: string;
         workflowEnvironment?: string;
-        workflowProjectPath?: string;
-        podcastCatalogRoute?: string;
       }) => {
         AppConsts.localeMappings = result.localeMappings;
         AppConsts.idpBaseUrl = result.idpBaseUrl ?? '';
@@ -163,14 +162,12 @@ export class AppPreBootstrap {
 
   private static applyWorkflowConfig(result: {
     workflowGatewayUrl?: string;
+    environment?: string;
     workflowEnvironment?: string;
-    workflowProjectPath?: string;
-    podcastCatalogRoute?: string;
   }): void {
     AppConsts.workflowGatewayUrl = result.workflowGatewayUrl ?? '';
-    AppConsts.workflowEnvironment = (result.workflowEnvironment ?? 'sbx').trim() || 'sbx';
-    AppConsts.workflowProjectPath = (result.workflowProjectPath ?? 'api').trim() || 'api';
-    AppConsts.podcastCatalogRoute = (result.podcastCatalogRoute ?? 'podcasts').trim() || 'podcasts';
+    AppConsts.workflowEnvironment =
+      (result.environment ?? result.workflowEnvironment ?? 'sbx').trim() || 'sbx';
   }
 
   private static configureAppUrls(tenancyName: string, appBaseUrl: string): void {

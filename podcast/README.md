@@ -85,16 +85,14 @@ Edit `src/assets/appconfig.json` for local development:
 | `idpApiUrl` | Optional separate API base for profile/refresh. Falls back to `remoteServiceBaseUrl`. |
 | `idpTenancyName` | Default tenancy name. Override at runtime with `?idp_tenant=` or a tenant subdomain. |
 | `idpReturnUrl` | Optional post-login redirect. Defaults to the current app URL. |
-| `workflowGatewayUrl` | Cloudgate apps gateway (e.g. `http://apps.localhost:44301`). |
-| `workflowEnvironment` | `sbx` or `prod` — which published workflow slot to call. |
-| `workflowProjectPath` | Project path segment (default `api`). |
-| `podcastCatalogRoute` | Workflow route for catalog JSON (default `podcasts`). |
+| `workflowGatewayUrl` | Tenant apps API gateway (e.g. `http://apps.localhost:44301` or `https://{tenant}.api.cloudgate.dev`). |
+| `environment` | Workflow publish slot: `sbx` (sandbox) or `prod`. |
 
 ## Workflow data
 
 Home, Categories, Playlists, and Now Playing load podcast content from a Cloudgate workflow instead of hard-coded template HTML.
 
-**Runtime URL:** `{workflowGatewayUrl}/{workflowEnvironment}/{workflowProjectPath}/{podcastCatalogRoute}`
+**Runtime URL:** `{workflowGatewayUrl}/{environment}/api/podcasts`
 
 Example: `http://apps.localhost:44301/sbx/api/podcasts`
 
