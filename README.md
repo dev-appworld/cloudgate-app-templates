@@ -43,6 +43,7 @@ Entries in `templates.json` drive the Quick Start cards:
 | `devCommand` | Suggested start command shown in the use-template dialog |
 | `devPort` | Dev server port (informational) |
 | `thumbnail` | Preview image URL on the card |
+| `demoUrl` | Live hosted demo link shown on the card (optional) |
 | `tags` | Search/filter tags in Quick Start |
 
 ## Adding a template
