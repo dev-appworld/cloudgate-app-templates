@@ -16,6 +16,24 @@
         "tailwind",
         "capacitor"
       ]
+    },
+    {
+      "id": "hotel",
+      "name": "Cloudgate Hotel Demo",
+      "description": "Angular hotel discovery demo with workflow-backed catalog — import .template/workflow-template.json for GET /hotels.",
+      "folder": "hotel",
+      "framework": "Angular",
+      "devCommand": "npm install && npm run start",
+      "devPort": 3000,
+      "demoUrl": "https://hotel-demo.cloudweb.dev/",
+      "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/hotel/banner.png",
+      "tags": [
+        "angular",
+        "hotel",
+        "booking",
+        "tailwind",
+        "capacitor"
+      ]
     }
   ]
 }

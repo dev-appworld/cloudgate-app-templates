@@ -47,7 +47,8 @@ export class NavbarComponent extends AppComponentBase implements OnInit, OnDestr
       content: `
       <div class="text-center">
         <div class="flex w-full justify-center">
-          <img src="${AppBranding.headerLogo}" class="w-[200px] mb-5" />
+          <img src="${AppBranding.headerLogoLight}" alt="Cloudgate" class="mb-5 w-[200px] dark:hidden" />
+          <img src="${AppBranding.headerLogo}" alt="Cloudgate" class="mb-5 hidden w-[200px] dark:block" />
         </div>
         <p>© ${new Date().getFullYear()} <strong>Cloudgate.dev LLC</strong>. All rights reserved.</p>
         <p class="mt-2 text-sm">Part of the <a href="https://cloudgate.dev" target="_blank" class="text-primary">Cloudgate</a> platform.</p>
