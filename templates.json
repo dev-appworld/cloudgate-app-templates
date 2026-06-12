@@ -8,7 +8,7 @@
       "framework": "Angular",
       "devCommand": "npm install && npm run start",
       "devPort": 3000,
-      "demoUrl": "https://0ntl9ail.app.cloudgate.dev",
+      "demoUrl": "https://podcast-demo.cloudweb.dev/",
       "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/podcast/banner.png",
       "tags": [
         "angular",
