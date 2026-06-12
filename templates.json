@@ -1,39 +1,76 @@
-{
-  "templates": [
-    {
-      "id": "podcast",
-      "name": "Cloudgate Podcast Demo",
-      "description": "Angular podcast demo app with workflow-backed catalog — import .template/workflow-template.json for GET /podcasts.",
-      "folder": "podcast",
-      "framework": "Angular",
-      "devCommand": "npm install && npm run start",
-      "devPort": 3000,
-      "demoUrl": "https://podcast-demo.cloudweb.dev/",
-      "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/podcast/banner.png",
-      "tags": [
-        "angular",
-        "podcast",
-        "tailwind",
-        "capacitor"
-      ]
-    },
-    {
-      "id": "hotel",
-      "name": "Cloudgate Hotel Demo",
-      "description": "Angular hotel discovery demo with workflow-backed catalog — import .template/workflow-template.json for GET /hotels.",
-      "folder": "hotel",
-      "framework": "Angular",
-      "devCommand": "npm install && npm run start",
-      "devPort": 3000,
-      "demoUrl": "https://hotel-demo.cloudweb.dev/",
-      "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/hotel/banner.png",
-      "tags": [
-        "angular",
-        "hotel",
-        "booking",
-        "tailwind",
-        "capacitor"
-      ]
-    }
-  ]
-}
+{
+  "templates": [
+    {
+      "id": "podcast",
+      "name": "Cloudgate Podcast Demo",
+      "description": "Angular podcast demo app with workflow-backed catalog — import .template/workflow-template.json for GET /podcasts.",
+      "folder": "podcast",
+      "framework": "Angular",
+      "devCommand": "npm install && npm run start",
+      "devPort": 3000,
+      "demoUrl": "https://podcast-demo.cloudweb.dev/",
+      "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/podcast/banner.png",
+      "tags": ["angular", "podcast", "tailwind", "capacitor"]
+    },
+    {
+      "id": "hotel",
+      "name": "Cloudgate Hotel Demo",
+      "description": "Angular hotel discovery demo with workflow-backed catalog — import .template/workflow-template.json for GET /hotels.",
+      "folder": "hotel",
+      "framework": "Angular",
+      "devCommand": "npm install && npm run start",
+      "devPort": 3000,
+      "demoUrl": "https://hotel-demo.cloudweb.dev/",
+      "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/hotel/banner.png",
+      "tags": ["angular", "hotel", "booking", "tailwind", "capacitor"]
+    },
+    {
+      "id": "medical",
+      "name": "Cloudgate Medical Demo",
+      "description": "Angular medical discovery demo with doctor booking — import .template/workflow-template.json for GET /doctors.",
+      "folder": "medical",
+      "framework": "Angular",
+      "devCommand": "npm install && npm run start",
+      "devPort": 3000,
+      "demoUrl": "https://medical-demo.cloudweb.dev/",
+      "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/medical/banner.png",
+      "tags": ["angular", "medical", "healthcare", "tailwind", "capacitor"]
+    },
+    {
+      "id": "nft",
+      "name": "Cloudgate NFT Demo",
+      "description": "Angular NFT auction demo with workflow-backed catalog — import .template/workflow-template.json for GET /nfts.",
+      "folder": "nft",
+      "framework": "Angular",
+      "devCommand": "npm install && npm run start",
+      "devPort": 3000,
+      "demoUrl": "https://nft-demo.cloudweb.dev/",
+      "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/nft/banner.png",
+      "tags": ["angular", "nft", "tailwind", "capacitor"]
+    },
+    {
+      "id": "store",
+      "name": "Cloudgate Store Demo",
+      "description": "Angular store demo with product catalog — import .template/workflow-template.json for GET /products.",
+      "folder": "store",
+      "framework": "Angular",
+      "devCommand": "npm install && npm run start",
+      "devPort": 3000,
+      "demoUrl": "https://store-demo.cloudweb.dev/",
+      "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/store/banner.png",
+      "tags": ["angular", "store", "ecommerce", "tailwind", "capacitor"]
+    },
+    {
+      "id": "wallet",
+      "name": "Cloudgate Wallet Demo",
+      "description": "Angular wallet demo with transfer flow — import .template/workflow-template.json for GET /transactions.",
+      "folder": "wallet",
+      "framework": "Angular",
+      "devCommand": "npm install && npm run start",
+      "devPort": 3000,
+      "demoUrl": "https://wallet-demo.cloudweb.dev/",
+      "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/wallet/banner.png",
+      "tags": ["angular", "wallet", "fintech", "tailwind", "capacitor"]
+    }
+  ]
+}

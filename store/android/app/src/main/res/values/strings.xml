@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<resources>
+    <string name="app_name">Shop App</string>
+    <string name="title_activity_main">Shop App</string>
+    <string name="package_name">com.appworldsa.shop</string>
+    <string name="custom_url_scheme">com.appworldsa.shop</string>
+    <string name="server_client_id">257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com</string>
+</resources>

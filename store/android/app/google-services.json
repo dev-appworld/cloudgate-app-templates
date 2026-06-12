@@ -1,0 +1,362 @@
+{
+  "project_info": {
+    "project_number": "257440546946",
+    "project_id": "appworld-demo",
+    "storage_bucket": "appworld-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257440546946:android:fa4caad63b8775accd349b",
+        "android_client_info": {
+          "package_name": "com.appworldsa.audio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257440546946-5c7nd83lvbfm6rh0e3fil36fpsh934st.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appworldsa.audio",
+            "certificate_hash": "4cc28949521f87cb2d715ca5adeef8ac8340bf96"
+          }
+        },
+        {
+          "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTs6q65gOnyUsDF_hBSjOTj9mNrhoro_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "257440546946-0fmke4grlqn18hvv92mq8numnsv5us9r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appworldsa.wallet"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257440546946:android:ec63a8ee2e0a0c5bcd349b",
+        "android_client_info": {
+          "package_name": "com.appworldsa.hotel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257440546946-ehauhe5pqo9qeffb6rugc1pvpo3jbmsc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appworldsa.hotel",
+            "certificate_hash": "4cc28949521f87cb2d715ca5adeef8ac8340bf96"
+          }
+        },
+        {
+          "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTs6q65gOnyUsDF_hBSjOTj9mNrhoro_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "257440546946-0fmke4grlqn18hvv92mq8numnsv5us9r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appworldsa.wallet"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257440546946:android:148d0beddfa89fb1cd349b",
+        "android_client_info": {
+          "package_name": "com.appworldsa.lms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257440546946-dl9s8sf116jc57mgp1rpdi3hcmq61t5d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appworldsa.lms",
+            "certificate_hash": "4cc28949521f87cb2d715ca5adeef8ac8340bf96"
+          }
+        },
+        {
+          "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTs6q65gOnyUsDF_hBSjOTj9mNrhoro_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "257440546946-0fmke4grlqn18hvv92mq8numnsv5us9r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appworldsa.wallet"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257440546946:android:728f96f3ab9a6407cd349b",
+        "android_client_info": {
+          "package_name": "com.appworldsa.medical"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257440546946-j242igerjtqa4aap0kbip906fptkl74t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appworldsa.medical",
+            "certificate_hash": "4cc28949521f87cb2d715ca5adeef8ac8340bf96"
+          }
+        },
+        {
+          "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTs6q65gOnyUsDF_hBSjOTj9mNrhoro_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "257440546946-0fmke4grlqn18hvv92mq8numnsv5us9r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appworldsa.wallet"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257440546946:android:c68c4d22f68ca678cd349b",
+        "android_client_info": {
+          "package_name": "com.appworldsa.nft"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257440546946-abkblborrohca56244h4ep7jqkr0g3k4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appworldsa.nft",
+            "certificate_hash": "4cc28949521f87cb2d715ca5adeef8ac8340bf96"
+          }
+        },
+        {
+          "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTs6q65gOnyUsDF_hBSjOTj9mNrhoro_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "257440546946-0fmke4grlqn18hvv92mq8numnsv5us9r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appworldsa.wallet"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257440546946:android:d477bed4d0be4187cd349b",
+        "android_client_info": {
+          "package_name": "com.appworldsa.shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257440546946-n5fujjcvtpb44t1rfr7oqfqq9oq1673g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appworldsa.shop",
+            "certificate_hash": "4cc28949521f87cb2d715ca5adeef8ac8340bf96"
+          }
+        },
+        {
+          "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTs6q65gOnyUsDF_hBSjOTj9mNrhoro_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "257440546946-0fmke4grlqn18hvv92mq8numnsv5us9r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appworldsa.wallet"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257440546946:android:6d0439737b36f866cd349b",
+        "android_client_info": {
+          "package_name": "com.appworldsa.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257440546946-1jg40q6mc70s9b6t9viff351g4neesjo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appworldsa.test",
+            "certificate_hash": "4cc28949521f87cb2d715ca5adeef8ac8340bf96"
+          }
+        },
+        {
+          "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTs6q65gOnyUsDF_hBSjOTj9mNrhoro_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "257440546946-0fmke4grlqn18hvv92mq8numnsv5us9r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appworldsa.wallet"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257440546946:android:02a0ceba950e3b37cd349b",
+        "android_client_info": {
+          "package_name": "com.appworldsa.wallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257440546946-clpspaqfdvhkp84se6info9d6tssq2n2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appworldsa.wallet",
+            "certificate_hash": "4cc28949521f87cb2d715ca5adeef8ac8340bf96"
+          }
+        },
+        {
+          "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTs6q65gOnyUsDF_hBSjOTj9mNrhoro_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257440546946-udddj313e9va4r9pk4dqbvqj7ig487la.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "257440546946-0fmke4grlqn18hvv92mq8numnsv5us9r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appworldsa.wallet"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
