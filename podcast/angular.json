@@ -38,6 +38,9 @@
             ],
             "scripts": [
               "node_modules/sweetalert2/dist/sweetalert2.js",
+              "src/assets/abp-web-resources/abp.js",
+              "src/assets/abp-web-resources/abp.sweet-alert.js",
+              "src/assets/abp-web-resources/abp.notify.js",
               "node_modules/flowbite/dist/flowbite.min.js"
             ],
             "allowedCommonJsDependencies": [
@@ -82,7 +85,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "host": "localhost",
+            "host": "0.0.0.0",
             "port": 3000,
             "open": true,
             "proxyConfig": "proxy.conf.json",
@@ -91,7 +94,7 @@
               "127.0.0.1",
               ".localhost",
               ".dev.cloudgate.dev",
-              ".code.cloudgate.dev"
+              ".app.cloudgate.dev"
             ]
           },
           "configurations": {
@@ -101,9 +104,9 @@
             "development": {
               "buildTarget": "angular-tailwind:build:development"
             },
-            "preview": {
+            "local": {
               "buildTarget": "angular-tailwind:build:development",
-              "host": "0.0.0.0"
+              "host": "localhost"
             }
           },
           "defaultConfiguration": "development"
@@ -132,7 +135,10 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "node_modules/sweetalert2/dist/sweetalert2.js"
+              "node_modules/sweetalert2/dist/sweetalert2.js",
+              "src/assets/abp-web-resources/abp.js",
+              "src/assets/abp-web-resources/abp.sweet-alert.js",
+              "src/assets/abp-web-resources/abp.notify.js"
             ]
           }
         }
