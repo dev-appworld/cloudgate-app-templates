@@ -1,9 +1,7 @@
 {
-  "name": "angular-tailwind",
-  "displayName": "Cloudgate Podcast Demo",
-  "version": "1.0.0",
-  "description": "Cloudgate Podcast Demo — Angular app template for Web Coder Quick Start",
-  "homepage": "https://cloudgate.dev",
+  "name": "cloudgate-podcast",
+  "version": "0.0.0",
+  "private": true,
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -19,7 +17,6 @@
     "lint": "ng lint",
     "serve": "serve dist/ -p 3000"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^17.3.12",
     "@angular/common": "^17.2.2",

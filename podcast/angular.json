@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-tailwind": {
+    "cloudgate-podcast": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -99,13 +99,13 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "angular-tailwind:build:production"
+              "buildTarget": "cloudgate-podcast:build:production"
             },
             "development": {
-              "buildTarget": "angular-tailwind:build:development"
+              "buildTarget": "cloudgate-podcast:build:development"
             },
             "local": {
-              "buildTarget": "angular-tailwind:build:development",
+              "buildTarget": "cloudgate-podcast:build:development",
               "host": "localhost"
             }
           },
@@ -114,7 +114,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "angular-tailwind:build"
+            "buildTarget": "cloudgate-podcast:build"
           }
         },
         "test": {
