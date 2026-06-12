@@ -21,6 +21,7 @@ import { LocalService } from '../session/local-storage.service';
 import { ToastrService } from 'ngx-toastr';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { HttpClient } from '@angular/common/http';
+import { AppBranding } from '../branding/app-branding';
 
 interface AbpEventSubscription {
   eventName: string;
@@ -176,16 +177,16 @@ export abstract class AppComponentBase implements OnDestroy {
 
   async website() {
     await AppLauncher.openUrl({
-      url: window.config.Website,
+      url: AppBranding.websiteUrl,
     });
   }
 
   get privacyUrl(): string {
-    return `${window.config.Website}/privacy`;
+    return `${AppBranding.websiteUrl}/privacy`;
   }
 
   get termsUrl(): string {
-    return `${window.config.Website}/terms-plain`;
+    return `${AppBranding.websiteUrl}/terms-plain`;
   }
 
   privacy(): void {

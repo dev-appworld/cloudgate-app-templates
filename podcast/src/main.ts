@@ -6,7 +6,6 @@ import { RootModule } from './root.module';
 
 declare global {
   interface Window {
-    config: any;
     eftSec: any;
     confetti: any;
     fwSettings: {

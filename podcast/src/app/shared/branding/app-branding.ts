@@ -4,4 +4,6 @@ export const AppBranding = {
   appIcon: 'assets/branding/app-icon.svg',
   headerLogo: 'assets/branding/header-logo.svg',
   symbol: 'assets/branding/logo-symbol.svg',
+  friendlyName: 'Cloudgate Podcast Demo',
+  websiteUrl: 'https://cloudgate.dev',
 } as const;

@@ -120,25 +120,13 @@ The app runs on `{tenant}.localhost:3000` while the gateway is `apps.localhost:4
 | `src/app/shared/workflow/workflow-http.service.ts` | Generic HTTP client for workflow endpoints |
 | `src/app/shared/workflow/podcast-workflow.service.ts` | Loads and caches `PodcastCatalog` |
 
-Runtime links (website, store URLs, sample tenant) live in `src/assets/style.js`:
-
-```js
-window.config = {
-  Website: 'https://cloudgate.dev',
-  iOS: 'https://cloudgate.dev',
-  Android: 'https://cloudgate.dev',
-  SampleAppTenantId: 5,
-  BuildTenantId: undefined,
-};
-```
-
-Branding paths are centralized in `src/app/shared/branding/app-branding.ts`.
+Website URL and display name for share/links are in `src/app/shared/branding/app-branding.ts` (`websiteUrl`, `friendlyName`).
 
 ## Scripts
 
 ```bash
 npm install
-npm start        # dev server at http://localhost:3000
+npm start        # dev server; opens localhost then redirects to apps.localhost
 npm run build    # production build to dist/
 npm run lint     # ESLint
 npm run e2e-ui   # Playwright tests (UI mode)
@@ -146,7 +134,8 @@ npm run e2e-ui   # Playwright tests (UI mode)
 
 | Command | Description |
 | --- | --- |
-| `npm start` | Starts the dev server on port 3000 |
+| `npm start` | Local dev on `localhost:3000` (binds loopback, not `0.0.0.0`) |
+| `npm run start:preview` | Cloudgate preview — binds `0.0.0.0` for remote dev containers |
 | `npm run build` | Production build |
 | `npm run watch` | Development build with watch |
 | `npm run prettier` | Format `src/app` and `src/environments` |
@@ -167,7 +156,6 @@ src/app/
     common/            # AppComponentBase, guards, auth service
 src/assets/
   appconfig.json       # API + IdP configuration
-  style.js             # Runtime window.config
   branding/            # Cloudgate SVG assets
 ```
 
@@ -185,7 +173,7 @@ The dev server listens on port **3000**, matching the other Angular template in 
 
 Typical local stack:
 
-- **App** — `http://localhost:3000` (or `http://{tenant}.localhost:3000`)
+- **App** — `http://apps.localhost:3000` (`npm start` opens this URL; plain `localhost` redirects automatically)
 - **API** — `http://localhost:44301`
 - **IdP** — `http://localhost:5173`
 

@@ -1,5 +1,5 @@
 {
-  "appBaseUrl": "http://{TENANCY_NAME}.localhost:3000",
+  "appBaseUrl": "http://localhost:3000",
   "idpBaseUrl": "http://localhost:5173",
   "idpApiUrl": "http://apps.localhost:44301",
   "idpTenancyName": "apps",

@@ -85,9 +85,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "host": "0.0.0.0",
+            "host": "localhost",
             "port": 3000,
+            "open": true,
+            "proxyConfig": "proxy.conf.json",
             "allowedHosts": [
+              "localhost",
+              "127.0.0.1",
+              ".localhost",
               ".dev.cloudgate.dev",
               ".code.cloudgate.dev"
             ]
@@ -98,6 +103,10 @@
             },
             "development": {
               "buildTarget": "angular-tailwind:build:development"
+            },
+            "preview": {
+              "buildTarget": "angular-tailwind:build:development",
+              "host": "0.0.0.0"
             }
           },
           "defaultConfiguration": "development"

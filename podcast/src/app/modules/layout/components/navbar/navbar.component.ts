@@ -62,8 +62,8 @@ export class NavbarComponent extends AppComponentBase implements OnInit, OnDestr
 
   async share() {
     await Share.share({
-      title: window.config.FriendlyName,
-      url: window.config.Website,
+      title: AppBranding.friendlyName,
+      url: AppBranding.websiteUrl,
       dialogTitle: 'Share with Friends',
     });
   }

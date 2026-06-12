@@ -126,10 +126,11 @@ export class AppPreBootstrap {
           }
         }
 
-        if (tenancyName == null) {
-          callback();
+        const effectiveTenancyName = tenancyName || AppConsts.idpTenancyName || null;
+        if (effectiveTenancyName) {
+          AppPreBootstrap.configureTenantIdCookie(effectiveTenancyName, callback);
         } else {
-          AppPreBootstrap.configureTenantIdCookie(tenancyName, callback);
+          callback();
         }
       },
     );
