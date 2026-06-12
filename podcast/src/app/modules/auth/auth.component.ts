@@ -4,6 +4,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { AppComponentBase } from 'src/app/shared/common/app-component-base';
 import { AlertModalComponent } from 'src/app/shared/components/alert/alert.component';
+import { setTenantIdCookie } from 'src/app/shared/core/multi-tenancy.util';
 
 @Component({
   selector: 'app-auth',
@@ -34,7 +35,7 @@ export class AuthComponent extends AppComponentBase implements OnInit {
   }
 
   switchApp() {
-    abp.event.trigger('showModal', {
+    this.appEvents.trigger('showModal', {
       title: 'Disconnect App',
       content: `
     <div class="text-center">
@@ -46,7 +47,7 @@ export class AuthComponent extends AppComponentBase implements OnInit {
       danger: true,
       onPositive: () => {
         this.localStore.clearData();
-        abp.multiTenancy.setTenantIdCookie();
+        setTenantIdCookie();
         window.location.href = '/#/auth/onboarding';
         // window.location.reload();
       },

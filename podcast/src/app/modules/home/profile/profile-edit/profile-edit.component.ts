@@ -61,7 +61,7 @@ export class ProfileEditComponent extends AppComponentBase implements OnInit {
       return;
     }
 
-    const token = getStoredAccessToken() || abp.auth.getToken();
+    const token = getStoredAccessToken();
     const tenancyName = idpAuthConfig.tenancyName;
     if (!token || !tenancyName) {
       this.status = { type: 'error', message: 'IdP session is not available. Sign in again.' };

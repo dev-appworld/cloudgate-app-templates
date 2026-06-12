@@ -1,5 +1,5 @@
 import { Injector, Pipe, PipeTransform } from '@angular/core';
-import { LocalizationService } from 'abp-ng2-module';
+import { formatLocalizedString, LocalizationService } from 'src/app/shared/core';
 import { AppConsts } from 'src/app/shared/AppConsts';
 
 @Pipe({
@@ -31,8 +31,7 @@ export class LocalizePipe implements PipeTransform {
       return localizedText;
     }
 
-    args.unshift(localizedText);
-    return abp.utils.formatString.apply(this, this.flattenDeep(args));
+    return formatLocalizedString(localizedText, ...this.flattenDeep(args));
   }
 
   transform(key: string, ...args: any[]): string {

@@ -12,28 +12,25 @@ import { QueryStringTenantResolver } from './shared/multi-tenancy/tenant-resolve
 import { SubdomainTenantResolver } from './shared/multi-tenancy/tenant-resolvers/subdomain-tenant-resolver';
 import { SubdomainTenancyNameFinder } from './shared/helpers/SubdomainTenancyNameFinder';
 import { bootstrapIdpSessionFromUrl } from './app/shared/idp-auth/idp-auth.bootstrap';
+import { APP_TIME_ZONE_ID, supportsMultipleTimezone } from './app/shared/core/clock.util';
+import { initializeDefaultLanguage, getCurrentAppLanguage } from './app/shared/core/locale.util';
+import { formatString } from './app/shared/core/format-string.util';
+import { localize } from './app/shared/core/locale.util';
+import {
+  getTenantIdCookie,
+  setTenancyNameCookie,
+  TENANT_ID_COOKIE_NAME,
+} from './app/shared/core/multi-tenancy.util';
 
 export class AppPreBootstrap {
   static run(appRootUrl: string, injector: Injector, callback: () => void, resolve: any, reject: any): void {
     AppPreBootstrap.getApplicationConfig(appRootUrl, injector, () => {
-      AppPreBootstrap.configureMinimalAbp(callback);
+      AppPreBootstrap.configureAppDefaults(callback);
     });
   }
 
-  private static configureMinimalAbp(callback: () => void): void {
-    abp.localization = abp.localization || {};
-    abp.localization.currentLanguage = {
-      name: 'en-US',
-      displayName: 'English',
-      icon: 'famfamfam-flags us',
-      isDefault: true,
-      isDisabled: false,
-      isRightToLeft: false,
-    };
-    abp.auth = abp.auth || {};
-    abp.auth.grantedPermissions = abp.auth.grantedPermissions || {};
-    abp.clock = abp.clock || {};
-    abp.clock.provider = abp.timing.localClockProvider;
+  private static configureAppDefaults(callback: () => void): void {
+    initializeDefaultLanguage();
     AppPreBootstrap.configureLuxon();
     callback();
   }
@@ -54,8 +51,8 @@ export class AppPreBootstrap {
       ? [{}]
       : [
           {
-            name: abp.multiTenancy.tenantIdCookieName,
-            value: abp.multiTenancy.getTenantIdCookie() + '',
+            name: TENANT_ID_COOKIE_NAME,
+            value: getTenantIdCookie() + '',
           },
         ];
 
@@ -113,11 +110,11 @@ export class AppPreBootstrap {
         if (AppConsts.PreventNotExistingTenantSubdomains) {
           var subdomainTenancyNameFinder = new SubdomainTenancyNameFinder();
           if (subdomainTenancyNameFinder.urlHasTenancyNamePlaceholder(result.appBaseUrl)) {
-            const message = abp.localization.localize(
+            const message = localize(
               'ThereIsNoTenantDefinedWithName{0}',
               AppConsts.localization.defaultLocalizationSourceName,
             );
-            abp.message.warn(abp.utils.formatString(message, tenancyName));
+            alert(formatString(message, tenancyName));
             document.location.href = result.appBaseUrl.replace(
               AppConsts.tenancyNamePlaceHolderInUrl + '.',
               '',
@@ -146,7 +143,7 @@ export class AppPreBootstrap {
     var queryStringTenantResolver = new QueryStringTenantResolver();
     tenancyName = queryStringTenantResolver.resolve();
     if (tenancyName) {
-      abp.utils.setCookieValue('abp_tenancy_name', tenancyName);
+      setTenancyNameCookie(tenancyName);
       return tenancyName;
     }
 
@@ -157,7 +154,7 @@ export class AppPreBootstrap {
   }
 
   private static configureTenantIdCookie(tenancyName: string, callback: () => void) {
-    abp.utils.setCookieValue('abp_tenancy_name', tenancyName);
+    setTenancyNameCookie(tenancyName);
     callback();
   }
 
@@ -180,23 +177,23 @@ export class AppPreBootstrap {
   }
 
   private static configureLuxon() {
-    let luxonLocale = new LocaleMappingService().map('luxon', abp.localization.currentLanguage.name);
+    let luxonLocale = new LocaleMappingService().map('luxon', getCurrentAppLanguage().name);
 
     DateTime.local().setLocale(luxonLocale);
     DateTime.utc().setLocale(luxonLocale);
     Settings.defaultLocale = luxonLocale;
 
-    if (abp.clock.provider.supportsMultipleTimezone) {
-      Settings.defaultZone = abp.timing.timeZoneInfo.iana.timeZoneId;
+    if (supportsMultipleTimezone()) {
+      Settings.defaultZone = APP_TIME_ZONE_ID;
     }
 
     DateTime.prototype.toJSON = function () {
-      if (!abp.clock.provider.supportsMultipleTimezone) {
+      if (!supportsMultipleTimezone()) {
         let localDate = this.setLocale('en');
         return localDate.toString();
       }
 
-      let date = this.setLocale('en').setZone(abp.timing.timeZoneInfo.iana.timeZoneId) as DateTime;
+      let date = this.setLocale('en').setZone(APP_TIME_ZONE_ID) as DateTime;
       return date.toISO();
     };
   }

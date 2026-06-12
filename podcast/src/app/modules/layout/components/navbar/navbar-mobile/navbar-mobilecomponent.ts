@@ -4,6 +4,7 @@ import { MenuService } from '../../../services/menu.service';
 import { NavbarMobileMenuComponent } from './navbar-mobile-menu/navbar-mobile-menu.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgClass } from '@angular/common';
+import { AppEventsService } from 'src/app/shared/core/app-events.service';
 
 @Component({
     selector: 'app-navbar-mobile',
@@ -23,14 +24,15 @@ export class NavbarMobileComponent implements OnInit, OnDestroy {
     public menuService: MenuService,
     public appSession: AppSessionService,
     private readonly cdr: ChangeDetectorRef,
+    private readonly appEvents: AppEventsService,
   ) {}
 
   ngOnInit(): void {
-    abp.event.on('app.branding.changed', this.brandingHandler);
+    this.appEvents.on('app.branding.changed', this.brandingHandler);
   }
 
   ngOnDestroy(): void {
-    abp.event.off('app.branding.changed', this.brandingHandler);
+    this.appEvents.off('app.branding.changed', this.brandingHandler);
   }
 
   public toggleMobileMenu(): void {

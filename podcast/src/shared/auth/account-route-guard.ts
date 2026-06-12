@@ -1,4 +1,4 @@
-import { PermissionCheckerService } from 'abp-ng2-module';
+import { PermissionCheckerService } from 'src/app/shared/core';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AppSessionService } from 'src/app/shared/session/app-session.service';

@@ -1,5 +1,6 @@
-import { clearIdpSession, getStoredAccessToken, getStoredRefreshToken, storeIdpTokens } from './auth-storage';
+import { clearIdpSession as clearIdpSessionStorage, getStoredAccessToken, getStoredRefreshToken, storeIdpTokens } from './auth-storage';
 import { isTokenValid } from './jwt.utils';
+import { TokenService } from '../core/token.service';
 
 function getIdpCallbackParams(): URLSearchParams {
   const params = new URLSearchParams(window.location.search);
@@ -42,10 +43,12 @@ function stripIdpCallbackParams() {
   );
 }
 
-function syncAbpTokens(accessToken: string, refreshToken?: string) {
-  abp.auth.setToken(accessToken);
+const tokenStorage = new TokenService();
+
+function syncStoredTokens(accessToken: string, refreshToken?: string) {
+  tokenStorage.setToken(accessToken);
   if (refreshToken) {
-    abp.auth.setRefreshToken(refreshToken);
+    tokenStorage.setRefreshToken(refreshToken);
   }
 }
 
@@ -63,14 +66,14 @@ export function bootstrapIdpSessionFromUrl(): boolean {
       refreshFromUrl || undefined,
       Number.isFinite(expiresIn) ? expiresIn : undefined,
     );
-    syncAbpTokens(tokenFromUrl, refreshFromUrl || getStoredRefreshToken() || undefined);
+    syncStoredTokens(tokenFromUrl, refreshFromUrl || getStoredRefreshToken() || undefined);
     stripIdpCallbackParams();
     return true;
   }
 
   const stored = getStoredAccessToken();
   if (isTokenValid(stored)) {
-    syncAbpTokens(stored!, getStoredRefreshToken() || undefined);
+    syncStoredTokens(stored!, getStoredRefreshToken() || undefined);
     return true;
   }
 
@@ -78,7 +81,7 @@ export function bootstrapIdpSessionFromUrl(): boolean {
 }
 
 export function clearIdpSessionAndAbp() {
-  clearIdpSession();
-  abp.auth.clearToken();
-  abp.auth.clearRefreshToken();
+  clearIdpSessionStorage();
+  tokenStorage.clearToken();
+  tokenStorage.clearRefreshToken();
 }

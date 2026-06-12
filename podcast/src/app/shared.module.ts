@@ -7,6 +7,7 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { LocaleMappingService } from './shared/locale-mapping.service';
+import { getCurrentAppLanguage } from './shared/core/locale.util';
 
 import { PasswordModule } from 'primeng/password';
 
@@ -18,7 +19,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 export function getRecaptchaLanguage(): string {
 
-  return new LocaleMappingService().map('recaptcha', abp.localization.currentLanguage.name);
+  return new LocaleMappingService().map('recaptcha', getCurrentAppLanguage().name);
 
 }
 

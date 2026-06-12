@@ -1,8 +1,10 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Modal } from 'flowbite';
 import { UtilsModule } from 'src/shared/utils/utils.module';
+import { AppEventsService } from '../../core/app-events.service';
+import { NotifyService } from '../../core/notify.service';
 
 @Component({
   selector: 'getInTouchModal',
@@ -11,7 +13,7 @@ import { UtilsModule } from 'src/shared/utils/utils.module';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf, UtilsModule, NgFor],
 })
-export class GetInTouchModalComponent implements OnInit {
+export class GetInTouchModalComponent implements OnInit, OnDestroy {
   modal: Modal | undefined;
   options: any = {
     closable: false,
@@ -40,7 +42,19 @@ export class GetInTouchModalComponent implements OnInit {
     { name: 'Other', value: 5 },
   ];
 
-  constructor(private readonly _formBuilder: FormBuilder) {}
+  private readonly showHandler = () => {
+    this.show();
+  };
+
+  private readonly hideHandler = () => {
+    this.hide();
+  };
+
+  constructor(
+    private readonly _formBuilder: FormBuilder,
+    private readonly appEvents: AppEventsService,
+    private readonly notify: NotifyService,
+  ) {}
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -52,12 +66,13 @@ export class GetInTouchModalComponent implements OnInit {
 
     const infoModal = document.getElementById('getInTouchModal');
     this.modal = new Modal(infoModal, this.options);
-    abp.event.on('showGetInTouchModal', () => {
-      this.show();
-    });
-    abp.event.on('hideModal', () => {
-      this.hide();
-    });
+    this.appEvents.on('showGetInTouchModal', this.showHandler);
+    this.appEvents.on('hideModal', this.hideHandler);
+  }
+
+  ngOnDestroy(): void {
+    this.appEvents.off('showGetInTouchModal', this.showHandler);
+    this.appEvents.off('hideModal', this.hideHandler);
   }
 
   show(): void {
@@ -96,6 +111,6 @@ export class GetInTouchModalComponent implements OnInit {
     this.form.controls['message'].setValue('');
     this.saving = false;
     this.close();
-    abp.notify.info('Contact form is not connected to a backend in this template.');
+    this.notify.info('Contact form is not connected to a backend in this template.');
   }
 }

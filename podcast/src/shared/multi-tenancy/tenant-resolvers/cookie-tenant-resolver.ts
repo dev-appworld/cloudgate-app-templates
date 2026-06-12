@@ -1,7 +1,9 @@
+import { getTenancyNameCookie } from 'src/app/shared/core/multi-tenancy.util';
+
 export class CookieTenantResolver {
 
     resolve(): string {
-        return abp.utils.getCookieValue('abp_tenancy_name');
+        return getTenancyNameCookie();
     }
 
 }

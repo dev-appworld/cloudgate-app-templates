@@ -7,6 +7,7 @@ import { AppComponentBase } from 'src/app/shared/common/app-component-base';
 import { CommonModule } from '@angular/common';
 import { AlertModalComponent } from 'src/app/shared/components/alert/alert.component';
 import { GetInTouchModalComponent } from 'src/app/shared/components/getInTouch/get-in-touch.component';
+import { UserNotificationPayload } from 'src/app/shared/core/user-notification.models';
 
 @Component({
   selector: 'app-layout',
@@ -65,7 +66,7 @@ export class LayoutComponent extends AppComponentBase implements OnInit {
   registerToEvents() {
     let self = this;
 
-    this.subscribeToEvent('abp.notifications.received', (userNotification: abp.notifications.IUserNotification) => {
+    this.subscribeToEvent('abp.notifications.received', (userNotification: UserNotificationPayload) => {
       self._zone.run(() => {
         this.toastr.info(
           userNotification.notification.data.properties.Message,

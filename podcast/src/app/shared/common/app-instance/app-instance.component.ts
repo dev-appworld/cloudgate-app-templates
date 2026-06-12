@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponentBase } from '../app-component-base';
 import { LocalService } from '../../session/local-storage.service';
+import { setTenantIdCookie } from '../../core/multi-tenancy.util';
 
 @Component({
   selector: 'app-app-instance',
@@ -19,7 +20,7 @@ export class AppInstanceComponent extends AppComponentBase implements OnInit {
     this.tenantId = +(this.activatedRoute.snapshot.paramMap.get('id') ?? '');
     if (this.tenantId) {
       this.localStore.clearData();
-      abp.multiTenancy.setTenantIdCookie(this.tenantId);
+      setTenantIdCookie(this.tenantId);
     }
     this._router.navigate(['auth/sign-in']);
   }

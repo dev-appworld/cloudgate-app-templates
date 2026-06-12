@@ -3,6 +3,7 @@ import { AppComponentBase } from 'src/app/shared/common/app-component-base';
 import { idpAuthConfig } from 'src/app/shared/idp-auth/idp-auth.config';
 import { getStoredAccessToken } from 'src/app/shared/idp-auth/auth-storage';
 import { isTokenValid } from 'src/app/shared/idp-auth/jwt.utils';
+import { TokenService } from 'src/app/shared/core/token.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,13 +15,13 @@ import { isTokenValid } from 'src/app/shared/idp-auth/jwt.utils';
 export class SignInComponent extends AppComponentBase implements OnInit {
   protected redirecting = false;
 
-  constructor(injector: Injector) {
+  constructor(injector: Injector, private readonly _tokenService: TokenService) {
     super(injector);
   }
 
   ngOnInit(): void {
     if (idpAuthConfig.enabled) {
-      const token = getStoredAccessToken() || abp.auth.getToken();
+      const token = getStoredAccessToken() || this._tokenService.getToken();
       if (isTokenValid(token)) {
         window.location.href = '/#/home';
         return;

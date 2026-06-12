@@ -3,10 +3,9 @@ import {
   FeatureCheckerService,
   LocalizationService,
   MessageService,
-  AbpMultiTenancyService,
   NotifyService,
   SettingService,
-} from 'abp-ng2-module';
+} from '../core';
 import { Component, Injector, OnDestroy } from '@angular/core';
 import { AppConsts } from '../AppConsts';
 import { AppUrlService } from './nav/app-url.service';
@@ -22,8 +21,9 @@ import { ToastrService } from 'ngx-toastr';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { HttpClient } from '@angular/common/http';
 import { AppBranding } from '../branding/app-branding';
+import { AppEventsService } from '../core/app-events.service';
 
-interface AbpEventSubscription {
+interface AppEventSubscription {
   eventName: string;
   callback: (...args: any[]) => void;
 }
@@ -44,12 +44,13 @@ export abstract class AppComponentBase implements OnDestroy {
   appSession: AppSessionService;
   appUrlService: AppUrlService;
   spinnerService: NgxSpinnerService;
-  eventSubscriptions: AbpEventSubscription[] = [];
+  eventSubscriptions: AppEventSubscription[] = [];
   router: Router;
   authService: CloudgateAuthService;
   localStore: LocalService;
   toastr: ToastrService;
   themeService: ThemeService;
+  appEvents: AppEventsService;
 
   http: HttpClient;
 
@@ -73,6 +74,7 @@ export abstract class AppComponentBase implements OnDestroy {
     this.localStore = injector.get(LocalService);
     this.toastr = injector.get(ToastrService);
     this.themeService = injector.get(ThemeService);
+    this.appEvents = injector.get(AppEventsService);
     this.isIOS = Capacitor.getPlatform() == 'ios';
 
     this.http = injector.get(HttpClient);
@@ -91,7 +93,6 @@ export abstract class AppComponentBase implements OnDestroy {
   }
 
   logout(): void {
-    // this.localStore.clearData();
     this.authService.logout();
   }
 
@@ -110,7 +111,7 @@ export abstract class AppComponentBase implements OnDestroy {
   setPageAction(pageAction: string) {
     if (AppConsts.pageAction != pageAction) {
       AppConsts.pageAction = pageAction;
-      abp.event.trigger('app.show.nav');
+      this.appEvents.trigger('app.show.nav');
     } else {
       AppConsts.pageAction = pageAction;
     }
@@ -151,7 +152,7 @@ export abstract class AppComponentBase implements OnDestroy {
   }
 
   protected subscribeToEvent(eventName: string, callback: (...args: any[]) => void): void {
-    abp.event.on(eventName, callback);
+    this.appEvents.on(eventName, callback);
     this.eventSubscriptions.push({
       eventName,
       callback,
@@ -159,12 +160,12 @@ export abstract class AppComponentBase implements OnDestroy {
   }
 
   private unSubscribeAllEvents() {
-    this.eventSubscriptions.forEach((s) => abp.event.off(s.eventName, s.callback));
+    this.eventSubscriptions.forEach((s) => this.appEvents.off(s.eventName, s.callback));
     this.eventSubscriptions = [];
   }
 
   sendEmail() {
-    abp.event.trigger('showModal', {
+    this.appEvents.trigger('showModal', {
       title: 'Get in Touch',
       content:
         '<p class="text-center">Please email us at <a href="mailto:dev@cloudgate.dev" class="text-primary underline">dev@cloudgate.dev</a> and we will get back to you.</p>',
@@ -223,12 +224,10 @@ export abstract class AppComponentBase implements OnDestroy {
     if (url) {
       this.http.get(url, { responseType: 'blob' }).subscribe(
         (blob) => {
-          // Create a link element
           const link = document.createElement('a');
           link.href = URL.createObjectURL(blob);
-          link.download = 'QR-Image.jpg'; // Set the download filename
+          link.download = 'QR-Image.jpg';
 
-          // Append link to the body, click it, and then remove it
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);

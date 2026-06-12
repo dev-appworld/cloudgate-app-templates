@@ -1,14 +1,13 @@
-import { AbpHttpInterceptor, RefreshTokenService, AbpHttpConfigurationService } from 'abp-ng2-module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CloudgateAuthService } from 'src/app/shared/auth/cloudgate-auth.service';
-import { ZeroTemplateHttpConfigurationService } from './zero-template-http-configuration.service';
+import { AuthHttpInterceptor } from 'src/app/shared/core/auth-http.interceptor';
+import { RefreshTokenService } from 'src/app/shared/core/refresh-token.service';
 
 @NgModule({
   providers: [
     { provide: RefreshTokenService, useClass: CloudgateAuthService },
-    { provide: AbpHttpConfigurationService, useClass: ZeroTemplateHttpConfigurationService },
-    { provide: HTTP_INTERCEPTORS, useClass: AbpHttpInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
   ],
 })
 export class ServiceProxyModule {}

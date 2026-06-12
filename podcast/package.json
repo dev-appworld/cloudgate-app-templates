@@ -45,8 +45,6 @@
     "@zxing/browser": "^0.1.5",
     "@zxing/library": "^0.21.2",
     "@zxing/ngx-scanner": "^18.0.1",
-    "abp-ng2-module": "^9.0.0",
-    "abp-web-resources": "^5.8.0",
     "angular-svg-icon": "^13.0.0",
     "crypto-js": "^4.2.0",
     "daisyui": "^4.12.7",

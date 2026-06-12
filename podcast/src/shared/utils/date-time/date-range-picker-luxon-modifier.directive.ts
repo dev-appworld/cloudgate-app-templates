@@ -5,6 +5,7 @@ import { filter } from 'rxjs/operators';
 import { DateTime } from 'luxon';
 import compare from 'just-compare';
 import { DateTimeService } from 'src/app/shared/common/timing/date-time.service';
+import { APP_TIME_ZONE_ID, supportsMultipleTimezone } from 'src/app/shared/core/clock.util';
 
 ///this directive ensures that date values will always be the luxon.
 @Directive({
@@ -42,10 +43,10 @@ export class DateRangePickerLuxonModifierDirective implements OnDestroy, OnChang
 
         this.lastDates = dates;
 
-        if (abp.clock.provider.supportsMultipleTimezone) {
+        if (supportsMultipleTimezone()) {
           this.lastDates = [
-            this._dateTimeService.changeTimeZone(dates[0], abp.timing.timeZoneInfo.iana.timeZoneId),
-            this._dateTimeService.changeTimeZone(dates[1], abp.timing.timeZoneInfo.iana.timeZoneId),
+            this._dateTimeService.changeTimeZone(dates[0], APP_TIME_ZONE_ID),
+            this._dateTimeService.changeTimeZone(dates[1], APP_TIME_ZONE_ID),
           ];
         }
 

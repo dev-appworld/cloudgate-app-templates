@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { RefreshTokenService, TokenService } from 'abp-ng2-module';
+import { RefreshTokenService } from '../core/refresh-token.service';
+import { TokenService } from '../core/token.service';
 import { Observable, Subject, of } from 'rxjs';
 import { AppConsts } from '../AppConsts';
 import { LocalStorageService } from 'src/app/shared/utils/local-storage.service';
@@ -62,8 +63,7 @@ export class CloudgateAuthService implements RefreshTokenService {
       storeIdpTokens(result.accessToken, result.refreshToken, result.expiresIn);
       const tokenExpireDate = new Date(new Date().getTime() + 1000 * result.expiresIn);
       this._tokenService.setToken(result.accessToken, tokenExpireDate);
-      abp.auth.setToken(result.accessToken);
-      abp.auth.setRefreshToken(result.refreshToken);
+      this._tokenService.setRefreshToken(result.refreshToken);
       refreshTokenObservable.next(true);
       refreshTokenObservable.complete();
     });

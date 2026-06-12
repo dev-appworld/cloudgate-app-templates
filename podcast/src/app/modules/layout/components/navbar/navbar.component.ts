@@ -42,7 +42,7 @@ export class NavbarComponent extends AppComponentBase implements OnInit, OnDestr
   }
 
   aboutUs() {
-    abp.event.trigger('showModal', {
+    this.appEvents.trigger('showModal', {
       title: 'About Us',
       content: `
       <div class="text-center">

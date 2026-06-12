@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DateTime } from 'luxon';
 import { AppLocalizationService } from '../localization/app-localization.service';
+import { APP_TIME_ZONE_ID, supportsMultipleTimezone } from '../../core/clock.util';
 
 @Injectable()
 export class DateTimeService {
@@ -48,8 +49,8 @@ export class DateTimeService {
   }
 
   getDate(): DateTime {
-    if (abp.clock.provider.supportsMultipleTimezone) {
-      return DateTime.local().setZone(abp.timing.timeZoneInfo.iana.timeZoneId);
+    if (supportsMultipleTimezone()) {
+      return DateTime.local().setZone(APP_TIME_ZONE_ID);
     } else {
       return DateTime.local();
     }
@@ -176,7 +177,7 @@ export class DateTimeService {
   }
 
   createDate(year: number, month: number, day: number): DateTime {
-    if (abp.clock.provider.supportsMultipleTimezone) {
+    if (supportsMultipleTimezone()) {
       return DateTime.utc(year, month + 1, day);
     } else {
       return DateTime.local(year, month + 1, day);

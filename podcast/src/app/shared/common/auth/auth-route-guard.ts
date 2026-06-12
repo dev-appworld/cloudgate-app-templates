@@ -1,4 +1,4 @@
-import { PermissionCheckerService, RefreshTokenService } from 'abp-ng2-module';
+import { PermissionCheckerService, RefreshTokenService } from 'src/app/shared/core';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -17,6 +17,7 @@ import { AppSessionService } from '../../session/app-session.service';
 import { idpAuthConfig } from '../../idp-auth/idp-auth.config';
 import { getStoredAccessToken } from '../../idp-auth/auth-storage';
 import { isTokenValid } from '../../idp-auth/jwt.utils';
+import { TokenService } from '../../core/token.service';
 
 @Injectable()
 export class AppRouteGuard implements CanActivate, CanActivateChild, CanLoad {
@@ -25,10 +26,11 @@ export class AppRouteGuard implements CanActivate, CanActivateChild, CanLoad {
     private _router: Router,
     private _sessionService: AppSessionService,
     private _refreshTokenService: RefreshTokenService,
+    private _tokenService: TokenService,
   ) {}
 
   private getAccessToken(): string | null {
-    return getStoredAccessToken() || abp.auth.getToken() || null;
+    return getStoredAccessToken() || this._tokenService.getToken() || null;
   }
 
   private redirectToIdpLogin(state: RouterStateSnapshot | null): void {

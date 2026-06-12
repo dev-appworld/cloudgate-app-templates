@@ -1,3 +1,5 @@
+import { localize } from 'src/app/shared/core/locale.util';
+
 export class XmlHttpRequestHelper {
   static ajax(type: string, url: string, customHeaders: any, data: any, success: any) {
     let xhr = new XMLHttpRequest();
@@ -8,8 +10,7 @@ export class XmlHttpRequestHelper {
           let result = JSON.parse(xhr.responseText);
           success(result);
         } else if (xhr.status !== 0) {
-          var test = abp.localization.localize('InternalServerError', 'AbpWeb');
-          alert(abp.localization.localize('InternalServerError', 'AbpWeb'));
+          alert(localize('InternalServerError', 'AbpWeb'));
         }
       }
     };

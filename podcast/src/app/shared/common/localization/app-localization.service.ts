@@ -1,6 +1,6 @@
-import { LocalizationService } from 'abp-ng2-module';
 import { Injectable } from '@angular/core';
 import { AppConsts } from '../../AppConsts';
+import { formatLocalizedString, LocalizationService } from '../../core';
 
 @Injectable()
 export class AppLocalizationService extends LocalizationService {
@@ -10,7 +10,7 @@ export class AppLocalizationService extends LocalizationService {
     return this.ls.apply(this, args);
   }
 
-  ls(sourcename: string, key: string, ...args: any): string {
+  ls(sourcename: string, key: string, ...args: any[]): string {
     let localizedText = this.localize(key, sourcename);
 
     if (!localizedText) {
@@ -21,7 +21,6 @@ export class AppLocalizationService extends LocalizationService {
       return localizedText;
     }
 
-    args.unshift(localizedText);
-    return abp.utils.formatString.apply(this, args);
+    return formatLocalizedString(localizedText, ...args);
   }
 }

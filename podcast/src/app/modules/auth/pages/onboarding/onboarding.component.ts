@@ -80,7 +80,7 @@ export class OnboardingComponent extends AppComponentBase implements OnInit {
   }
 
   scanQR() {
-    abp.event.trigger('app.show.scanQRCode', (code: any) => {
+    this.appEvents.trigger('app.show.scanQRCode', (code: any) => {
       this.setVal(code);
     });
   }

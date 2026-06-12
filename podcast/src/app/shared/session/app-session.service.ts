@@ -14,6 +14,8 @@ import { IdpProfileService } from '../idp-auth/idp-profile.service';
 import { getProfilePictureSrc, IdpProfile } from '../idp-auth/idp-profile.models';
 import { getStoredAccessToken, getStoredRefreshToken, storeIdpTokens } from '../idp-auth/auth-storage';
 import { isTokenValid, userFromIdpToken } from '../idp-auth/jwt.utils';
+import { AppEventsService } from '../core/app-events.service';
+import { TokenService } from '../core/token.service';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +32,11 @@ export class AppSessionService {
   private _app: AppInformationDto | undefined;
   private _tenantLogoUrl: string | undefined;
 
-  constructor(private readonly _idpProfileService: IdpProfileService) {}
+  constructor(
+    private readonly _idpProfileService: IdpProfileService,
+    private readonly _appEvents: AppEventsService,
+    private readonly _tokenService: TokenService,
+  ) {}
 
   get application(): ApplicationInfoDto | undefined {
     return this._application;
@@ -117,7 +123,7 @@ export class AppSessionService {
     }
 
     this._tenantLogoUrl = logoUrl;
-    abp.event.trigger('app.branding.changed');
+    this._appEvents.trigger('app.branding.changed');
   }
 
   clearTenantBrandingUrl(): void {
@@ -125,7 +131,7 @@ export class AppSessionService {
       return;
     }
     this._tenantLogoUrl = undefined;
-    abp.event.trigger('app.branding.changed');
+    this._appEvents.trigger('app.branding.changed');
   }
 
   setUser(name: string, surname: string) {
@@ -156,7 +162,7 @@ export class AppSessionService {
 
     return this.ensureUserHydrated().then(() => {
       if (this._user) {
-        abp.event.trigger('abp.session.user');
+        this._appEvents.trigger('abp.session.user');
       }
       this.applyTenantBrandingUrl();
       return true;
@@ -164,7 +170,7 @@ export class AppSessionService {
   }
 
   async ensureUserHydrated(): Promise<void> {
-    let accessToken = getStoredAccessToken() || abp.auth.getToken() || '';
+    let accessToken = getStoredAccessToken() || this._tokenService.getToken() || '';
 
     if (!isTokenValid(accessToken)) {
       const refreshed = await this.tryRefreshAccessToken();
@@ -188,7 +194,7 @@ export class AppSessionService {
   }
 
   private async hydrateUserFromIdpProfile(): Promise<void> {
-    const token = getStoredAccessToken() || abp.auth.getToken();
+    const token = getStoredAccessToken() || this._tokenService.getToken();
     if (!isTokenValid(token) || !idpAuthConfig.tenancyName) return;
 
     const profile = await this._idpProfileService.getProfile(token!, idpAuthConfig.tenancyName);
@@ -257,8 +263,8 @@ export class AppSessionService {
     if (!result || !isTokenValid(result.accessToken)) return null;
 
     storeIdpTokens(result.accessToken, result.refreshToken, result.expiresIn);
-    abp.auth.setToken(result.accessToken);
-    abp.auth.setRefreshToken(result.refreshToken);
+    this._tokenService.setToken(result.accessToken);
+    this._tokenService.setRefreshToken(result.refreshToken);
     return result.accessToken;
   }
 }

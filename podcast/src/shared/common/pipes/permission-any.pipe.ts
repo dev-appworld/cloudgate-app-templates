@@ -1,5 +1,5 @@
 import { Injector, Pipe, PipeTransform } from '@angular/core';
-import { PermissionCheckerService } from 'abp-ng2-module';
+import { PermissionCheckerService } from 'src/app/shared/core';
 
 @Pipe({
     name: 'permissionAny',

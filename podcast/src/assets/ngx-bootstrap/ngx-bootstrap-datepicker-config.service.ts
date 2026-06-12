@@ -1,6 +1,7 @@
 import { BsDatepickerConfig, BsDaterangepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { NgxBootstrapLocaleMappingService } from './ngx-bootstrap-locale-mapping.service';
+import { getCurrentAppLanguage } from '../../app/shared/core/locale.util';
 
 export class NgxBootstrapDatePickerConfigService {
   static getDaterangepickerConfig(): BsDaterangepickerConfig {
@@ -17,23 +18,23 @@ export class NgxBootstrapDatePickerConfigService {
 
   static getDatepickerLocale(): BsLocaleService {
     let localeService = new BsLocaleService();
-    localeService.use(abp.localization.currentLanguage.name);
+    localeService.use(getCurrentAppLanguage().name);
     return localeService;
   }
 
   static registerNgxBootstrapDatePickerLocales(): Promise<boolean> {
-    if (abp.localization.currentLanguage.name === 'en') {
+    if (getCurrentAppLanguage().name === 'en') {
       return Promise.resolve(true);
     }
 
     let supportedLocale = new NgxBootstrapLocaleMappingService()
-      .map(abp.localization.currentLanguage.name)
+      .map(getCurrentAppLanguage().name)
       .toLowerCase();
-    let moduleLocaleName = new NgxBootstrapLocaleMappingService().getModuleName(abp.localization.currentLanguage.name);
+    let moduleLocaleName = new NgxBootstrapLocaleMappingService().getModuleName(getCurrentAppLanguage().name);
 
     return new Promise<boolean>((resolve, reject) => {
       import(`/node_modules/ngx-bootstrap/chronos/esm2020/i18n/${supportedLocale}.mjs`).then((module) => {
-        defineLocale(abp.localization.currentLanguage.name.toLowerCase(), module[`${moduleLocaleName}Locale`]);
+        defineLocale(getCurrentAppLanguage().name.toLowerCase(), module[`${moduleLocaleName}Locale`]);
         resolve(true);
       }, reject);
     });

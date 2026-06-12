@@ -23,6 +23,7 @@ import { environment } from './environments/environment';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { AppCommonModule } from './app/shared/common/app-common.module';
+import { getCurrentAppLanguage } from './app/shared/core/locale.util';
 
 export function appInitializerFactory(injector: Injector, platformLocation: PlatformLocation) {
   return () => {
@@ -99,7 +100,7 @@ function registerLocales(
   spinnerService: NgxSpinnerService,
 ) {
   if (shouldLoadLocale()) {
-    let angularLocale = convertAbpLocaleToAngularLocale(abp.localization.currentLanguage.name);
+    let angularLocale = convertAbpLocaleToAngularLocale(getCurrentAppLanguage().name);
     import(`/node_modules/@angular/common/locales/${angularLocale}.mjs`).then((module) => {
       registerLocaleData(module.default);
       NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales().then((_) => {
@@ -116,7 +117,7 @@ function registerLocales(
 }
 
 export function shouldLoadLocale(): boolean | string {
-  return abp.localization?.currentLanguage?.name && abp.localization.currentLanguage.name !== 'en-US';
+  return getCurrentAppLanguage().name && getCurrentAppLanguage().name !== 'en-US';
 }
 
 export function convertAbpLocaleToAngularLocale(locale: string): string {
@@ -124,7 +125,7 @@ export function convertAbpLocaleToAngularLocale(locale: string): string {
 }
 
 export function getCurrentLanguage(): string {
-  const locale = abp.localization?.currentLanguage?.name;
+  const locale = getCurrentAppLanguage().name;
   if (!locale) {
     return 'en';
   }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Modal } from 'flowbite';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { BarcodeFormat } from '@zxing/library';
 import { NgIf } from '@angular/common';
+import { AppEventsService } from '../../core/app-events.service';
 
 @Component({
   selector: 'scanQRCodeModal',
@@ -10,7 +11,7 @@ import { NgIf } from '@angular/common';
   standalone: true,
   imports: [ZXingScannerModule, NgIf],
 })
-export class ScanQRCodeComponent implements OnInit {
+export class ScanQRCodeComponent implements OnInit, OnDestroy {
   modal: Modal | undefined;
   format: BarcodeFormat = 11;
   options: any = {
@@ -19,17 +20,26 @@ export class ScanQRCodeComponent implements OnInit {
   scan = false;
   callback: ((qrcode: string) => void) | undefined;
 
-  constructor() {}
+  private readonly showHandler = () => {
+    this.modal?.show();
+  };
+
+  private readonly hideHandler = () => {
+    this.modal?.hide();
+  };
+
+  constructor(private readonly appEvents: AppEventsService) {}
 
   ngOnInit(): void {
     const infoModal = document.getElementById('qrModal');
     this.modal = new Modal(infoModal, this.options);
-    abp.event.on('showModalQR', () => {
-      this.modal?.show();
-    });
-    abp.event.on('hideModalQR', () => {
-      this.modal?.hide();
-    });
+    this.appEvents.on('showModalQR', this.showHandler);
+    this.appEvents.on('hideModalQR', this.hideHandler);
+  }
+
+  ngOnDestroy(): void {
+    this.appEvents.off('showModalQR', this.showHandler);
+    this.appEvents.off('hideModalQR', this.hideHandler);
   }
 
   show(callback: (qrcode: string) => void): void {
@@ -45,17 +55,23 @@ export class ScanQRCodeComponent implements OnInit {
     this.modal?.hide();
   }
 
-  onScan() {
-    this.scan = true;
+  onScanned($event: string) {
+    this.scanSuccessHandler($event);
   }
 
-  onScanned(data: any) {
+  scanSuccessHandler($event: any) {
     this.scan = false;
-    console.log(data);
-
-    if (this.callback) {
-      this.callback(data);
-    }
     this.hide();
+    if (this.callback) {
+      this.callback($event);
+    }
+  }
+
+  scanErrorHandler($event: any) {
+    console.log($event);
+  }
+
+  scanCompleteHandler($event: any) {
+    console.log($event);
   }
 }

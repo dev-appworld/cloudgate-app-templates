@@ -18,9 +18,11 @@ function getTenancyFromSubdomain(): string {
   return parts.length > 2 ? parts[0] : '';
 }
 
+import { getTenancyNameCookie } from '../core/multi-tenancy.util';
+
 function getTenancyFromCookie(): string {
   try {
-    return (abp.utils.getCookieValue('abp_tenancy_name') ?? '').trim();
+    return getTenancyNameCookie();
   } catch {
     return '';
   }

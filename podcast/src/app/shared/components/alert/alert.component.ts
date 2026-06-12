@@ -1,7 +1,8 @@
 import { NgClass, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Modal } from 'flowbite';
+import { AppEventsService } from '../../core/app-events.service';
 
 @Component({
   selector: 'alertModal',
@@ -10,7 +11,7 @@ import { Modal } from 'flowbite';
   standalone: true,
   imports: [NgIf, NgClass],
 })
-export class AlertModalComponent implements OnInit {
+export class AlertModalComponent implements OnInit, OnDestroy {
   modal: Modal | undefined;
   options: any = {
     closable: false,
@@ -27,30 +28,45 @@ export class AlertModalComponent implements OnInit {
     onNegative: () => {},
   };
 
-  constructor(private _sanitizer: DomSanitizer) {}
+  private readonly showModalHandler = ({
+    title,
+    content,
+    frameUrl,
+    buttonText,
+    buttonTextSecondary,
+    danger,
+    onPositive,
+    onNegative,
+  }: any) => {
+    this.modalTemplate = {
+      title,
+      content,
+      frameUrl,
+      buttonText,
+      buttonTextSecondary,
+      danger,
+      onPositive,
+      onNegative,
+    };
+    this.show();
+  };
+
+  private readonly hideModalHandler = () => {
+    this.hide();
+  };
+
+  constructor(private _sanitizer: DomSanitizer, private readonly appEvents: AppEventsService) {}
 
   ngOnInit(): void {
     const infoModal = document.getElementById('infoModal');
     this.modal = new Modal(infoModal, this.options);
-    abp.event.on(
-      'showModal',
-      ({ title, content, frameUrl, buttonText, buttonTextSecondary, danger, onPositive, onNegative }) => {
-        this.modalTemplate = {
-          title,
-          content,
-          frameUrl,
-          buttonText,
-          buttonTextSecondary,
-          danger,
-          onPositive,
-          onNegative,
-        };
-        this.show();
-      },
-    );
-    abp.event.on('hideModal', () => {
-      this.hide();
-    });
+    this.appEvents.on('showModal', this.showModalHandler);
+    this.appEvents.on('hideModal', this.hideModalHandler);
+  }
+
+  ngOnDestroy(): void {
+    this.appEvents.off('showModal', this.showModalHandler);
+    this.appEvents.off('hideModal', this.hideModalHandler);
   }
 
   show(): void {

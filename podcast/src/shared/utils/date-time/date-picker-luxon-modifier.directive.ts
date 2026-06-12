@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { DateTime } from 'luxon';
 import compare from 'just-compare';
 import { DateTimeService } from 'src/app/shared/common/timing/date-time.service';
+import { APP_TIME_ZONE_ID, supportsMultipleTimezone } from 'src/app/shared/core/clock.util';
 
 ///this directive ensures that the date value will always be the luxon.
 @Directive({
@@ -37,8 +38,8 @@ export class DatePickerLuxonModifierDirective implements OnDestroy, OnChanges {
           // using UTC date regardless of timing configuration
           var utcDateString = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
           date = this._dateTimeService.fromISODateString(utcDateString).toJSDate();
-        } else if (abp.clock.provider.supportsMultipleTimezone) {
-          date = this._dateTimeService.changeTimeZone(date, abp.timing.timeZoneInfo.iana.timeZoneId);
+        } else if (supportsMultipleTimezone()) {
+          date = this._dateTimeService.changeTimeZone(date, APP_TIME_ZONE_ID);
         }
 
         this.lastDate = date;
