@@ -6,25 +6,44 @@ Browse templates in the hub at **Web Coder → Quick Start** (`/web-coder`). Eac
 
 ## Templates
 
-| Template | Folder | Notes |
-| --- | --- | --- |
-| Cloudgate Podcast Demo | [`podcast/`](./podcast/) | Angular podcast demo app with bundled workflow import for `GET /podcasts` |
+| Template | Folder | Workflow API | Demo |
+| --- | --- | --- | --- |
+| [Cloudgate Podcast Demo](./podcast/) | [`podcast/`](./podcast/) | `GET /podcasts` | [podcast-demo.cloudweb.dev](https://podcast-demo.cloudweb.dev/) |
+| [Cloudgate Hotel Demo](./hotel/) | [`hotel/`](./hotel/) | `GET /hotels` | [hotel-demo.cloudweb.dev](https://hotel-demo.cloudweb.dev/) |
+| [Cloudgate Medical Demo](./medical/) | [`medical/`](./medical/) | `GET /doctors` | [medical-demo.cloudweb.dev](https://medical-demo.cloudweb.dev/) |
+| [Cloudgate NFT Demo](./nft/) | [`nft/`](./nft/) | `GET /nfts` | [nft-demo.cloudweb.dev](https://nft-demo.cloudweb.dev/) |
+| [Cloudgate Store Demo](./store/) | [`store/`](./store/) | `GET /products` | [store-demo.cloudweb.dev](https://store-demo.cloudweb.dev/) |
+| [Cloudgate Wallet Demo](./wallet/) | [`wallet/`](./wallet/) | `GET /transactions` | [wallet-demo.cloudweb.dev](https://wallet-demo.cloudweb.dev/) |
 
-Additional starters (`react/`, `angular/`, `html/`, `vue/`) live in this repo and can be enabled in [`templates.json`](./templates.json) when listed in the manifest.
+All gallery templates are **Angular 17** apps with Tailwind CSS, Capacitor-ready mobile shells, Cloudgate IdP login, and a bundled workflow import (`.template/workflow-template.json`) for the catalog API each app calls at runtime.
 
-### Cloudgate Podcast Demo
+Additional bare starters (`react/`, `angular/`, `html/`, `vue/`) live in this repo and can be enabled in [`templates.json`](./templates.json) when listed in the manifest.
 
-The Cloudgate Podcast Demo template includes a workflow catalog the app calls at runtime. When you create the project from Quick Start, selected workflows import automatically. See [podcast/README.md](./podcast/README.md) for screenshots, demo link, and full setup.
+### Per-template docs
+
+Each demo folder has its own README with screenshots, local dev steps, and workflow import instructions:
+
+- [podcast/README.md](./podcast/README.md)
+- [hotel/README.md](./hotel/README.md)
+- [medical/README.md](./medical/README.md)
+- [nft/README.md](./nft/README.md)
+- [store/README.md](./store/README.md)
+- [wallet/README.md](./wallet/README.md)
 
 ## Repository layout
 
 ```
 templates.json          # Manifest published to the Quick Start gallery
-react/
-angular/
-html/
-vue/
-podcast/                # Featured template — Angular + workflow import
+podcast/                # Angular podcast demo + workflow import
+hotel/                  # Angular hotel discovery demo + workflow import
+medical/                # Angular medical / doctor booking demo + workflow import
+nft/                    # Angular NFT auction demo + workflow import
+store/                  # Angular e-commerce store demo + workflow import
+wallet/                 # Angular wallet / transfer demo + workflow import
+react/                  # Bare React starter (not in gallery manifest)
+angular/                # Bare Angular starter (not in gallery manifest)
+html/                   # Bare HTML starter (not in gallery manifest)
+vue/                    # Bare Vue starter (not in gallery manifest)
 ```
 
 Each template folder contains a runnable project and a `template.json` with the same metadata as its manifest entry.
@@ -49,9 +68,10 @@ Entries in `templates.json` drive the Quick Start cards:
 ## Adding a template
 
 1. Add a new top-level folder with the starter source.
-2. Add `template.json` inside the folder.
-3. Register the template in `templates.json` (include a `thumbnail` URL for the card image).
-4. Push to `main` — new and updated templates appear in Quick Start after the gallery refreshes.
+2. Add `template.json` inside the folder (include a `banner.png` gallery thumbnail).
+3. Register the template in `templates.json`.
+4. Keep the repo lean — Web Coder downloads the **entire** GitHub tarball (50 MB limit). Do not commit `node_modules/`, `dist/`, `docs/screenshots/`, Capacitor `android/`/`ios/` shells, or large preview GIFs.
+5. Push to `main` — new and updated templates appear in Quick Start after the gallery refreshes.
 
 ## License
 

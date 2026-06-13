@@ -3,6 +3,19 @@ dist/
 .angular/
 *.log
 
+# README-only assets (keep repo tarball under Web Coder 50 MB download limit)
+**/docs/screenshots/
+
+# Editor/preview artifacts not used at runtime
+**/src/assets/preview/
+
+# Duplicate/unused image webps (apps use .jpg in assets/images)
+**/src/assets/images/*.webp
+
+# Capacitor native shells — regenerate with `npx cap add android|ios`
+**/android/
+**/ios/
+
 # Per-workspace Cloudgate editor artifacts (see each folder's .cloudgate/.gitignore)
 **/.cloudgate/*
 !**/.cloudgate/.gitignore
