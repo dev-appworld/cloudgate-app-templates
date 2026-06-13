@@ -37,9 +37,7 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "node_modules/apexcharts/dist/apexcharts.min.js",
-              "node_modules/sweetalert2/dist/sweetalert2.js",
-              "node_modules/flowbite/dist/flowbite.min.js"
+              "node_modules/apexcharts/dist/apexcharts.min.js"
             ],
             "allowedCommonJsDependencies": [
               "swipejs",
@@ -52,8 +50,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "4mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -134,7 +132,6 @@
             ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js",
-              "node_modules/sweetalert2/dist/sweetalert2.js"
             ]
           }
         }
@@ -145,4 +142,3 @@
     "analytics": false
   }
 }
-

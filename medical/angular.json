@@ -36,10 +36,7 @@
               "node_modules/sweetalert2/dist/sweetalert2.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": [
-              "node_modules/sweetalert2/dist/sweetalert2.js",
-              "node_modules/flowbite/dist/flowbite.min.js"
-            ],
+            "scripts": [],
             "allowedCommonJsDependencies": [
               "swipejs",
               "localforage"
@@ -50,8 +47,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "4mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -130,9 +127,7 @@
               "node_modules/sweetalert2/dist/sweetalert2.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": [
-              "node_modules/sweetalert2/dist/sweetalert2.js"
-            ]
+            "scripts": []
           }
         }
       }

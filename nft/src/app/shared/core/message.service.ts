@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Swal, { SweetAlertResult } from 'sweetalert2';
+import type { SweetAlertResult } from 'sweetalert2';
 
 type MessageOptions = Record<string, unknown> & { isHtml?: boolean };
 
@@ -13,7 +13,7 @@ function showMessage(type: string, message: string, title?: string, options?: Me
   } else {
     opts.text = message;
   }
-  return Swal.fire(opts as any);
+  return window.Swal.fire(opts as any);
 }
 
 @Injectable({
@@ -53,7 +53,7 @@ export class MessageService {
     } else {
       opts.text = message;
     }
-    return Swal.fire(opts as any).then((result) => {
+    return window.Swal.fire(opts as any).then((result) => {
       callback?.(!!result.value, result);
       return result;
     });

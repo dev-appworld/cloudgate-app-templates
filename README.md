@@ -17,6 +17,17 @@ Browse templates in the hub at **Web Coder → Quick Start** (`/web-coder`). Eac
 
 All gallery templates are **Angular 17** apps with Tailwind CSS, Capacitor-ready mobile shells, Cloudgate IdP login, and a bundled workflow import (`.template/workflow-template.json`) for the catalog API each app calls at runtime.
 
+### Production build before publish
+
+Published apps are served as static files from `dist/`. For the smallest bundles and best live performance:
+
+```bash
+npm install
+npm run build -- --configuration production
+```
+
+Then publish the **`dist/`** folder from **Web Coder → Web Apps**. Production builds use hashed filenames so browsers and Cloudflare can cache JS/CSS aggressively after deploy.
+
 Additional bare starters (`react/`, `angular/`, `html/`, `vue/`) live in this repo and can be enabled in [`templates.json`](./templates.json) when listed in the manifest.
 
 ### Per-template docs

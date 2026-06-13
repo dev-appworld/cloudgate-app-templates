@@ -71,6 +71,17 @@
       "demoUrl": "https://wallet-demo.cloudweb.dev/",
       "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/wallet/banner.png",
       "tags": ["angular", "wallet", "fintech", "tailwind", "capacitor"]
+    },
+    {
+      "id": "react-auth",
+      "name": "React IdP Auth Portal",
+      "description": "Standalone React login portal for Cloudgate IdP — custom UI calling Login, Register, and password reset APIs with returnUrl token redirect.",
+      "folder": "react-auth",
+      "framework": "React",
+      "devCommand": "npm install && npm run dev",
+      "devPort": 3000,
+      "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/react-auth/banner.png",
+      "tags": ["react", "vite", "tailwind", "auth", "idp"]
     }
   ]
 }
