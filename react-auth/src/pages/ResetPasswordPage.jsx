@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { idpResetPassword } from '@/api/idpApi';
 import { Alert } from '@/components/Alert';
 import { FormField } from '@/components/FormField';
-import { getRecaptchaPayload, recaptchaService } from '@/utils/recaptcha';
+import { getRecaptchaPayload } from '@/utils/recaptcha';
 import { useReturnUrl, withReturnUrl } from '@/utils/useReturnUrl';
 
 export function ResetPasswordPage() {
@@ -23,10 +23,6 @@ export function ResetPasswordPage() {
 
   const tokenValid = !!(userId && resetCode && expireDate && tenantId);
 
-  useEffect(() => {
-    recaptchaService.hideBadge();
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -44,7 +40,7 @@ export function ResetPasswordPage() {
     }
     setLoading(true);
     try {
-      const recaptcha = await getRecaptchaPayload('password_reset');
+      const recaptcha = await getRecaptchaPayload();
       await idpResetPassword({
         userId: Number(userId),
         resetCode,

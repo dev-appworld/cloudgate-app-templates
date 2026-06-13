@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { idpLogin } from '@/api/idpApi';
 import { Alert } from '@/components/Alert';
 import { FormField } from '@/components/FormField';
-import { getRecaptchaPayload, recaptchaService } from '@/utils/recaptcha';
+import { getRecaptchaPayload } from '@/utils/recaptcha';
 import { useReturnUrl, withReturnUrl } from '@/utils/useReturnUrl';
 
 export function LoginPage() {
@@ -18,10 +18,6 @@ export function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    recaptchaService.hideBadge();
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -31,7 +27,7 @@ export function LoginPage() {
     }
     setLoading(true);
     try {
-      const recaptcha = await getRecaptchaPayload('login');
+      const recaptcha = await getRecaptchaPayload();
       const result = await idpLogin({
         email: email.trim(),
         password,

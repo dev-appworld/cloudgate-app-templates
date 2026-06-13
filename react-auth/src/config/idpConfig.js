@@ -5,7 +5,6 @@
 const idpApiUrl = String(import.meta.env.VITE_IDP_API_URL ?? '').trim();
 const idpTenancyNameEnv = String(import.meta.env.VITE_IDP_TENANCY_NAME ?? '').trim();
 const idpAppName = String(import.meta.env.VITE_IDP_APP_NAME ?? 'Sign in').trim();
-const recaptchaSiteKey = String(import.meta.env.VITE_RECAPTCHA_SITE_KEY ?? '').trim();
 const recaptchaSecret = String(import.meta.env.VITE_IDP_RECAPTCHA_SECRET ?? '').trim();
 
 function getTenancyFromQuery() {
@@ -25,17 +24,11 @@ export const idpConfig = {
   get appName() {
     return idpAppName;
   },
-  get recaptchaSiteKey() {
-    return recaptchaSiteKey;
-  },
   get recaptchaSecret() {
     return recaptchaSecret;
   },
   get enabled() {
     return Boolean(this.apiUrl && this.tenancyName);
-  },
-  get hasRecaptchaConfig() {
-    return Boolean(recaptchaSiteKey || recaptchaSecret);
   },
   getBrandingLogoUrl(tenancyName) {
     const tenant = tenancyName || this.tenancyName;

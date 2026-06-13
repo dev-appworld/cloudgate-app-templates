@@ -60,10 +60,9 @@ Copy `.env.example` to `.env`:
 | `VITE_IDP_API_URL` | Yes | Cloudgate API base URL (e.g. `http://localhost:44301`) |
 | `VITE_IDP_TENANCY_NAME` | Yes | Tenant slug (e.g. `apps`); override at runtime with `?idp_tenant=` |
 | `VITE_IDP_APP_NAME` | No | Display name when no tenant logo is configured |
-| `VITE_IDP_RECAPTCHA_SECRET` | Yes* | Same value as **recaptchaSecret** in Cloudgate IdP Settings (`/flows/identity/settings`) |
-| `VITE_RECAPTCHA_SITE_KEY` | No | Optional Google reCAPTCHA v3 site key — only if you prefer browser reCAPTCHA over the tenant secret |
+| `VITE_IDP_RECAPTCHA_SECRET` | Yes | Same value as **recaptchaSecret** in Cloudgate IdP Settings (`/flows/identity/settings`) |
 
-\*The IdP API requires reCAPTCHA on Login/Register/password reset. You satisfy that with **`VITE_IDP_RECAPTCHA_SECRET`** (recommended): copy the secret from IdP Settings into `.env`. You do **not** need a Google reCAPTCHA account or `VITE_RECAPTCHA_SITE_KEY` unless you explicitly want invisible reCAPTCHA v3 in the browser ([Google reCAPTCHA admin](https://www.google.com/recaptcha/admin) → create a v3 key → use the **site key** here).
+Copy **recaptchaSecret** from IdP Settings into `VITE_IDP_RECAPTCHA_SECRET`. The portal sends it in API request bodies to satisfy the IdP reCAPTCHA requirement.
 
 ## Scripts
 
@@ -93,7 +92,7 @@ src/
   components/             # AuthLayout, BrandedLogo, FormField, Alert
   pages/                  # Login, Register, ForgotPassword, ResetPassword, Success
   utils/
-    recaptcha.js          # reCAPTCHA v3 loader + secret fallback
+    recaptcha.js          # Tenant recaptchaSecret payload for API calls
     redirectWithTokens.js # returnUrl redirect with token query params
     errors.js             # API error parsing
     useReturnUrl.js       # Preserve returnUrl across navigation

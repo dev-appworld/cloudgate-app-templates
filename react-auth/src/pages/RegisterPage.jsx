@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { idpRegister } from '@/api/idpApi';
 import { Alert } from '@/components/Alert';
 import { FormField } from '@/components/FormField';
-import { getRecaptchaPayload, recaptchaService } from '@/utils/recaptcha';
+import { getRecaptchaPayload } from '@/utils/recaptcha';
 import { useReturnUrl, withReturnUrl } from '@/utils/useReturnUrl';
 
 export function RegisterPage() {
@@ -18,10 +18,6 @@ export function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    recaptchaService.hideBadge();
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +36,7 @@ export function RegisterPage() {
     }
     setLoading(true);
     try {
-      const recaptcha = await getRecaptchaPayload('register');
+      const recaptcha = await getRecaptchaPayload();
       const result = await idpRegister({
         email: email.trim(),
         password,

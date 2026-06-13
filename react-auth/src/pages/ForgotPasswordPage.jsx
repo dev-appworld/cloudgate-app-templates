@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { idpRequestPasswordReset } from '@/api/idpApi';
 import { Alert } from '@/components/Alert';
 import { FormField } from '@/components/FormField';
-import { getRecaptchaPayload, recaptchaService } from '@/utils/recaptcha';
+import { getRecaptchaPayload } from '@/utils/recaptcha';
 import { useReturnUrl, withReturnUrl } from '@/utils/useReturnUrl';
 
 export function ForgotPasswordPage() {
@@ -12,10 +12,6 @@ export function ForgotPasswordPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [sent, setSent] = useState(false);
-
-  useEffect(() => {
-    recaptchaService.hideBadge();
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +22,7 @@ export function ForgotPasswordPage() {
     }
     setLoading(true);
     try {
-      const recaptcha = await getRecaptchaPayload('forgot_password');
+      const recaptcha = await getRecaptchaPayload();
       await idpRequestPasswordReset({ email: email.trim(), ...recaptcha });
       setSent(true);
     } catch (err) {
