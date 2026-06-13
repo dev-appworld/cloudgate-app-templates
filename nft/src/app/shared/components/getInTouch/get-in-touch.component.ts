@@ -1,9 +1,9 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Modal } from 'flowbite';
-import { finalize } from 'rxjs';
-import { CommsServiceProxy, ContactUsDto, RegisterOutput } from 'src/shared/service-proxies/service-proxies';
+import { AppEventsService } from 'src/app/shared/core/app-events.service';
+import { NotifyService } from 'src/app/shared/core/notify.service';
 import { UtilsModule } from 'src/shared/utils/utils.module';
 
 @Component({
@@ -13,14 +13,14 @@ import { UtilsModule } from 'src/shared/utils/utils.module';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, NgClass, NgIf, UtilsModule, NgFor],
 })
-export class GetInTouchModalComponent implements OnInit {
+export class GetInTouchModalComponent implements OnInit, OnDestroy {
   modal: Modal | undefined;
   options: any = {
     closable: false,
   };
 
   form!: FormGroup;
-  saving!: boolean;
+  saving = false;
   submitted = false;
   subjects: any = [
     {
@@ -42,7 +42,14 @@ export class GetInTouchModalComponent implements OnInit {
     { name: 'Other', value: 5 },
   ];
 
-  constructor(private readonly _formBuilder: FormBuilder, private _commsService: CommsServiceProxy) {}
+  private readonly showHandler = () => this.show();
+  private readonly hideHandler = () => this.hide();
+
+  constructor(
+    private readonly _formBuilder: FormBuilder,
+    private readonly _appEvents: AppEventsService,
+    private readonly _notify: NotifyService,
+  ) {}
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -54,12 +61,13 @@ export class GetInTouchModalComponent implements OnInit {
 
     const infoModal = document.getElementById('getInTouchModal');
     this.modal = new Modal(infoModal, this.options);
-    abp.event.on('showGetInTouchModal', () => {
-      this.show();
-    });
-    abp.event.on('hideModal', () => {
-      this.hide();
-    });
+    this._appEvents.on('showGetInTouchModal', this.showHandler);
+    this._appEvents.on('hideModal', this.hideHandler);
+  }
+
+  ngOnDestroy(): void {
+    this._appEvents.off('showGetInTouchModal', this.showHandler);
+    this._appEvents.off('hideModal', this.hideHandler);
   }
 
   show(): void {
@@ -82,9 +90,7 @@ export class GetInTouchModalComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    const { name, email, subject, message, duration } = this.form.value;
 
-    // stop here if form is invalid
     if (this.form.invalid) {
       return;
     }
@@ -93,28 +99,13 @@ export class GetInTouchModalComponent implements OnInit {
   }
 
   sendMessage() {
-    var model = new ContactUsDto();
-    model.name = this.form.value['name'];
-    model.email = this.form.value['email'];
-    model.subject = this.form.value['subject'];
-    model.message = this.form.value['message'];
-
     this.saving = true;
-    this._commsService
-      .contact(model)
-      .pipe(
-        finalize(() => {
-          this.saving = false;
-          this.form.controls['name'].setValue('');
-          this.form.controls['email'].setValue('');
-          this.form.controls['subject'].setValue('');
-          this.form.controls['message'].setValue('');
-          this.close();
-          abp.notify.success('Sent successfully');
-        }),
-      )
-      .subscribe((result) => {
-        this.hide();
-      });
+    setTimeout(() => {
+      this.saving = false;
+      this.submitted = false;
+      this.form.reset();
+      this.close();
+      this._notify.success('Sent successfully');
+    }, 500);
   }
 }

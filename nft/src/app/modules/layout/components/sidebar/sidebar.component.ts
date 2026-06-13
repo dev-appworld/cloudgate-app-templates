@@ -20,7 +20,7 @@ export class SidebarComponent extends AppComponentBase implements OnInit {
   public themeColors = [
     {
       name: 'base',
-      code: '#1a998e',
+      code: '#cafc01',
     },
     {
       name: 'yellow',

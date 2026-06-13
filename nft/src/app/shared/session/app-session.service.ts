@@ -29,6 +29,7 @@ export class AppSessionService {
   private _platform: string | undefined;
   private _isIOS: boolean | undefined;
   private _profilePicture = AppConsts.appBaseUrl + '/assets/avatars/placeholder-profile.jpg';
+  private _qrImage: string | undefined = './assets/icons/image-holder.jpg';
   private _app: AppInformationDto | undefined;
   private _tenantLogoUrl: string | undefined;
 
@@ -104,6 +105,10 @@ export class AppSessionService {
 
   get appIcon(): string | undefined {
     return this._tenantLogoUrl ?? AppBranding.appIcon;
+  }
+
+  get qrImage(): string | undefined {
+    return this._qrImage;
   }
 
   get loginLogo(): string {

@@ -12,11 +12,9 @@ import { AppComponentBase } from 'src/app/shared/common/app-component-base';
 export class FavouriteListItemComponent extends AppComponentBase implements OnInit {
   @Input() image: string | undefined;
   @Input() title: string | undefined;
-  @Input() subtitle: string | undefined;
+  @Input() handle: string | undefined;
   @Input() amount: string | undefined;
-  @Input() rating: string | undefined;
-  @Input() location: string | undefined;
-  @Input() placeId: string | undefined;
+  @Input() followers: string | undefined;
 
   constructor(injector: Injector) {
     super(injector);
@@ -24,4 +22,3 @@ export class FavouriteListItemComponent extends AppComponentBase implements OnIn
 
   ngOnInit(): void {}
 }
-

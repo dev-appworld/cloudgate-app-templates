@@ -6,6 +6,7 @@ import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.
 import { AppComponentBase } from 'src/app/shared/common/app-component-base';
 import { CommonModule } from '@angular/common';
 import { AlertModalComponent } from 'src/app/shared/components/alert/alert.component';
+import { GetInTouchModalComponent } from 'src/app/shared/components/getInTouch/get-in-touch.component';
 import { UserNotificationPayload } from 'src/app/shared/core/user-notification.models';
 
 @Component({
@@ -20,13 +21,11 @@ import { UserNotificationPayload } from 'src/app/shared/core/user-notification.m
     BottomNavbarComponent,
     CommonModule,
     AlertModalComponent,
+    GetInTouchModalComponent,
   ],
 })
 export class LayoutComponent extends AppComponentBase implements OnInit {
-  private static readonly BOTTOM_NAV_ROUTES = ['/home', '/favourites', '/explore', '/profile'];
-
   private mainContent: HTMLElement | null = null;
-  hideBottomNavbar = false;
 
   constructor(injector: Injector, public _zone: NgZone) {
     super(injector);
@@ -36,29 +35,12 @@ export class LayoutComponent extends AppComponentBase implements OnInit {
         if (this.mainContent) {
           this.mainContent!.scrollTop = 0;
         }
-        this.syncBottomNavbarVisibility();
       }
     });
   }
 
   ngOnInit(): void {
     this.registerToEvents();
-    this.syncBottomNavbarVisibility();
-    this.subscribeToEvent('app.show.nav', () => this.syncBottomNavbarVisibility());
-  }
-
-  private shouldShowBottomNavbar(): boolean {
-    const path = this.router.url.split('?')[0].split('#')[0].replace(/\/$/, '') || '/';
-    if (path.startsWith('/home/bid')) return false;
-    return LayoutComponent.BOTTOM_NAV_ROUTES.includes(path);
-  }
-
-  private syncBottomNavbarVisibility(): void {
-    setTimeout(() => {
-      this._zone.run(() => {
-        this.hideBottomNavbar = !this.shouldShowBottomNavbar();
-      });
-    });
   }
 
   registerToEvents() {
@@ -82,4 +64,3 @@ export class LayoutComponent extends AppComponentBase implements OnInit {
     });
   }
 }
-

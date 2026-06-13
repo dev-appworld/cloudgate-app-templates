@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CommunityComponent } from './community.component';
+import { GalleryComponent } from './gallery.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
-      { path: '', component: CommunityComponent },
+      { path: '', component: GalleryComponent },
       { path: '**', redirectTo: 'errors/404' },
     ],
   },
@@ -16,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CommunityRoutingModule {}
+export class GalleryRoutingModule {}
