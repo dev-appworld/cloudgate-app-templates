@@ -6,6 +6,7 @@ import { effect } from '@angular/core';
   providedIn: 'root',
 })
 export class ThemeService {
+  private static readonly STORAGE_KEY = 'theme:cloudgate-medical';
   public theme = signal<Theme>({ mode: 'light', color: 'base' });
 
   constructor() {
@@ -16,14 +17,21 @@ export class ThemeService {
   }
 
   private loadTheme() {
-    const theme = localStorage.getItem('theme');
+    const theme = localStorage.getItem(ThemeService.STORAGE_KEY) ?? localStorage.getItem('theme');
     if (theme) {
-      this.theme.set(JSON.parse(theme));
+      try {
+        const parsed = JSON.parse(theme) as Theme;
+        if (parsed.mode === 'light' || parsed.mode === 'dark') {
+          this.theme.set(parsed);
+        }
+      } catch {
+        // Ignore invalid persisted theme and keep defaults.
+      }
     }
   }
 
   private setTheme() {
-    localStorage.setItem('theme', JSON.stringify(this.theme()));
+    localStorage.setItem(ThemeService.STORAGE_KEY, JSON.stringify(this.theme()));
     this.setThemeClass();
   }
 

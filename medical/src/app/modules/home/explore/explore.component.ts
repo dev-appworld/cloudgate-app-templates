@@ -1,47 +1,35 @@
-import { afterNextRender, Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
 import { AppConsts } from 'src/app/shared/AppConsts';
 import { AppComponentBase } from 'src/app/shared/common/app-component-base';
-import { PlaceGridItemComponent } from '../components/place-grid-item/place-grid-item.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { PlaceExploreItemComponent } from '../components/place-explore-item/place-explore-item.component';
-import { MedicalWorkflowService } from 'src/app/shared/workflow/medical-workflow.service';
-import { MedicalCatalog, MedicalDoctor } from 'src/app/shared/workflow/medical.models';
 import { initFlowbite } from 'flowbite';
+import { DoctorGridItemComponent } from '../components/doctor-grid-item/doctor-grid-item.component';
+import { DoctorItemComponent } from '../components/doctor-item/doctor-item.component';
+import { CategoryGridItemComponent } from '../components/category-grid-item/category-grid-item.component';
 
 @Component({
   selector: 'app-explore',
   templateUrl: './explore.component.html',
   standalone: true,
-  imports: [RouterOutlet, PlaceGridItemComponent, AngularSvgIconModule, PlaceExploreItemComponent, NgIf, NgFor],
+  imports: [
+    RouterOutlet,
+    AngularSvgIconModule,
+    DoctorGridItemComponent,
+    DoctorItemComponent,
+    CategoryGridItemComponent,
+  ],
 })
 export class ExploreComponent extends AppComponentBase implements OnInit {
-  catalog: MedicalCatalog | null = null;
-  loading = true;
-  loadError = false;
+  testResult: string = '';
 
-  constructor(
-    injector: Injector,
-    private readonly medicalWorkflow: MedicalWorkflowService,
-  ) {
+  constructor(injector: Injector) {
     super(injector);
   }
 
   ngOnInit(): void {
     AppConsts.pageName = 'Explore';
     AppConsts.pageAction = 'Menu';
-    this.medicalWorkflow.loadCatalog().then((catalog) => {
-      this.catalog = catalog;
-      this.loading = false;
-      this.loadError = this.medicalWorkflow.getState() === 'error';
-      if (!this.loadError && catalog.exploreRecent.length > 0) {
-        afterNextRender(() => initFlowbite(), { injector: this.injector });
-      }
-    });
-  }
-
-  trackById(_index: number, item: MedicalDoctor): string {
-    return item.id;
+    initFlowbite();
   }
 }

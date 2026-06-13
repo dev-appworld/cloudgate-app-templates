@@ -1,4 +1,4 @@
-<div class="mt-24">
+<div>
   <div class="mb-2">
     <div class="mr-2 flex">
       <h1 class="flex-1 text-xl font-bold text-gray-900 dark:text-white">
@@ -173,27 +173,48 @@
     <div class="mr-2 flex">
       <h1 class="flex-1 text-xl font-bold text-gray-900 dark:text-white">Top Doctors</h1>
       <button type="button" class="text-center text-sm font-medium text-gray-700">
-        <p class="text-lg text-gray-500 dark:text-gray-300" (click)="navigate('/explore')">See all</p>
+        <p class="text-lg text-gray-500 dark:text-gray-300" (click)="navigate('/home/gallery')">See all</p>
       </button>
     </div>
   </div>
 
-  <div *ngIf="loading" class="py-4 text-center text-sm text-gray-500">Loading doctors...</div>
-  <div *ngIf="loadError && !loading" class="py-4 text-center text-sm text-red-400">
-    Could not load doctors from the workflow.
-  </div>
-
-  <div *ngIf="catalog && !loading" class="overflow-x-auto" style="scrollbar-width: none">
+  <div class="overflow-x-auto" style="scrollbar-width: none">
     <div class="carousel gap-4 pb-4">
-      <div class="carousel-item" *ngFor="let doctor of catalog.forYou; trackBy: trackById">
+      <div class="carousel-item">
         <app-doctor-item
-          [doctorId]="doctor.id"
-          [image]="doctor.imageUrl"
-          [name]="doctor.title"
-          [type]="doctor.subtitle"
-          [stars]="doctor.rating"
-          [ratings]="doctor.amount"
-          [distance]="doctor.location"></app-doctor-item>
+          image="./assets/images/image-01.jpg"
+          name="Dr. M.H. Sweedish"
+          type="General Practictioner"
+          stars="4.4"
+          ratings="328"
+          distance="56"></app-doctor-item>
+      </div>
+      <div class="carousel-item">
+        <app-doctor-item
+          image="./assets/images/image-06.jpg"
+          name="Dr. A. Obama"
+          type="General Practictioner"
+          stars="4.9"
+          ratings="1898"
+          distance="67"></app-doctor-item>
+      </div>
+      <div class="carousel-item">
+        <app-doctor-item
+          image="./assets/images/image-05.jpg"
+          name="Dr. J.K. van Vuuren"
+          type="General Practictioner"
+          stars="4.6"
+          ratings="418"
+          distance="19"></app-doctor-item>
+      </div>
+      <div class="carousel-item">
+        <app-doctor-item
+          image="./assets/images/image-02.jpg"
+          name="Dr. P. Maseke"
+          type="General Practictioner"
+          stars="4.3"
+          ratings="298"
+          distance="26"></app-doctor-item>
       </div>
     </div>
   </div>

@@ -17,6 +17,10 @@ const routes: Routes = [
         canLoad: [AppRouteGuard],
       },
       {
+        path: 'home/gallery',
+        loadChildren: () => import('../home/pages/gallery/gallery.module').then((m) => m.GalleryModule),
+      },
+      {
         path: 'home/doctor',
         loadChildren: () => import('../home/pages/doctor/doctor.module').then((m) => m.DoctorModule),
       },
@@ -36,7 +40,7 @@ const routes: Routes = [
         path: 'profile/edit',
         loadChildren: () => import('../home/profile/profile-edit/profile-edit.module').then((m) => m.ProfileEditModule),
       },
-      { path: '**', redirectTo: 'error/404' },
+      { path: '**', redirectTo: 'errors/404' },
     ],
   },
 ];

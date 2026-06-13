@@ -11,7 +11,6 @@ import { AppComponentBase } from 'src/app/shared/common/app-component-base';
   standalone: true,
 })
 export class DoctorItemComponent extends AppComponentBase implements OnInit {
-  @Input() doctorId: string | undefined;
   @Input() image: string | undefined;
   @Input() name: string | undefined;
   @Input() type: string | undefined;

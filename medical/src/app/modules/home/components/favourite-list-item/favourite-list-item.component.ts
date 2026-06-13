@@ -11,12 +11,11 @@ import { AppComponentBase } from 'src/app/shared/common/app-component-base';
 })
 export class FavouriteListItemComponent extends AppComponentBase implements OnInit {
   @Input() image: string | undefined;
-  @Input() title: string | undefined;
-  @Input() subtitle: string | undefined;
-  @Input() amount: string | undefined;
-  @Input() rating: string | undefined;
-  @Input() location: string | undefined;
-  @Input() placeId: string | undefined;
+  @Input() name: string | undefined;
+  @Input() type: string | undefined;
+  @Input() stars: string | undefined;
+  @Input() ratings: string | undefined;
+  @Input() distance: string | undefined;
 
   constructor(injector: Injector) {
     super(injector);
