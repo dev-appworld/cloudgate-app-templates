@@ -16,14 +16,18 @@ export class ThemeService {
   }
 
   private loadTheme() {
-    const theme = localStorage.getItem('theme');
+    const theme = localStorage.getItem('theme:cloudgate-wallet');
     if (theme) {
-      this.theme.set(JSON.parse(theme));
+      try {
+        this.theme.set(JSON.parse(theme));
+      } catch {
+        localStorage.removeItem('theme:cloudgate-wallet');
+      }
     }
   }
 
   private setTheme() {
-    localStorage.setItem('theme', JSON.stringify(this.theme()));
+    localStorage.setItem('theme:cloudgate-wallet', JSON.stringify(this.theme()));
     this.setThemeClass();
   }
 

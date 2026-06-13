@@ -12,7 +12,7 @@ const routes: Routes = [
     { path: 'explore', loadChildren: () => import('../home/explore/explore.module').then((m) => m.ExploreModule) },
     { path: 'profile', loadChildren: () => import('../home/profile/profile.module').then((m) => m.ProfileModule) },
     { path: 'profile/edit', loadChildren: () => import('../home/profile/profile-edit/profile-edit.module').then((m) => m.ProfileEditModule) },
-    { path: '**', redirectTo: 'error/404' },
+    { path: '**', redirectTo: 'errors/404' },
   ]},
 ];
 @NgModule({ imports: [RouterModule.forChild(routes)], exports: [RouterModule] })

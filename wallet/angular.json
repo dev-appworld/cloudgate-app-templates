@@ -37,12 +37,14 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
+              "node_modules/apexcharts/dist/apexcharts.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.js",
               "node_modules/flowbite/dist/flowbite.min.js"
             ],
             "allowedCommonJsDependencies": [
               "swipejs",
-              "localforage"
+              "localforage",
+              "apexcharts"
             ]
           },
           "configurations": {
@@ -131,6 +133,7 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
+              "node_modules/apexcharts/dist/apexcharts.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.js"
             ]
           }

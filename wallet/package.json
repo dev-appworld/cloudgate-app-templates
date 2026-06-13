@@ -39,6 +39,7 @@
     "@types/lodash-es": "^4.17.7",
     "@types/luxon": "^3.3.0",
     "angular-svg-icon": "^13.0.0",
+    "apexcharts": "^3.35.3",
     "crypto-js": "^4.2.0",
     "daisyui": "^4.12.7",
     "flowbite": "^2.3.0",
@@ -47,6 +48,7 @@
     "localforage": "^1.10.0",
     "lodash-es": "^4.17.7",
     "luxon": "^3.3.0",
+    "ng-apexcharts": "^1.7.1",
     "ngx-bootstrap": "^10.2.0",
     "ngx-spinner": "^16.0.2",
     "ngx-toastr": "^19.0.0",
@@ -88,4 +90,3 @@
     }
   }
 }
-

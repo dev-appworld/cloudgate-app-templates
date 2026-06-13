@@ -1,48 +1,35 @@
-import { afterNextRender, Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
 import { AppConsts } from 'src/app/shared/AppConsts';
 import { AppComponentBase } from 'src/app/shared/common/app-component-base';
-import { PlaceGridItemComponent } from '../components/place-grid-item/place-grid-item.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { PlaceExploreItemComponent } from '../components/place-explore-item/place-explore-item.component';
-import { WalletWorkflowService } from 'src/app/shared/workflow/wallet-workflow.service';
-import { WalletCatalog, WalletCatalogItem } from 'src/app/shared/workflow/wallet-catalog.models';
 import { initFlowbite } from 'flowbite';
+import { CategoryGridItemComponent } from '../components/category-grid-item/category-grid-item.component';
+import { TransactionListItemComponent } from '../components/transaction-list-item/transaction-list-item.component';
+import { ChartsWidget1Component } from './charts-widget1/charts-widget1.component';
 
 @Component({
   selector: 'app-explore',
   templateUrl: './explore.component.html',
   standalone: true,
-  imports: [RouterOutlet, PlaceGridItemComponent, AngularSvgIconModule, PlaceExploreItemComponent, NgIf, NgFor],
+  imports: [
+    RouterOutlet,
+    AngularSvgIconModule,
+    CategoryGridItemComponent,
+    TransactionListItemComponent,
+    ChartsWidget1Component,
+  ],
 })
 export class ExploreComponent extends AppComponentBase implements OnInit {
-  catalog: WalletCatalog | null = null;
-  loading = true;
-  loadError = false;
+  testResult: string = '';
 
-  constructor(
-    injector: Injector,
-    private readonly walletWorkflowService: WalletWorkflowService,
-  ) {
+  constructor(injector: Injector) {
     super(injector);
   }
 
   ngOnInit(): void {
-    AppConsts.pageName = 'Explore';
+    AppConsts.pageName = 'Statistics';
     AppConsts.pageAction = 'Menu';
-    this.walletWorkflowService.loadCatalog().then((catalog) => {
-      this.catalog = catalog;
-      this.loading = false;
-      this.loadError = this.walletWorkflowService.getState() === 'error';
-      if (!this.loadError && catalog.exploreRecent.length > 0) {
-        afterNextRender(() => initFlowbite(), { injector: this.injector });
-      }
-    });
-  }
-
-  trackById(_index: number, item: WalletCatalogItem): string {
-    return item.id;
+    initFlowbite();
   }
 }
-

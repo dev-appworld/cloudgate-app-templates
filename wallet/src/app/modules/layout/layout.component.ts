@@ -23,10 +23,7 @@ import { UserNotificationPayload } from 'src/app/shared/core/user-notification.m
   ],
 })
 export class LayoutComponent extends AppComponentBase implements OnInit {
-  private static readonly BOTTOM_NAV_ROUTES = ['/home', '/favourites', '/explore', '/profile'];
-
   private mainContent: HTMLElement | null = null;
-  hideBottomNavbar = false;
 
   constructor(injector: Injector, public _zone: NgZone) {
     super(injector);
@@ -36,29 +33,12 @@ export class LayoutComponent extends AppComponentBase implements OnInit {
         if (this.mainContent) {
           this.mainContent!.scrollTop = 0;
         }
-        this.syncBottomNavbarVisibility();
       }
     });
   }
 
   ngOnInit(): void {
     this.registerToEvents();
-    this.syncBottomNavbarVisibility();
-    this.subscribeToEvent('app.show.nav', () => this.syncBottomNavbarVisibility());
-  }
-
-  private shouldShowBottomNavbar(): boolean {
-    const path = this.router.url.split('?')[0].split('#')[0].replace(/\/$/, '') || '/';
-    if (path.startsWith('/home/transfer')) return false;
-    return LayoutComponent.BOTTOM_NAV_ROUTES.includes(path);
-  }
-
-  private syncBottomNavbarVisibility(): void {
-    setTimeout(() => {
-      this._zone.run(() => {
-        this.hideBottomNavbar = !this.shouldShowBottomNavbar();
-      });
-    });
   }
 
   registerToEvents() {

@@ -1,44 +1,43 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
 import { AppConsts } from 'src/app/shared/AppConsts';
 import { AppComponentBase } from 'src/app/shared/common/app-component-base';
 import { FavouriteListItemComponent } from '../components/favourite-list-item/favourite-list-item.component';
 import { initFlowbite } from 'flowbite';
-import { WalletWorkflowService } from 'src/app/shared/workflow/wallet-workflow.service';
-import { WalletCatalog, WalletCatalogItem } from 'src/app/shared/workflow/wallet-catalog.models';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { TransactionListItemComponent } from '../components/transaction-list-item/transaction-list-item.component';
+import { CategoryGridItemComponent } from '../components/category-grid-item/category-grid-item.component';
+import { CardItemComponent } from '../components/card-item/card-item.component';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-favourites',
   templateUrl: './favourites.component.html',
   standalone: true,
-  imports: [RouterOutlet, FavouriteListItemComponent, NgIf, NgFor],
+  imports: [
+    RouterOutlet,
+    AngularSvgIconModule,
+    CategoryGridItemComponent,
+    TransactionListItemComponent,
+    CardItemComponent,
+    NgClass,
+    NgIf,
+  ],
 })
 export class FavouritesComponent extends AppComponentBase implements OnInit {
-  catalog: WalletCatalog | null = null;
-  loading = true;
-  loadError = false;
+  tabMenu: string = 'physical';
 
-  constructor(
-    injector: Injector,
-    private readonly walletWorkflowService: WalletWorkflowService,
-  ) {
+  constructor(injector: Injector) {
     super(injector);
   }
 
   ngOnInit(): void {
-    AppConsts.pageName = 'Favourites';
+    AppConsts.pageName = 'My Wallet';
     AppConsts.pageAction = 'Menu';
     initFlowbite();
-    this.walletWorkflowService.loadCatalog().then((catalog) => {
-      this.catalog = catalog;
-      this.loading = false;
-      this.loadError = this.walletWorkflowService.getState() === 'error';
-    });
   }
 
-  trackById(_index: number, item: WalletCatalogItem): string {
-    return item.id;
+  setTab(tab: string) {
+    this.tabMenu = tab;
   }
 }
-
