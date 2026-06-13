@@ -3,9 +3,6 @@ dist/
 .angular/
 *.log
 
-# README-only assets (keep repo tarball under Web Coder 50 MB download limit)
-**/docs/screenshots/
-
 # Editor/preview artifacts not used at runtime
 **/src/assets/preview/
 
