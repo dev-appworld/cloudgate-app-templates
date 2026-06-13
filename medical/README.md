@@ -6,41 +6,41 @@ An Angular medical discovery demo app for the [Cloudgate](https://cloudgate.dev)
 
 ## Screenshots
 
-Mobile UI in light and dark mode. Full-size files live in [`docs/screenshots/`](./docs/screenshots/).
+Mobile UI in light and dark mode. Full-size files are hosted at [cloudgate.dev/assets/app-templates/medical/](https://cloudgate.dev/assets/app-templates/medical/).
 
 ### Light mode
 
 <p align="center">
-  <img src="./docs/screenshots/light-01.png" width="190" alt="Sign in" />
-  <img src="./docs/screenshots/light-02.png" width="190" alt="Sign up" />
-  <img src="./docs/screenshots/light-03.png" width="190" alt="Home" />
-  <img src="./docs/screenshots/light-04.png" width="190" alt="Favourites" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/light-01.png" width="190" alt="Sign in" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/light-02.png" width="190" alt="Sign up" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/light-03.png" width="190" alt="Home" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/light-04.png" width="190" alt="Favourites" />
 </p>
 <p align="center"><sub>Sign in · Sign up · Home · Favourites</sub></p>
 
 <p align="center">
-  <img src="./docs/screenshots/light-05.png" width="190" alt="Explore" />
-  <img src="./docs/screenshots/light-06.png" width="190" alt="Profile" />
-  <img src="./docs/screenshots/light-07.png" width="190" alt="Doctor detail" />
-  <img src="./docs/screenshots/light-08.png" width="190" alt="Categories" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/light-05.png" width="190" alt="Explore" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/light-06.png" width="190" alt="Profile" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/light-07.png" width="190" alt="Doctor detail" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/light-08.png" width="190" alt="Categories" />
 </p>
 <p align="center"><sub>Explore · Profile · Doctor detail · Categories</sub></p>
 
 ### Dark mode
 
 <p align="center">
-  <img src="./docs/screenshots/dark-01.png" width="190" alt="Sign in" />
-  <img src="./docs/screenshots/dark-02.png" width="190" alt="Sign up" />
-  <img src="./docs/screenshots/dark-03.png" width="190" alt="Home" />
-  <img src="./docs/screenshots/dark-04.png" width="190" alt="Favourites" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/dark-01.png" width="190" alt="Sign in" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/dark-02.png" width="190" alt="Sign up" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/dark-03.png" width="190" alt="Home" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/dark-04.png" width="190" alt="Favourites" />
 </p>
 <p align="center"><sub>Sign in · Sign up · Home · Favourites</sub></p>
 
 <p align="center">
-  <img src="./docs/screenshots/dark-05.png" width="190" alt="Explore" />
-  <img src="./docs/screenshots/dark-06.png" width="190" alt="Profile" />
-  <img src="./docs/screenshots/dark-07.png" width="190" alt="Doctor detail" />
-  <img src="./docs/screenshots/dark-08.png" width="190" alt="Categories" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/dark-05.png" width="190" alt="Explore" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/dark-06.png" width="190" alt="Profile" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/dark-07.png" width="190" alt="Doctor detail" />
+  <img src="https://cloudgate.dev/assets/app-templates/medical/dark-08.png" width="190" alt="Categories" />
 </p>
 <p align="center"><sub>Explore · Profile · Doctor detail · Categories</sub></p>
 

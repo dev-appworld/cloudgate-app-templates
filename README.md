@@ -70,7 +70,7 @@ Entries in `templates.json` drive the Quick Start cards:
 1. Add a new top-level folder with the starter source.
 2. Add `template.json` inside the folder (include a `banner.png` gallery thumbnail).
 3. Register the template in `templates.json`.
-4. Keep each template folder lean — Web Coder copies only that folder (50 MB per-template limit). Do not commit `node_modules/`, `dist/`, Capacitor `android/`/`ios/` shells, or large unused preview GIFs. README screenshots in `docs/screenshots/` are fine.
+4. Keep each template folder lean — Web Coder copies only that folder (50 MB per-template limit), and skips `docs/`. README screenshots live on [cloudgate.dev/assets/app-templates/](https://cloudgate.dev/assets/app-templates/), not in this repo. Do not commit `node_modules/`, `dist/`, Capacitor `android/`/`ios/` shells, or large unused preview GIFs.
 5. Push to `main` — new and updated templates appear in Quick Start after the gallery refreshes.
 
 ## License
