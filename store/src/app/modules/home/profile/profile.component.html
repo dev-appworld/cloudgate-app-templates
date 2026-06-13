@@ -1,7 +1,7 @@
 <div class="mt-24">
   <div class="mb-6 rounded-box bg-white pb-6 text-gray-900 shadow-xl dark:bg-gray-900">
     <div class="h-32 overflow-hidden rounded-t-box">
-      <img class="w-full object-cover object-top" src="./assets/images/profile.jpg" alt="Sky" />
+      <img class="w-full object-cover object-top" src="./assets/images/sky.jpg" alt="Sky" />
     </div>
     <div class="relative mx-auto -mt-16 h-32 w-32 overflow-hidden rounded-full border-4 border-white">
       <img class="h-32 object-cover object-center" [src]="appSession.profilePicture" alt="Profile Picture" />
@@ -32,16 +32,6 @@
               <svg-icon src="./assets/icons/heroicons/outline/user-circle.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
             </div>
             <span class="block text-lg font-medium">Account</span>
-          </button>
-        </li>
-        <li class="border-b py-2">
-          <button
-            (click)="navigate('profile/community')"
-            class="inline-flex w-full items-center px-4 py-2 text-left text-gray-600 hover:text-gray-700 dark:text-white">
-            <div class="w-10">
-              <svg-icon src="./assets/icons/other/community.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
-            </div>
-            <span class="block text-lg font-medium">Community</span>
           </button>
         </li>
         <li class="border-b py-2">

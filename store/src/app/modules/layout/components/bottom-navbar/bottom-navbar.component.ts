@@ -17,4 +17,19 @@ export class BottomNavbarComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  action() {
+    this.appEvents.trigger('showModal', {
+      title: 'Scan QR',
+      content: `
+      <div class="text-center">
+        <p>Sample of primary action for scanning barcode or similar action</p>
+      </div>
+      `,
+      buttonText: 'OK',
+      buttonTextSecondary: undefined,
+      onPositive: () => {},
+      onNegative: () => {},
+    });
+  }
 }

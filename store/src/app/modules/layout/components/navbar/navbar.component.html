@@ -1,67 +1,73 @@
-<div [ngClass]="isIOS ? 'mt-10' : 'mt-5'" class="relative bg-background">
-  <div class="mx-auto px-5">
+<div class="relative z-20">
+  <div class="absolute w-full" [ngClass]="pageName === 'Product' ? 'hidden' : ''">
+    <img class="h-32 w-full object-fill" src="./assets/images/background.png" alt="image description" />
+  </div>
+  <div [ngClass]="isIOS ? 'mt-10' : 'mt-5'" class="absolute mx-auto w-full px-5">
     <div class="flex items-center justify-between py-3.5 md:justify-start">
       <!-- Mobile Navigation Menu Button-->
-      <div [ngClass]="pageAction !== 'Menu' ? 'hidden' : ''">
-        <button
-          data-drawer-target="sidebar-multi-level-sidebar"
-          data-drawer-toggle="sidebar-multi-level-sidebar"
-          aria-controls="sidebar-multi-level-sidebar"
-          type="button"
-          class="inline-flex items-center rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-white dark:focus:ring-gray-600 dark:hover:bg-gray-700 lg:hidden">
-          <span class="sr-only">Open sidebar</span>
-          <svg
-            class="h-6 w-6"
-            aria-hidden="true"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              clip-rule="evenodd"
-              fill-rule="evenodd"
-              d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
-          </svg>
-        </button>
-      </div>
-      <div [ngClass]="pageAction === 'Menu' ? 'hidden' : ''">
-        <button
-          (click)="navigate(pageAction)"
-          class="inline-flex items-center rounded-lg text-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 hover:bg-gray-100 dark:text-gray-400 dark:focus:ring-gray-600 dark:hover:bg-gray-700">
-          <span class="sr-only">Back</span>
-          <svg
-            class="h-5 w-5"
-            viewBox="-5.5 0 26 26"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
-            fill="currentColor">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-              <title>chevron-left</title>
-              <desc>Created with Sketch Beta.</desc>
-              <defs></defs>
-              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-                <g
-                  id="Icon-Set-Filled"
-                  sketch:type="MSLayerGroup"
-                  transform="translate(-423.000000, -1196.000000)"
-                  fill="currentColor">
-                  <path
-                    d="M428.115,1209 L437.371,1200.6 C438.202,1199.77 438.202,1198.43 437.371,1197.6 C436.541,1196.76 435.194,1196.76 434.363,1197.6 L423.596,1207.36 C423.146,1207.81 422.948,1208.41 422.985,1209 C422.948,1209.59 423.146,1210.19 423.596,1210.64 L434.363,1220.4 C435.194,1221.24 436.541,1221.24 437.371,1220.4 C438.202,1219.57 438.202,1218.23 437.371,1217.4 L428.115,1209"
-                    id="chevron-left"
-                    sketch:type="MSShapeGroup"></path>
+      <div class="flex flex-1">
+        <div [ngClass]="pageAction !== 'Menu' ? 'hidden' : ''" class="w-16">
+          <button
+            data-drawer-target="sidebar-multi-level-sidebar"
+            data-drawer-toggle="sidebar-multi-level-sidebar"
+            aria-controls="sidebar-multi-level-sidebar"
+            type="button"
+            class="inline-flex items-center rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-600 dark:hover:bg-gray-700 lg:hidden">
+            <span class="sr-only">Open sidebar</span>
+            <svg
+              class="h-6 w-6"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                clip-rule="evenodd"
+                fill-rule="evenodd"
+                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+            </svg>
+          </button>
+        </div>
+        <div [ngClass]="pageAction === 'Menu' ? 'hidden' : ''" class="w-16">
+          <button
+            (click)="navigate(pageAction)"
+            class="mr-5 rounded-full bg-white p-2 text-center text-sm font-medium text-gray-900 dark:bg-gray-700 dark:text-white">
+            <svg
+              class="h-5 w-5"
+              viewBox="-5.5 0 26 26"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+              fill="currentColor">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <title>chevron-left</title>
+                <desc>Created with Sketch Beta.</desc>
+                <defs></defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                  <g
+                    id="Icon-Set-Filled"
+                    sketch:type="MSLayerGroup"
+                    transform="translate(-423.000000, -1196.000000)"
+                    fill="currentColor">
+                    <path
+                      d="M428.115,1209 L437.371,1200.6 C438.202,1199.77 438.202,1198.43 437.371,1197.6 C436.541,1196.76 435.194,1196.76 434.363,1197.6 L423.596,1207.36 C423.146,1207.81 422.948,1208.41 422.985,1209 C422.948,1209.59 423.146,1210.19 423.596,1210.64 L434.363,1220.4 C435.194,1221.24 436.541,1221.24 437.371,1220.4 C438.202,1219.57 438.202,1218.23 437.371,1217.4 L428.115,1209"
+                      id="chevron-left"
+                      sketch:type="MSShapeGroup"></path>
+                  </g>
                 </g>
               </g>
-            </g>
-          </svg>
-        </button>
-      </div>
+            </svg>
+          </button>
+        </div>
 
-      <!-- Logo -->
-      <div class="flex items-center justify-start">
-        <b class="pl-3 text-sm font-bold text-foreground"> {{ pageName }} </b>
+        <!-- Logo -->
+        <div class="ml-5 flex flex-1 items-center">
+          <b class="text-sm font-bold" [ngClass]="pageName === 'Product' ? 'text-transparent' : 'text-white'">
+            {{ pageName }}
+          </b>
+        </div>
       </div>
 
       <!-- Profile menu -->
@@ -72,7 +78,10 @@
       </div>
       <div [ngClass]="pageAction === 'Menu' ? 'hidden' : ''">
         <div class="items-center justify-end">
-          <button type="button" class="ml-3 pt-2 text-center text-sm font-medium text-gray-700 dark:text-white">
+          <button
+            type="button"
+            [ngClass]="pageName === 'Product' ? 'text-transparent' : 'text-foreground'"
+            class="ml-3 pt-2 text-center text-sm font-medium">
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
               <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -92,6 +101,8 @@
       </div>
     </div>
   </div>
+  <!-- Mobile menu -->
+  <!-- <app-navbar-mobile></app-navbar-mobile> -->
 </div>
 
 <aside
@@ -113,11 +124,11 @@
         <p class="text-xs text-gray-500 dark:text-white">{{ appSession.app?.appSubText }}</p>
       </div>
 
-      <div class="mt-4 flex justify-center px-4">
+      <div class="mt-4 text-center">
         <button
-          (click)="sendEmail()"
+          (click)="closeDrawer(); sendEmail()"
           type="button"
-          class="rounded-full bg-gradient-to-br from-pink-500 to-orange-400 px-5 py-2.5 text-sm font-medium text-white shadow-lg focus:outline-none focus:ring-4 focus:ring-pink-200 hover:bg-gradient-to-bl dark:focus:ring-pink-800">
+          class="me-2 mb-2 rounded-full bg-gradient-to-br from-pink-500 to-orange-400 px-5 py-2.5 text-center text-sm font-medium text-white shadow-lg focus:outline-none focus:ring-4 focus:ring-pink-200 hover:bg-gradient-to-bl dark:focus:ring-pink-800">
           Get in touch
         </button>
       </div>
@@ -127,7 +138,7 @@
       <li>
         <a
           href="javascript:;"
-          (click)="aboutUs()"
+          (click)="closeDrawer(); aboutUs()"
           class="group flex items-center rounded-lg px-2 py-3 text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
           <div class="w-6">
             <svg-icon src="./assets/icons/heroicons/outline/information-circle.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
@@ -138,7 +149,7 @@
       <li>
         <a
           href="javascript:;"
-          (click)="share()"
+          (click)="closeDrawer(); share()"
           class="group flex items-center rounded-lg px-2 py-3 text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
           <div class="w-6">
             <svg-icon src="./assets/icons/heroicons/outline/share.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
@@ -149,7 +160,7 @@
       <li>
         <a
           href="javascript:;"
-          (click)="website()"
+          (click)="closeDrawer(); website()"
           class="group flex items-center rounded-lg px-2 py-3 text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
           <div class="w-6">
             <svg-icon src="./assets/icons/heroicons/outline/globe.svg" [svgClass]="'h-5 w-5'"> </svg-icon>

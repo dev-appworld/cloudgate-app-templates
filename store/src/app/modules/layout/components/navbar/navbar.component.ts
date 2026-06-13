@@ -1,10 +1,11 @@
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd } from '@angular/router';
+import { filter, Subscription } from 'rxjs';
 import { ProfileMenuComponent } from './profile-menu/profile-menu.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { initFlowbite } from 'flowbite';
 import { AppComponentBase } from 'src/app/shared/common/app-component-base';
 import { CommonModule } from '@angular/common';
-import { ThemeService } from 'src/app/core/services/theme.service';
 import { Share } from '@capacitor/share';
 import { AppBranding } from 'src/app/shared/branding/app-branding';
 
@@ -17,8 +18,9 @@ import { AppBranding } from 'src/app/shared/branding/app-branding';
 })
 export class NavbarComponent extends AppComponentBase implements OnInit, OnDestroy {
   private _drawerBackdropObserver?: MutationObserver;
+  private _routerSubscription?: Subscription;
 
-  constructor(injector: Injector, private _themeService: ThemeService) {
+  constructor(injector: Injector) {
     super(injector);
   }
 
@@ -26,10 +28,14 @@ export class NavbarComponent extends AppComponentBase implements OnInit, OnDestr
     initFlowbite();
     this._drawerBackdropObserver = new MutationObserver(() => this.moveDrawerBackdropIntoShell());
     this._drawerBackdropObserver.observe(document.body, { childList: true });
+    this._routerSubscription = this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => this.closeDrawer());
   }
 
   override ngOnDestroy(): void {
     this._drawerBackdropObserver?.disconnect();
+    this._routerSubscription?.unsubscribe();
   }
 
   private moveDrawerBackdropIntoShell(): void {
@@ -40,7 +46,15 @@ export class NavbarComponent extends AppComponentBase implements OnInit, OnDestr
     }
   }
 
+  closeDrawer(): void {
+    const hideButton = document.querySelector(
+      '[data-drawer-hide="sidebar-multi-level-sidebar"]',
+    ) as HTMLButtonElement | null;
+    hideButton?.click();
+  }
+
   aboutUs() {
+    this.closeDrawer();
     this.appEvents.trigger('showModal', {
       title: 'About Us',
       content: `
@@ -61,6 +75,7 @@ export class NavbarComponent extends AppComponentBase implements OnInit, OnDestr
   }
 
   async share() {
+    this.closeDrawer();
     await Share.share({
       title: AppBranding.friendlyName,
       url: AppBranding.websiteUrl,
