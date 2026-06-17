@@ -14,8 +14,11 @@ Browse templates in the hub at **Web Coder → Quick Start** (`/web-coder`). Eac
 | [Cloudgate NFT Demo](./nft/) | [`nft/`](./nft/) | `GET /nfts` | [nft-demo.cloudweb.dev](https://nft-demo.cloudweb.dev/) |
 | [Cloudgate Store Demo](./store/) | [`store/`](./store/) | `GET /products` | [store-demo.cloudweb.dev](https://store-demo.cloudweb.dev/) |
 | [Cloudgate Wallet Demo](./wallet/) | [`wallet/`](./wallet/) | `GET /transactions` | [wallet-demo.cloudweb.dev](https://wallet-demo.cloudweb.dev/) |
+| [Cloudgate CRM](./crm/) | [`crm/`](./crm/) | `POST /crm/*` (leads, pipeline, email, …) | — |
 
-All gallery templates are **Angular 17** apps with Tailwind CSS, Capacitor-ready mobile shells, Cloudgate IdP login, and a bundled workflow import (`.template/workflow-template.json`) for the catalog API each app calls at runtime.
+Most gallery templates are **Angular 17** apps with Tailwind CSS, Capacitor-ready mobile shells, Cloudgate IdP login, and a bundled workflow import (`.template/workflow-template.json`) for the catalog API each app calls at runtime.
+
+**Cloudgate CRM** is a fuller, data-driven example: a **React 18 + Vite + Tailwind** application backed by a complete Cloudgate workflow API — a SQLite database with leads, companies, contacts, pipeline stages, activities, tasks, tags and emails, plus SendGrid email send, reply/open tracking webhooks, and mass-email campaigns. Its `.template/workflow-template.json` bundles every CRM endpoint and `.template/schema.sql` provisions the database schema and sample data.
 
 ### Production build before publish
 
@@ -40,6 +43,7 @@ Each demo folder has its own README with screenshots, local dev steps, and workf
 - [nft/README.md](./nft/README.md)
 - [store/README.md](./store/README.md)
 - [wallet/README.md](./wallet/README.md)
+- [crm/README.md](./crm/README.md)
 
 ## Repository layout
 
@@ -51,6 +55,7 @@ medical/                # Angular medical / doctor booking demo + workflow impor
 nft/                    # Angular NFT auction demo + workflow import
 store/                  # Angular e-commerce store demo + workflow import
 wallet/                 # Angular wallet / transfer demo + workflow import
+crm/                    # React CRM app + workflow import (leads, pipeline, email, SQLite)
 react/                  # Bare React starter (not in gallery manifest)
 angular/                # Bare Angular starter (not in gallery manifest)
 html/                   # Bare HTML starter (not in gallery manifest)
