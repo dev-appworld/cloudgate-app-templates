@@ -75,7 +75,7 @@
     {
       "id": "cloudgate-crm",
       "name": "Cloudgate CRM",
-      "description": "React + Vite CRM backed by Cloudgate workflows — leads, sales pipeline, companies, contacts, tasks, activities, and SendGrid email campaigns. Import .template/workflow-template.json and run .template/schema.sql.",
+      "description": "React + Vite CRM for leads, sales pipeline, companies, contacts, tasks, and email campaigns.",
       "folder": "crm",
       "framework": "React",
       "devCommand": "npm install && npm run dev",
