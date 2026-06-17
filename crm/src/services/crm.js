@@ -118,9 +118,3 @@ export const dashboardApi = {
   byStage: () => listCall('/dashboard', 'byStage', {}),
   recent: () => listCall('/dashboard', 'recent', {}),
 };
-
-export const seedApi = {
-  // reset=true clears CRM data then loads the sample set; reset=false fills gaps only.
-  run: (reset = false) =>
-    api.post('/seed', { reset }).then((r) => (Array.isArray(r) ? r[0] : r) || {}),
-};

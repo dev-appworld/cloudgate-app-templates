@@ -113,7 +113,7 @@ SELECT v.Name, v.Color FROM (
 ) v
 WHERE NOT EXISTS (SELECT 1 FROM tags t WHERE t.Name = v.Name);
 
--- --- Sample data (optional; the POST /crm/seed endpoint reproduces this) ---
+-- --- Sample data (loaded on Quick Start via schema.sql) ---
 INSERT INTO companies (Name, Domain, Industry, Size, Website, City, Country)
 SELECT v.Name, v.Domain, v.Industry, v.Size, 'https://' || v.Domain, v.City, v.Country FROM (
   SELECT 'Acme Corp' Name, 'acme.com' Domain, 'Manufacturing' Industry, '201-500' Size, 'Austin' City, 'USA' Country UNION ALL
@@ -156,3 +156,11 @@ SELECT v.Title, (SELECT Id FROM leads WHERE Email = v.Email), datetime('now', v.
   SELECT 'Schedule demo with Wade','wade@umbrella.co','+3 days','normal'
 ) v
 WHERE EXISTS (SELECT 1 FROM leads WHERE Email = v.Email);
+
+INSERT INTO contacts (FirstName, LastName, Email, JobTitle, CompanyId)
+SELECT v.FirstName, v.LastName, v.Email, v.JobTitle,
+       (SELECT Id FROM companies WHERE Name = v.CompanyName) FROM (
+  SELECT 'Jane' FirstName, 'Cooper' LastName, 'jane.cooper@acme.com' Email, 'VP Sales' JobTitle, 'Acme Corp' CompanyName UNION ALL
+  SELECT 'Robert', 'Fox', 'robert.fox@globex.io', 'CTO', 'Globex'
+) v
+WHERE NOT EXISTS (SELECT 1 FROM contacts c WHERE c.Email = v.Email);

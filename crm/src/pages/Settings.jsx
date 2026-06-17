@@ -1,7 +1,7 @@
 // Settings page.
 import { useState } from 'react';
 import { useAsync } from '@/hooks/useAsync';
-import { stagesApi, tagsApi, seedApi } from '@/services/crm';
+import { stagesApi, tagsApi } from '@/services/crm';
 import {
   Card,
   Spinner,
@@ -195,49 +195,6 @@ function TagsPanel() {
   );
 }
 
-function SampleDataPanel() {
-  const toast = useToast();
-  const [busy, setBusy] = useState('');
-
-  const run = async (reset) => {
-    const msg = reset
-      ? 'Reset all CRM data and reload the sample set? This deletes existing leads, companies, activities and tasks.'
-      : 'Load the sample data set? Existing records are kept; only missing samples are added.';
-    if (!window.confirm(msg)) return;
-    setBusy(reset ? 'reset' : 'load');
-    try {
-      const r = await seedApi.run(reset);
-      toast.success(`Done — ${r.Leads ?? 0} leads, ${r.Companies ?? 0} companies, ${r.Tasks ?? 0} tasks.`);
-    } catch (err) {
-      toast.error(err?.message || 'Failed to load sample data.');
-    } finally {
-      setBusy('');
-    }
-  };
-
-  return (
-    <Card title="Sample data">
-      <div className="flex flex-col gap-3 p-5">
-        <p className="text-sm text-slate-600">
-          Populate this CRM with a realistic demo set (companies, leads across the pipeline, activities
-          and tasks). Useful when standing up a new instance.
-        </p>
-        <div className="flex flex-wrap gap-2">
-          <Button variant="secondary" loading={busy === 'load'} onClick={() => run(false)}>
-            Load sample data
-          </Button>
-          <Button variant="danger" loading={busy === 'reset'} onClick={() => run(true)}>
-            Reset &amp; reseed
-          </Button>
-        </div>
-        <p className="text-xs text-slate-400">
-          “Load” fills gaps without touching your records. “Reset &amp; reseed” wipes CRM data first.
-        </p>
-      </div>
-    </Card>
-  );
-}
-
 const Settings = () => {
   return (
     <div className="flex flex-col gap-5">
@@ -246,7 +203,6 @@ const Settings = () => {
         <StagesPanel />
         <TagsPanel />
       </div>
-      <SampleDataPanel />
       <Card title="Email (SendGrid)">
         <div className="p-5 text-sm text-slate-600">
           <p>

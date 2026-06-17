@@ -27,9 +27,9 @@
     "routes": [
       "leads", "companies", "contacts", "tasks", "activities", "stages", "tags",
       "emails", "import", "dashboard", "email-send", "email-bulk",
-      "email-inbound", "email-events", "seed"
+      "email-inbound", "email-events"
     ],
-    "publishHint": "Import the bundle, create the 'crm_db' SQLite database and run .template/schema.sql, then publish all CRM endpoints to sandbox. Verify POST /sbx/crm/dashboard returns stats.",
+    "publishHint": "Import the bundle (creates crm_db and runs .template/schema.sql), then publish all CRM endpoints to sandbox. Verify POST /sbx/crm/dashboard returns stats.",
     "keys": ["SENDGRID_API_KEY", "SENDGRID_FROM_EMAIL"]
   },
   "configSetup": {
