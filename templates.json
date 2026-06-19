@@ -10,7 +10,12 @@
       "devPort": 3000,
       "demoUrl": "https://podcast-demo.cloudweb.dev/",
       "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/podcast/banner.png",
-      "tags": ["angular", "podcast", "tailwind", "capacitor"]
+      "tags": [
+        "angular",
+        "podcast",
+        "tailwind",
+        "capacitor"
+      ]
     },
     {
       "id": "hotel",
@@ -22,7 +27,13 @@
       "devPort": 3000,
       "demoUrl": "https://hotel-demo.cloudweb.dev/",
       "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/hotel/banner.png",
-      "tags": ["angular", "hotel", "booking", "tailwind", "capacitor"]
+      "tags": [
+        "angular",
+        "hotel",
+        "booking",
+        "tailwind",
+        "capacitor"
+      ]
     },
     {
       "id": "medical",
@@ -34,7 +45,13 @@
       "devPort": 3000,
       "demoUrl": "https://medical-demo.cloudweb.dev/",
       "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/medical/banner.png",
-      "tags": ["angular", "medical", "healthcare", "tailwind", "capacitor"]
+      "tags": [
+        "angular",
+        "medical",
+        "healthcare",
+        "tailwind",
+        "capacitor"
+      ]
     },
     {
       "id": "nft",
@@ -46,7 +63,12 @@
       "devPort": 3000,
       "demoUrl": "https://nft-demo.cloudweb.dev/",
       "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/nft/banner.png",
-      "tags": ["angular", "nft", "tailwind", "capacitor"]
+      "tags": [
+        "angular",
+        "nft",
+        "tailwind",
+        "capacitor"
+      ]
     },
     {
       "id": "store",
@@ -58,7 +80,13 @@
       "devPort": 3000,
       "demoUrl": "https://store-demo.cloudweb.dev/",
       "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/store/banner.png",
-      "tags": ["angular", "store", "ecommerce", "tailwind", "capacitor"]
+      "tags": [
+        "angular",
+        "store",
+        "ecommerce",
+        "tailwind",
+        "capacitor"
+      ]
     },
     {
       "id": "wallet",
@@ -70,7 +98,30 @@
       "devPort": 3000,
       "demoUrl": "https://wallet-demo.cloudweb.dev/",
       "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/wallet/banner.png",
-      "tags": ["angular", "wallet", "fintech", "tailwind", "capacitor"]
+      "tags": [
+        "angular",
+        "wallet",
+        "fintech",
+        "tailwind",
+        "capacitor"
+      ]
+    },
+    {
+      "id": "react-auth",
+      "name": "React IdP Auth Portal",
+      "description": "Standalone React login portal for Cloudgate IdP — custom UI calling Login, Register, and password reset APIs with returnUrl token redirect.",
+      "folder": "react-auth",
+      "framework": "React",
+      "devCommand": "npm install && npm run dev",
+      "devPort": 3000,
+      "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/react-auth/banner.png",
+      "tags": [
+        "react",
+        "vite",
+        "tailwind",
+        "auth",
+        "idp"
+      ]
     },
     {
       "id": "cloudgate-crm",
@@ -82,7 +133,16 @@
       "devPort": 3000,
       "demoUrl": "https://crm.cloudweb.dev/",
       "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/crm/banner.png",
-      "tags": ["react", "vite", "tailwind", "crm", "sales", "pipeline", "email", "idp"]
+      "tags": [
+        "react",
+        "vite",
+        "tailwind",
+        "crm",
+        "sales",
+        "pipeline",
+        "email",
+        "idp"
+      ]
     },
     {
       "id": "cloudgate-lms",
@@ -94,18 +154,12 @@
       "devPort": 3000,
       "demoUrl": "https://lms.cloudweb.dev/",
       "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/lms/banner.png",
-      "tags": ["react", "vite", "lms", "education"]
-    },
-    {
-      "id": "react-auth",
-      "name": "React IdP Auth Portal",
-      "description": "Standalone React login portal for Cloudgate IdP — custom UI calling Login, Register, and password reset APIs with returnUrl token redirect.",
-      "folder": "react-auth",
-      "framework": "React",
-      "devCommand": "npm install && npm run dev",
-      "devPort": 3000,
-      "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/react-auth/banner.png",
-      "tags": ["react", "vite", "tailwind", "auth", "idp"]
+      "tags": [
+        "react",
+        "vite",
+        "lms",
+        "education"
+      ]
     }
   ]
 }
