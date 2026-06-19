@@ -15,10 +15,13 @@ Browse templates in the hub at **Web Coder → Quick Start** (`/web-coder`). Eac
 | [Cloudgate Store Demo](./store/) | [`store/`](./store/) | `GET /products` | [store-demo.cloudweb.dev](https://store-demo.cloudweb.dev/) |
 | [Cloudgate Wallet Demo](./wallet/) | [`wallet/`](./wallet/) | `GET /transactions` | [wallet-demo.cloudweb.dev](https://wallet-demo.cloudweb.dev/) |
 | [Cloudgate CRM](./crm/) | [`crm/`](./crm/) | `POST /crm/*` (leads, pipeline, email, …) | — |
+| [Cloudgate LMS](./lms/) | [`lms/`](./lms/) | `POST /lms/*` (courses, lessons, quizzes, …) | — |
 
 Most gallery templates are **Angular 17** apps with Tailwind CSS, Capacitor-ready mobile shells, Cloudgate IdP login, and a bundled workflow import (`.template/workflow-template.json`) for the catalog API each app calls at runtime.
 
 **Cloudgate CRM** is a fuller, data-driven example: a **React 18 + Vite + Tailwind** application backed by a complete Cloudgate workflow API — a SQLite database with leads, companies, contacts, pipeline stages, activities, tasks, tags and emails, plus SendGrid email send, reply/open tracking webhooks, and mass-email campaigns. Its `.template/workflow-template.json` bundles every CRM endpoint and `.template/schema.sql` provisions the database schema and sample data.
+
+**Cloudgate LMS** is another full **React 18 + Vite + Tailwind** example: a Learning Management System backed by a complete Cloudgate workflow API — a SQLite database of courses, lessons, enrolments, lesson progress, quizzes and certificates, served by op-dispatch endpoints. It features a course catalog, a lesson player with progress tracking, auto-graded quizzes, completion certificates, and a unified activity feed. Its `.template/workflow-template.json` bundles every LMS endpoint and `.template/schema.sql` provisions the schema and demo data.
 
 ### Production build before publish
 
@@ -44,6 +47,7 @@ Each demo folder has its own README with screenshots, local dev steps, and workf
 - [store/README.md](./store/README.md)
 - [wallet/README.md](./wallet/README.md)
 - [crm/README.md](./crm/README.md)
+- [lms/README.md](./lms/README.md)
 
 ## Repository layout
 
@@ -56,6 +60,7 @@ nft/                    # Angular NFT auction demo + workflow import
 store/                  # Angular e-commerce store demo + workflow import
 wallet/                 # Angular wallet / transfer demo + workflow import
 crm/                    # React CRM app + workflow import (leads, pipeline, email, SQLite)
+lms/                    # React LMS app + workflow import (courses, lessons, quizzes, SQLite)
 react/                  # Bare React starter (not in gallery manifest)
 angular/                # Bare Angular starter (not in gallery manifest)
 html/                   # Bare HTML starter (not in gallery manifest)
