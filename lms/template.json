@@ -10,15 +10,9 @@
   "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/lms/banner.png",
   "tags": [
     "lms",
-    "learning",
-    "courses",
-    "lessons",
-    "quizzes",
-    "certificates",
     "education",
+    "courses",
     "react",
-    "tailwind",
-    "vite",
     "cloudgate"
   ],
   "workflowTemplate": ".template/workflow-template.json",

@@ -94,7 +94,7 @@
       "devPort": 3000,
       "demoUrl": "https://lms.cloudweb.dev/",
       "thumbnail": "https://raw.githubusercontent.com/dev-appworld/cloudgate-app-templates/main/lms/banner.png",
-      "tags": ["react", "vite", "tailwind", "lms", "courses", "quizzes", "education", "idp"]
+      "tags": ["react", "vite", "lms", "education"]
     },
     {
       "id": "react-auth",
